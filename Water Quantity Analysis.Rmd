@@ -61,6 +61,18 @@ pCode2 <- readNWISpCode(parameterCd2)
 ```{r}
 summary(colorado_quantity_df)
 ```
+<<<<<<< HEAD
+```{r setup, include=FALSE}
+# Set your working directory
+getwd()
+
+# Load your packages
+library(lubridate)
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(here)
+=======
 ## Data Wrangling
 ```{r}
 #Renaming columns to be understandable 
@@ -68,6 +80,7 @@ sanjuan_quantity_df<-rename(sanjuan_quantity_df, discharge_cf = X_00060_00003)
 colorado_quantity_df<-rename(colorado_quantity_df, discharge_cf = X_00060_00003)
 
 ```
+>>>>>>> 4eb2bbc7c30928e287b049cbda144f193c9e0eb3
 
 ## Data Visualization 
 ```{r, data exploration}
