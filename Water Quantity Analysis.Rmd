@@ -1,0 +1,192 @@
+---
+title: "Water Qualtiy Analysis"
+author: "Wynona Curaming"
+date: "Spring 2024"
+output: pdf_document
+geometry: margin=2.54cm
+editor_options: 
+  chunk_output_type: console
+---
+## Set Up
+```{r, setup}
+getwd()
+library(dataRetrieval)
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(lubridate)
+library(zoo)
+library(trend)
+library(here)
+library(ggthemes)
+
+library(viridis);library(rvest)
+library(tidycensus)
+```
+
+## Importing Datasets
+```{r}
+siteNumber <- "09379500"
+ChoptankInfo <- readNWISsite(siteNumber)
+parameterCd <- "00060"
+
+# Raw daily data:
+sanjuan_quantity_df <- readNWISdv(
+  siteNumber, parameterCd,
+  "2019-04-24", "2024-04-22"
+)
+
+pCode <- readNWISpCode(parameterCd)
+
+```
+
+```{r}
+summary(sanjuan_quantity_df)
+```
+
+```{r}
+siteNumber2<- "09380000"
+ChoptankInfo2 <- readNWISsite(siteNumber2)
+parameterCd2 <- "00060"
+
+# Raw daily data:
+colorado_quantity_df <- readNWISdv(
+  siteNumber2, parameterCd2,
+  "2019-04-24", "2024-04-22"
+)
+
+pCode2 <- readNWISpCode(parameterCd2)
+```
+
+```{r}
+summary(colorado_quantity_df)
+```
+<<<<<<< HEAD
+```{r setup, include=FALSE}
+# Set your working directory
+getwd()
+
+# Load your packages
+library(lubridate)
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(here)
+=======
+## Data Wrangling
+```{r}
+#Renaming columns to be understandable 
+sanjuan_quantity_df<-rename(sanjuan_quantity_df, discharge_cf = X_00060_00003)
+colorado_quantity_df<-rename(colorado_quantity_df, discharge_cf = X_00060_00003)
+
+```
+>>>>>>> 4eb2bbc7c30928e287b049cbda144f193c9e0eb3
+
+## Data Visualization 
+```{r, data exploration}
+ggplot(data=sanjuan_quantity_df, aes(x=Date, y=discharge_cf))+geom_point()+geom_smooth(method="lm")
+ggplot(data=colorado_quantity_df, aes(x=Date, y=discharge_cf))+geom_point()+geom_smooth(method="lm")
+
+discharge_sanjuan<-sanjuan_quantity_df$discharge_cf
+plot(discharge_sanjuan)
+```
+> The downward slope measured at both gages suggests that discharge volume for both San Juan and Colorado Rivers have declined in the last five years. San Juan appears to have more frequent periods of high discharge than usual (eg. mid-2023 and mid-2019) compared to Colorado. 
+
+## Time Series Analysis 
+Study question: How have water discharge levels changed in the last 5 years at San Juan and Colorado rivers?
+
+We don't have any missing data so we don't need to do linear interpolation. 
+
+```{r}
+# San Juan River 
+# Generate time series
+f_month <- month(first(sanjuan_quantity_df$Date))
+f_year <- year(first(sanjuan_quantity_df$Date))
+f_day<- day(first(sanjuan_quantity_df$Date))
+
+l_month <- month(last(sanjuan_quantity_df$Date))
+l_year <- year(last(sanjuan_quantity_df$Date))
+l_day<- day(last(sanjuan_quantity_df$Date))
+
+sanjuan_quantity_daily_ts<- ts(sanjuan_quantity_df$
+                              discharge_cf,
+                            start=c(f_year,f_month),
+                            frequency=365)
+
+# Decompose
+
+sanjuan_quantity_daily_decomposed<- stl(sanjuan_quantity_daily_ts, s.window = "periodic")
+plot(sanjuan_quantity_daily_decomposed)
+
+```
+
+```{r}
+# Colorado River  
+# Generate time series
+f_month1 <- month(first(colorado_quantity_df$Date))
+f_year1 <- year(first(colorado_quantity_df$Date))
+f_day1<- day(first(colorado_quantity_df$Date))
+
+l_month1 <- month(last(colorado_quantity_df$Date))
+l_year1 <- year(last(colorado_quantity_df$Date))
+l_day1<- day(last(colorado_quantity_df$Date))
+
+colorado_quantity_daily_ts<- ts(colorado_quantity_df$
+                              discharge_cf,
+                            start=c(f_year,f_month),
+                            frequency=365)
+
+# Decompose
+colorado_quantity_daily_decomposed<- stl(colorado_quantity_daily_ts, s.window = "periodic")
+plot(colorado_quantity_daily_decomposed)
+
+```
+
+## Description of plots 
+
+Colorado River: Water levels have declined from 2019 to mid-2022, then increased to peak at early 2023. 
+San Juan River: Water levels have declined from 2019 to 2020 and remained steady (at a low level) up till mid-2022. Water levels then increased to peak at early 2023, and declined since then. 
+
+check how much water the Navajo people withdraw or need?
+check population living near the river-> est how much they would need 
+potential explanation- agriculture
+
+We examined each of the chapters under the Western and Northern Agency on whether the San Juan and Colorado River passes through their territory. This would allows us to determine how much of the Navajo population collected water from each respective river. 
+
+For the Colorado River, the following chapters met this criteria: Bodaway-Gap, Coppermine, LeChee, and Navajo Mountain. 
+
+#data mining- 
+```{r}
+#set scraping website 
+Water_URL<- read_html('https://navajoprofile.wind.enavajo.org/')
+Water_URL
+
+#scrape the data 
+navajo_nation_chapter<-Water_URL%>%
+  html_nodes("td:nth-child(3)")%>%
+  html_text()
+navajo_nation_chapter
+
+indian_population<-Water_URL%>%
+  html_nodes("td:nth-child(4)")%>%
+  html_text()
+indian_population
+
+
+table<-Water_URL%>%
+  html_nodes("tabContent001")%>%
+  html_text()
+table
+
+
+```
+
+
+Indian Population-
+Bodaway-Gap: 1705
+Coppermine: 690
+
+
+For San Juan, the following chapters met this criteria: Kayenta, Oljato, Shonto, Beclabito, Upper Fruitland, Gadii Ahi/to'koi, Mexican Water, Red Mesa, Teec Nos Pos, Tse Daa Kaan. 
+
+
