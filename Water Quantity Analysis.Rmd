@@ -1,27 +1,15 @@
 ---
-title: 'Final Project: Navajo Nation Water Quality Analysis'
-author: "Samantha White-Murillo, Wynnoa, Iby" 
+title: "Water Qualtiy Analysis"
+author: "Wynona Curaming"
 date: "Spring 2024"
-output: 
+output: pdf_document
 geometry: margin=2.54cm
-  pdf_document:
-   fig_caption: true
-   editor_options: 
+editor_options: 
   chunk_output_type: console
 ---
-\newpage
-\tableofcontents
-\newpage
-\listoftables 
-\newpage
-\listoffigures 
-\newpage
-
-```{r setup, include=FALSE}
-# Working directory
+## Set Up
+```{r, setup}
 getwd()
-
-# Load your packages
 library(dataRetrieval)
 library(dplyr)
 library(ggplot2)
@@ -31,27 +19,14 @@ library(zoo)
 library(trend)
 library(here)
 library(ggthemes)
+library(pdftools)
 library(pdftables)
-library(viridis)
-library(rvest)
+library(viridis);library(rvest)
 library(tidycensus)
+```
 
-# Set your ggplot theme
-my_theme <- theme_light() +
-  theme(plot.title = element_text(face = "bold", size = 12, color = "black"),
-        axis.title = element_text(color = "darkblue", )) +
-  theme(legend.position = "bottom")
-
-# Load your datasets
-## Water Quality
-read_csv("Raw_data/Boron_S1.csv")
-read_csv("Raw_data/Boron_S2.csv")
-read_csv("Raw_data/magnesium_S1.csv")
-read_csv("Raw_data/magnesium_S2.csv")
-read_csv("Raw_data/Uranium_S1.csv")
-read_csv("Raw_data/Boron_S1.csv")
-
-## Water Quantity 
+## Importing Datasets
+```{r}
 siteNumber <- "09379500"
 ChoptankInfo <- readNWISsite(siteNumber)
 parameterCd <- "00060"
@@ -64,6 +39,13 @@ sanjuan_quantity_df <- readNWISdv(
 
 pCode <- readNWISpCode(parameterCd)
 
+```
+
+```{r}
+summary(sanjuan_quantity_df)
+```
+
+```{r}
 siteNumber2<- "09380000"
 ChoptankInfo2 <- readNWISsite(siteNumber2)
 parameterCd2 <- "00060"
@@ -75,26 +57,11 @@ colorado_quantity_df <- readNWISdv(
 )
 
 pCode2 <- readNWISpCode(parameterCd2)
-
 ```
 
-
-# Rationale and Research Questions
-
-
-
-\newpage
-
-# Dataset Information
-
-
-
-\newpage
-
-# Exploratory Analysis 
-
-## Water Quantity
-### Question 1: <insert specific question here and add additional subsections for additional questions below, if needed>
+```{r}
+summary(colorado_quantity_df)
+```
 
 ## Data Wrangling
 ```{r}
@@ -209,7 +176,33 @@ pop_chapters_SJ<-pop_Kayenta+pop_Oljato+pop_Shonto+pop_Beclabito+pop_Upper_Fruit
 pop_chapters_SJ #18728
 ```
 
-I tried scraping data from the website but it generated empty values. Hence, copy pasting the data was done instead. The code used can be found in the appendix. 
+#data scraping 
+```{r}
+#set scraping website 
+Water_URL<- read_html('https://navajoprofile.wind.enavajo.org/')
+Water_URL
+
+#scrape the data 
+navajo_nation_chapter<-Water_URL%>%
+  html_nodes("td:nth-child(3)")%>%
+  html_text()
+navajo_nation_chapter
+
+indian_population<-Water_URL%>%
+  html_nodes("td:nth-child(4)")%>%
+  html_text()
+indian_population
+
+
+table<-Water_URL%>%
+  html_nodes("tabContent001")%>%
+  html_text()
+table
+
+#Note: I tried scraping data from the website but it didn't work and it generated empty values.  Here's the code I used. Hence, I decided to copy paste instead. 
+
+```
+
 
 Indian Population drawing water directly from these rivers 
 - Colorado River: Estimated to be 4516
@@ -242,50 +235,3 @@ Source: https://www.un.org/waterforlifedecade/pdf/human_right_to_water_and_sanit
 Rapid intensification of the emerging southwestern North American megadrought in 2020–2021
 2. High snowpack from the mountains: The Basin experienced excellent snowpack last winter and above average runoff in 2023.
 https://www.azwater.gov/news/articles/2023-12-21-0 
-
-
-\newpage
-
-
-## Water Quality
-### Question 2: 
-
-
-
-\newpage
-
-# Summary and Conclusions
-
-
-\newpage
-
-# References
-<add references here if relevant, otherwise delete this section> 
-
-# Appendix
-## Data scraping attempt
-```{r}
-#set scraping website 
-Water_URL<- read_html('https://navajoprofile.wind.enavajo.org/')
-Water_URL
-
-#scrape the data 
-navajo_nation_chapter<-Water_URL%>%
-  html_nodes("td:nth-child(3)")%>%
-  html_text()
-navajo_nation_chapter
-
-indian_population<-Water_URL%>%
-  html_nodes("td:nth-child(4)")%>%
-  html_text()
-indian_population
-
-
-table<-Water_URL%>%
-  html_nodes("tabContent001")%>%
-  html_text()
-table
-
-#Note: I tried scraping data from the website but it didn't work and it generated empty values.  Here's the code I used. Hence, I decided to copy paste instead. 
-
-```
