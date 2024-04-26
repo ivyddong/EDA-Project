@@ -1,5 +1,16 @@
+---
+title: 'Final Project: Navajo Nation Water Quality Analysis'
+author: "Samantha White-Murillo, Wynnoa, Iby" 
+date: "Spring 2024"
+output: 
+geometry: margin=2.54cm
+  pdf_document:
+   fig_caption: true
+   editor_options: 
+  chunk_output_type: console
+---
 \newpage
-\tableofcontents 
+\tableofcontents
 \newpage
 \listoftables 
 \newpage
@@ -7,13 +18,37 @@
 \newpage
 
 ```{r setup, include=FALSE}
-# Set your working directory
+# Working directory
+getwd()
 
 # Load your packages
+library(dataRetrieval)
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(lubridate)
+library(zoo)
+library(trend)
+library(here)
+library(ggthemes)
+library(pdftables)
+library(viridis)
+library(rvest)
+library(tidycensus)
 
 # Set your ggplot theme
+my_theme <- theme_light() +
+  theme(plot.title = element_text(face = "bold", size = 12, color = "black"),
+        axis.title = element_text(color = "darkblue", )) +
+  theme(legend.position = "bottom")
 
 # Load your datasets
+read_csv("Raw_data/Boron_S1.csv")
+read_csv("Raw_data/Boron_S2.csv")
+read_csv("Raw_data/magnesium_S1.csv")
+read_csv("Raw_data/magnesium_S2.csv")
+read_csv("Raw_data/Uranium_S1.csv")
+read_csv("Raw_data/Boron_S1.csv")
 
 ```
 
@@ -32,12 +67,14 @@
 
 # Exploratory Analysis 
 
+## Water Quantity Data
 
 
 \newpage
 
 # Analysis
 
+## Water Quantity Analysis
 
 
 ## Question 1: <insert specific question here and add additional subsections for additional questions below, if needed>
