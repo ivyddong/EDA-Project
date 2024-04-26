@@ -19,6 +19,8 @@ library(zoo)
 library(trend)
 library(here)
 library(ggthemes)
+library(pdftools)
+library(pdftables)
 
 library(viridis);library(rvest)
 library(tidycensus)
@@ -139,7 +141,6 @@ colorado_quantity_daily_ts<- ts(colorado_quantity_df$
 # Decompose
 colorado_quantity_daily_decomposed<- stl(colorado_quantity_daily_ts, s.window = "periodic")
 plot(colorado_quantity_daily_decomposed)
-
 ```
 
 ## Description of plots 
@@ -155,7 +156,37 @@ We examined each of the chapters under the Western and Northern Agency on whethe
 
 For the Colorado River, the following chapters met this criteria: Bodaway-Gap, Coppermine, LeChee, and Navajo Mountain. 
 
-#data mining- 
+For San Juan, the following chapters met this criteria: Kayenta, Oljato, Shonto, Beclabito, Upper Fruitland, Gadii Ahi/to'koi, Mexican Water, Red Mesa, Teec Nos Pos, Tse Daa Kaan. 
+
+#manual data collection
+```{r}
+#Population Directly Drawing Water from the Colorado River  
+pop_Bodaway_Gap<-1705
+pop_Coppermine<-690
+pop_LeChee<-1762
+pop_Navajo_Mt<-359
+pop_chapters_Colorado<- pop_Bodaway_Gap+pop_Coppermine+pop_LeChee+pop_Navajo_Mt
+
+pop_chapters_Colorado #4516
+
+#Population Directly Drawing Water from the San Juan River 
+pop_Kayenta<-6035
+pop_Oljato<-2729
+pop_Shonto<-1645
+pop_Beclabito<-724
+pop_Upper_Fruitland<-2594
+pop_Gadii_Ahi<-430
+pop_Mexican_Water<-667
+pop_Red_Mesa<-1177
+pop_Teec_Nos_Pos<-1454
+pop_Tse_Daa_Kaan <-1273
+
+pop_chapters_SJ<-pop_Kayenta+pop_Oljato+pop_Shonto+pop_Beclabito+pop_Upper_Fruitland+pop_Gadii_Ahi+pop_Mexican_Water+pop_Red_Mesa+pop_Teec_Nos_Pos+pop_Tse_Daa_Kaan
+
+pop_chapters_SJ #18728
+```
+
+#data scraping 
 ```{r}
 #set scraping website 
 Water_URL<- read_html('https://navajoprofile.wind.enavajo.org/')
@@ -178,15 +209,21 @@ table<-Water_URL%>%
   html_text()
 table
 
+#Note: I tried scraping data from the website but it didn't work and it generated empty values.  Here's the code I used. Hence, I decided to copy paste instead. 
 
 ```
 
 
-Indian Population-
-Bodaway-Gap: 1705
-Coppermine: 690
+Indian Population drawing water directly from these rivers 
+- Colorado River: Estimated to be 4516
+- San Juan River: Estimated to be 18728
 
-
-For San Juan, the following chapters met this criteria: Kayenta, Oljato, Shonto, Beclabito, Upper Fruitland, Gadii Ahi/to'koi, Mexican Water, Red Mesa, Teec Nos Pos, Tse Daa Kaan. 
+Navajo people are estimated to use only 7 gallons of water per day. [CITE Source] 
+```{r}
+#Colorado 
+annual_draw_colorado<-4516*7*365
+#San Juan 
+annual_draw_SJ<-18728*7*365
+```
 
 
