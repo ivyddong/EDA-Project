@@ -3,4 +3,4 @@ https://nwis.waterservices.usgs.gov/nwis/iv/?sites=09379500&parameterCd=00060&st
 *dataRetrieval Instructions:*
 https://doi-usgs.github.io/dataRetrieval/
 *Colorado River:*
-https://nwis.waterservices.usgs.gov/nwis/iv/?sites=09380000&parameterCd=00065&startDT=2019-04-24T11:34:22.725-07:00&endDT=2024-04-22T11:34:22.725-07:00&siteStatus=all&format=rdb
+https://nwis.waterservices.usgs.gov/nwis/iv/?sites=09380000&parameterCd=00060&startDT=2019-04-24T13:13:56.630-07:00&endDT=2024-04-22T13:13:56.630-07:00&siteStatus=all&format=rdb

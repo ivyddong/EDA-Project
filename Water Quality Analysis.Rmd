@@ -82,6 +82,7 @@ Study question: Have water discharge levels changed in the last 5 years at San J
 We don't have any missing data so we don't need to do linear interpolation. 
 
 ```{r}
+# San Juan River 
 # Generate time series
 f_month <- month(first(sanjuan_quantity_df$Date))
 f_year <- year(first(sanjuan_quantity_df$Date))
@@ -103,19 +104,30 @@ plot(sanjuan_quantity_daily_decomposed)
 
 ```
 
-
-
-9. Create a new data frame called `GaringerOzone.monthly` that contains aggregated data: mean ozone concentrations for each month. In your pipe, you will need to first add columns for year and month to form the groupings. In a separate line of code, create a new Date column with each month-year combination being set as the first day of the month (this is for graphing purposes only)
-
 ```{r}
-#9
-GaringerOzone.monthly<- Daily.Max.8.hour.Ozone.Concentration_clean%>%
-  mutate(Year = year(Date))%>%
-  mutate(Month = month(Date))%>%
-  mutate(Date=my(paste0(Month,"-",Year)))%>%
-  group_by(Year, Month, Date)%>%
-  summarise(mean_ozone=mean(Daily.Max.8.hour.Ozone.Concentration.clean, na.rm= TRUE))
+# Colorado River  
+# Generate time series
+f_month1 <- month(first(colorado_quantity_df$Date))
+f_year1 <- year(first(colorado_quantity_df$Date))
+f_day1<- day(first(colorado_quantity_df$Date))
 
-summary(GaringerOzone.monthly)
+l_month1 <- month(last(colorado_quantity_df$Date))
+l_year1 <- year(last(colorado_quantity_df$Date))
+l_day1<- day(last(colorado_quantity_df$Date))
+
+colorado_quantity_daily_ts<- ts(colorado_quantity_df$
+                              discharge_cf,
+                            start=c(f_year,f_month),
+                            frequency=365)
+
+# Decompose
+colorado_quantity_daily_decomposed<- stl(colorado_quantity_daily_ts, s.window = "periodic")
+plot(colorado_quantity_daily_decomposed)
 
 ```
+
+
+
+check how much water the Navajo people withdraw or need?
+check population living near the river-> est how much they would need 
+potential explanation- agriculture
