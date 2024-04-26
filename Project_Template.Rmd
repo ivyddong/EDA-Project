@@ -67,20 +67,15 @@ read_csv("Raw_data/Boron_S1.csv")
 
 # Exploratory Analysis 
 
-## Water Quantity Data
+## Water Quantity
+### Question 1: <insert specific question here and add additional subsections for additional questions below, if needed>
 
 
 \newpage
 
-# Analysis
 
-## Water Quantity Analysis
-
-
-## Question 1: <insert specific question here and add additional subsections for additional questions below, if needed>
-
-## Question 2: 
-
+## Water Quality
+### Question 2: 
 
 
 
