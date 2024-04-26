@@ -1,8 +1,27 @@
+---
+title: "Water Qualtiy Analysis"
+author: "Wynona Curaming"
+date: "Spring 2024"
+output: pdf_document
+geometry: margin=2.54cm
+editor_options: 
+  chunk_output_type: console
+---
+## Set Up
 ```{r, setup}
-install.packages("dataRetrieval")
+getwd()
 library(dataRetrieval)
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(lubridate)
+library(zoo)
+library(trend)
+library(here)
+library(ggthemes)
 ```
 
+## Importing Datasets
 ```{r}
 siteNumber <- "09379500"
 ChoptankInfo <- readNWISsite(siteNumber)
@@ -25,7 +44,7 @@ summary(sanjuan_quantity_df)
 ```{r}
 siteNumber2<- "09380000"
 ChoptankInfo2 <- readNWISsite(siteNumber2)
-parameterCd2 <- "00065"
+parameterCd2 <- "00060"
 
 # Raw daily data:
 colorado_quantity_df <- readNWISdv(
@@ -39,6 +58,7 @@ pCode2 <- readNWISpCode(parameterCd2)
 ```{r}
 summary(colorado_quantity_df)
 ```
+<<<<<<< HEAD
 ```{r setup, include=FALSE}
 # Set your working directory
 getwd()
@@ -49,49 +69,78 @@ library(ggplot2)
 library(dplyr)
 library(tidyverse)
 library(here)
+=======
+## Data Wrangling
+```{r}
+#Renaming columns to be understandable 
+sanjuan_quantity_df<-rename(sanjuan_quantity_df, discharge_cf = X_00060_00003)
+colorado_quantity_df<-rename(colorado_quantity_df, discharge_cf = X_00060_00003)
 
-# Set your ggplot theme
+```
+>>>>>>> 4eb2bbc7c30928e287b049cbda144f193c9e0eb3
 
-# Load your datasets
+## Data Visualization 
+```{r, data exploration}
+ggplot(data=sanjuan_quantity_df, aes(x=Date, y=discharge_cf))+geom_point()+geom_smooth(method="lm")
+ggplot(data=colorado_quantity_df, aes(x=Date, y=discharge_cf))+geom_point()+geom_smooth(method="lm")
+
+discharge_sanjuan<-sanjuan_quantity_df$discharge_cf
+plot(discharge_sanjuan)
+```
+> The downward slope measured at both gages suggests that discharge volume for both San Juan and Colorado Rivers have declined in the last five years. San Juan appears to have more frequent periods of high discharge than usual (eg. mid-2023 and mid-2019) compared to Colorado. 
+
+## Time Series Analysis 
+Study question: Have water discharge levels changed in the last 5 years at San Juan and Colorado rivers?
+
+We don't have any missing data so we don't need to do linear interpolation. 
+
+```{r}
+# San Juan River 
+# Generate time series
+f_month <- month(first(sanjuan_quantity_df$Date))
+f_year <- year(first(sanjuan_quantity_df$Date))
+f_day<- day(first(sanjuan_quantity_df$Date))
+
+l_month <- month(last(sanjuan_quantity_df$Date))
+l_year <- year(last(sanjuan_quantity_df$Date))
+l_day<- day(last(sanjuan_quantity_df$Date))
+
+sanjuan_quantity_daily_ts<- ts(sanjuan_quantity_df$
+                              discharge_cf,
+                            start=c(f_year,f_month),
+                            frequency=365)
+
+# Decompose
+
+sanjuan_quantity_daily_decomposed<- stl(sanjuan_quantity_daily_ts, s.window = "periodic")
+plot(sanjuan_quantity_daily_decomposed)
+
+```
+
+```{r}
+# Colorado River  
+# Generate time series
+f_month1 <- month(first(colorado_quantity_df$Date))
+f_year1 <- year(first(colorado_quantity_df$Date))
+f_day1<- day(first(colorado_quantity_df$Date))
+
+l_month1 <- month(last(colorado_quantity_df$Date))
+l_year1 <- year(last(colorado_quantity_df$Date))
+l_day1<- day(last(colorado_quantity_df$Date))
+
+colorado_quantity_daily_ts<- ts(colorado_quantity_df$
+                              discharge_cf,
+                            start=c(f_year,f_month),
+                            frequency=365)
+
+# Decompose
+colorado_quantity_daily_decomposed<- stl(colorado_quantity_daily_ts, s.window = "periodic")
+plot(colorado_quantity_daily_decomposed)
 
 ```
 
 
-# Rationale and Research Questions
 
-
-
-\newpage
-
-# Dataset Information
-
-
-
-\newpage
-
-# Exploratory Analysis 
-
-
-
-\newpage
-
-# Analysis
-
-
-
-## Question 1: <insert specific question here and add additional subsections for additional questions below, if needed>
-
-## Question 2: 
-
-
-
-
-\newpage
-
-# Summary and Conclusions
-
-
-\newpage
-
-# References
-<add references here if relevant, otherwise delete this section> 
+check how much water the Navajo people withdraw or need?
+check population living near the river-> est how much they would need 
+potential explanation- agriculture
