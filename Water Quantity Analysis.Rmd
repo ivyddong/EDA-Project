@@ -215,7 +215,6 @@ annual_draw_colorado
 annual_draw_SJ<-18728*7*365
 annual_draw_SJ
 
-
 ```
 cubic meters per second
 1 cubic meter = 264.2 gallons 
@@ -225,3 +224,6 @@ water_available_SJ_2024<-500*264.2*seconds_per_year
 water_available_SJ_2024
 ```
 
+# To add to discussion 
+7 gallons per day is not enough to meet basic needs. According to the UN WHO, at least 50 liters per day per person is needed, which is about 13.2 gallons. 
+Source: https://www.un.org/waterforlifedecade/pdf/human_right_to_water_and_sanitation_media_brief.pdf
