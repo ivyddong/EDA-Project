@@ -21,7 +21,6 @@ library(here)
 library(ggthemes)
 library(pdftools)
 library(pdftables)
-
 library(viridis);library(rvest)
 library(tidycensus)
 ```
@@ -134,7 +133,10 @@ plot(colorado_quantity_daily_decomposed)
 ## Description of plots 
 
 Colorado River: Water levels have declined from 2019 to mid-2022, then increased to peak at early 2023. 
+
 San Juan River: Water levels have declined from 2019 to 2020 and remained steady (at a low level) up till mid-2022. Water levels then increased to peak at early 2023, and declined since then. 
+
+## Population Drawing Directly From the Rivers 
 
 check how much water the Navajo people withdraw or need?
 check population living near the river-> est how much they would need 
@@ -227,3 +229,9 @@ water_available_SJ_2024
 # To add to discussion 
 7 gallons per day is not enough to meet basic needs. According to the UN WHO, at least 50 liters per day per person is needed, which is about 13.2 gallons. 
 Source: https://www.un.org/waterforlifedecade/pdf/human_right_to_water_and_sanitation_media_brief.pdf
+
+# Explaining observed water availability 
+1. Drought: https://www.nature.com/articles/s41558-022-01290-z
+Rapid intensification of the emerging southwestern North American megadrought in 2020–2021
+2. High snowpack from the mountains: The Basin experienced excellent snowpack last winter and above average runoff in 2023.
+https://www.azwater.gov/news/articles/2023-12-21-0 

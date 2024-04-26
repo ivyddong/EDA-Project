@@ -43,12 +43,38 @@ my_theme <- theme_light() +
   theme(legend.position = "bottom")
 
 # Load your datasets
+## Water Quality
 read_csv("Raw_data/Boron_S1.csv")
 read_csv("Raw_data/Boron_S2.csv")
 read_csv("Raw_data/magnesium_S1.csv")
 read_csv("Raw_data/magnesium_S2.csv")
 read_csv("Raw_data/Uranium_S1.csv")
 read_csv("Raw_data/Boron_S1.csv")
+
+## Water Quantity 
+siteNumber <- "09379500"
+ChoptankInfo <- readNWISsite(siteNumber)
+parameterCd <- "00060"
+
+# Raw daily data:
+sanjuan_quantity_df <- readNWISdv(
+  siteNumber, parameterCd,
+  "2019-04-24", "2024-04-22"
+)
+
+pCode <- readNWISpCode(parameterCd)
+
+siteNumber2<- "09380000"
+ChoptankInfo2 <- readNWISsite(siteNumber2)
+parameterCd2 <- "00060"
+
+# Raw daily data:
+colorado_quantity_df <- readNWISdv(
+  siteNumber2, parameterCd2,
+  "2019-04-24", "2024-04-22"
+)
+
+pCode2 <- readNWISpCode(parameterCd2)
 
 ```
 
@@ -70,6 +96,153 @@ read_csv("Raw_data/Boron_S1.csv")
 ## Water Quantity
 ### Question 1: <insert specific question here and add additional subsections for additional questions below, if needed>
 
+## Data Wrangling
+```{r}
+#Renaming columns to be understandable 
+sanjuan_quantity_df<-rename(sanjuan_quantity_df, discharge_cf = X_00060_00003)
+colorado_quantity_df<-rename(colorado_quantity_df, discharge_cf = X_00060_00003)
+
+```
+
+## Data Visualization 
+```{r, data exploration}
+ggplot(data=sanjuan_quantity_df, aes(x=Date, y=discharge_cf))+geom_point()+geom_smooth(method="lm")
+ggplot(data=colorado_quantity_df, aes(x=Date, y=discharge_cf))+geom_point()+geom_smooth(method="lm")
+
+discharge_sanjuan<-sanjuan_quantity_df$discharge_cf
+plot(discharge_sanjuan)
+```
+> The downward slope measured at both gages suggests that discharge volume for both San Juan and Colorado Rivers have declined in the last five years. San Juan appears to have more frequent periods of high discharge than usual (eg. mid-2023 and mid-2019) compared to Colorado. 
+
+## Time Series Analysis 
+Study question: How have water discharge levels changed in the last 5 years at San Juan and Colorado rivers?
+
+We don't have any missing data so we don't need to do linear interpolation. 
+
+```{r}
+# San Juan River 
+# Generate time series
+f_month <- month(first(sanjuan_quantity_df$Date))
+f_year <- year(first(sanjuan_quantity_df$Date))
+f_day<- day(first(sanjuan_quantity_df$Date))
+
+l_month <- month(last(sanjuan_quantity_df$Date))
+l_year <- year(last(sanjuan_quantity_df$Date))
+l_day<- day(last(sanjuan_quantity_df$Date))
+
+sanjuan_quantity_daily_ts<- ts(sanjuan_quantity_df$
+                              discharge_cf,
+                            start=c(f_year,f_month),
+                            frequency=365)
+
+# Decompose
+
+sanjuan_quantity_daily_decomposed<- stl(sanjuan_quantity_daily_ts, s.window = "periodic")
+plot(sanjuan_quantity_daily_decomposed)
+
+```
+
+```{r}
+# Colorado River  
+# Generate time series
+f_month1 <- month(first(colorado_quantity_df$Date))
+f_year1 <- year(first(colorado_quantity_df$Date))
+f_day1<- day(first(colorado_quantity_df$Date))
+
+l_month1 <- month(last(colorado_quantity_df$Date))
+l_year1 <- year(last(colorado_quantity_df$Date))
+l_day1<- day(last(colorado_quantity_df$Date))
+
+colorado_quantity_daily_ts<- ts(colorado_quantity_df$
+                              discharge_cf,
+                            start=c(f_year,f_month),
+                            frequency=365)
+
+# Decompose
+colorado_quantity_daily_decomposed<- stl(colorado_quantity_daily_ts, s.window = "periodic")
+plot(colorado_quantity_daily_decomposed)
+```
+
+## Description of plots 
+
+Colorado River: Water levels have declined from 2019 to mid-2022, then increased to peak at early 2023. 
+
+San Juan River: Water levels have declined from 2019 to 2020 and remained steady (at a low level) up till mid-2022. Water levels then increased to peak at early 2023, and declined since then. 
+
+## Population Drawing Directly From the Rivers 
+
+check how much water the Navajo people withdraw or need?
+check population living near the river-> est how much they would need 
+potential explanation- agriculture
+
+We examined each of the chapters under the Western and Northern Agency on whether the San Juan and Colorado River passes through their territory. This would allows us to determine how much of the Navajo population collected water from each respective river. 
+
+For the Colorado River, the following chapters met this criteria: Bodaway-Gap, Coppermine, LeChee, and Navajo Mountain. 
+
+For San Juan, the following chapters met this criteria: Kayenta, Oljato, Shonto, Beclabito, Upper Fruitland, Gadii Ahi/to'koi, Mexican Water, Red Mesa, Teec Nos Pos, Tse Daa Kaan. 
+
+#manual data collection
+```{r}
+#Population Directly Drawing Water from the Colorado River  
+pop_Bodaway_Gap<-1705
+pop_Coppermine<-690
+pop_LeChee<-1762
+pop_Navajo_Mt<-359
+pop_chapters_Colorado<- pop_Bodaway_Gap+pop_Coppermine+pop_LeChee+pop_Navajo_Mt
+
+pop_chapters_Colorado #4516
+
+#Population Directly Drawing Water from the San Juan River 
+pop_Kayenta<-6035
+pop_Oljato<-2729
+pop_Shonto<-1645
+pop_Beclabito<-724
+pop_Upper_Fruitland<-2594
+pop_Gadii_Ahi<-430
+pop_Mexican_Water<-667
+pop_Red_Mesa<-1177
+pop_Teec_Nos_Pos<-1454
+pop_Tse_Daa_Kaan <-1273
+
+pop_chapters_SJ<-pop_Kayenta+pop_Oljato+pop_Shonto+pop_Beclabito+pop_Upper_Fruitland+pop_Gadii_Ahi+pop_Mexican_Water+pop_Red_Mesa+pop_Teec_Nos_Pos+pop_Tse_Daa_Kaan
+
+pop_chapters_SJ #18728
+```
+
+I tried scraping data from the website but it generated empty values. Hence, copy pasting the data was done instead. The code used can be found in the appendix. 
+
+Indian Population drawing water directly from these rivers 
+- Colorado River: Estimated to be 4516
+- San Juan River: Estimated to be 18728
+
+Navajo people are estimated to use only 7 gallons of water per day. [CITE Source] 
+```{r}
+#Colorado 
+annual_draw_colorado<-4516*7*365
+annual_draw_colorado
+#San Juan 
+annual_draw_SJ<-18728*7*365
+annual_draw_SJ
+
+```
+cubic meters per second
+1 cubic meter = 264.2 gallons 
+```{r}
+seconds_per_year<-365*24*60*60
+water_available_SJ_2024<-500*264.2*seconds_per_year
+water_available_SJ_2024
+```
+
+# To add to discussion 
+7 gallons per day is not enough to meet basic needs. According to the UN WHO, at least 50 liters per day per person is needed, which is about 13.2 gallons. 
+Source: https://www.un.org/waterforlifedecade/pdf/human_right_to_water_and_sanitation_media_brief.pdf
+
+# Explaining observed water availability 
+1. Drought: https://www.nature.com/articles/s41558-022-01290-z
+Rapid intensification of the emerging southwestern North American megadrought in 2020–2021
+2. High snowpack from the mountains: The Basin experienced excellent snowpack last winter and above average runoff in 2023.
+https://www.azwater.gov/news/articles/2023-12-21-0 
+
 
 \newpage
 
@@ -88,3 +261,31 @@ read_csv("Raw_data/Boron_S1.csv")
 
 # References
 <add references here if relevant, otherwise delete this section> 
+
+# Appendix
+## Data scraping attempt
+```{r}
+#set scraping website 
+Water_URL<- read_html('https://navajoprofile.wind.enavajo.org/')
+Water_URL
+
+#scrape the data 
+navajo_nation_chapter<-Water_URL%>%
+  html_nodes("td:nth-child(3)")%>%
+  html_text()
+navajo_nation_chapter
+
+indian_population<-Water_URL%>%
+  html_nodes("td:nth-child(4)")%>%
+  html_text()
+indian_population
+
+
+table<-Water_URL%>%
+  html_nodes("tabContent001")%>%
+  html_text()
+table
+
+#Note: I tried scraping data from the website but it didn't work and it generated empty values.  Here's the code I used. Hence, I decided to copy paste instead. 
+
+```
