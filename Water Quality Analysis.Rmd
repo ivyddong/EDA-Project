@@ -41,8 +41,14 @@ summary(colorado_quantity_df)
 ```
 ```{r setup, include=FALSE}
 # Set your working directory
+getwd()
 
 # Load your packages
+library(lubridate)
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(here)
 
 # Set your ggplot theme
 
