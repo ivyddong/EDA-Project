@@ -1,9 +1,27 @@
+---
+title: "Water Qualtiy Analysis"
+author: "Wynona Curaming"
+date: "Spring 2024"
+output: pdf_document
+geometry: margin=2.54cm
+editor_options: 
+  chunk_output_type: console
+---
+## Set Up
 ```{r, setup}
+getwd()
 library(dataRetrieval)
 library(dplyr)
 library(ggplot2)
+library(tidyverse)
+library(lubridate)
+library(zoo)
+library(trend)
+library(here)
+library(ggthemes)
 ```
 
+## Importing Datasets
 ```{r}
 siteNumber <- "09379500"
 ChoptankInfo <- readNWISsite(siteNumber)
@@ -40,17 +58,64 @@ pCode2 <- readNWISpCode(parameterCd2)
 ```{r}
 summary(colorado_quantity_df)
 ```
-```{r, data cleaning}
+## Data Wrangling
+```{r}
+#Renaming columns to be understandable 
 sanjuan_quantity_df<-rename(sanjuan_quantity_df, discharge_cf = X_00060_00003)
 colorado_quantity_df<-rename(colorado_quantity_df, discharge_cf = X_00060_00003)
 
 ```
 
-
+## Data Visualization 
 ```{r, data exploration}
 ggplot(data=sanjuan_quantity_df, aes(x=Date, y=discharge_cf))+geom_point()+geom_smooth(method="lm")
 ggplot(data=colorado_quantity_df, aes(x=Date, y=discharge_cf))+geom_point()+geom_smooth(method="lm")
 
 discharge_sanjuan<-sanjuan_quantity_df$discharge_cf
 plot(discharge_sanjuan)
+```
+> The downward slope measured at both gages suggests that discharge volume for both San Juan and Colorado Rivers have declined in the last five years. San Juan appears to have more frequent periods of high discharge than usual (eg. mid-2023 and mid-2019) compared to Colorado. 
+
+## Time Series Analysis 
+Study question: Have water discharge levels changed in the last 5 years at San Juan and Colorado rivers?
+
+We don't have any missing data so we don't need to do linear interpolation. 
+
+```{r}
+# Generate time series
+f_month <- month(first(sanjuan_quantity_df$Date))
+f_year <- year(first(sanjuan_quantity_df$Date))
+f_day<- day(first(sanjuan_quantity_df$Date))
+
+l_month <- month(last(sanjuan_quantity_df$Date))
+l_year <- year(last(sanjuan_quantity_df$Date))
+l_day<- day(last(sanjuan_quantity_df$Date))
+
+sanjuan_quantity_daily_ts<- ts(sanjuan_quantity_df$
+                              discharge_cf,
+                            start=c(f_year,f_month),
+                            frequency=365)
+
+# Decompose
+
+sanjuan_quantity_daily_decomposed<- stl(sanjuan_quantity_daily_ts, s.window = "periodic")
+plot(sanjuan_quantity_daily_decomposed)
+
+```
+
+
+
+9. Create a new data frame called `GaringerOzone.monthly` that contains aggregated data: mean ozone concentrations for each month. In your pipe, you will need to first add columns for year and month to form the groupings. In a separate line of code, create a new Date column with each month-year combination being set as the first day of the month (this is for graphing purposes only)
+
+```{r}
+#9
+GaringerOzone.monthly<- Daily.Max.8.hour.Ozone.Concentration_clean%>%
+  mutate(Year = year(Date))%>%
+  mutate(Month = month(Date))%>%
+  mutate(Date=my(paste0(Month,"-",Year)))%>%
+  group_by(Year, Month, Date)%>%
+  summarise(mean_ozone=mean(Daily.Max.8.hour.Ozone.Concentration.clean, na.rm= TRUE))
+
+summary(GaringerOzone.monthly)
+
 ```
