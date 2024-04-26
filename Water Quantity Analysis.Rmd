@@ -63,18 +63,7 @@ pCode2 <- readNWISpCode(parameterCd2)
 ```{r}
 summary(colorado_quantity_df)
 ```
-<<<<<<< HEAD
-```{r setup, include=FALSE}
-# Set your working directory
-getwd()
 
-# Load your packages
-library(lubridate)
-library(ggplot2)
-library(dplyr)
-library(tidyverse)
-library(here)
-=======
 ## Data Wrangling
 ```{r}
 #Renaming columns to be understandable 
@@ -82,7 +71,6 @@ sanjuan_quantity_df<-rename(sanjuan_quantity_df, discharge_cf = X_00060_00003)
 colorado_quantity_df<-rename(colorado_quantity_df, discharge_cf = X_00060_00003)
 
 ```
->>>>>>> 4eb2bbc7c30928e287b049cbda144f193c9e0eb3
 
 ## Data Visualization 
 ```{r, data exploration}
@@ -222,8 +210,18 @@ Navajo people are estimated to use only 7 gallons of water per day. [CITE Source
 ```{r}
 #Colorado 
 annual_draw_colorado<-4516*7*365
+annual_draw_colorado
 #San Juan 
 annual_draw_SJ<-18728*7*365
-```
+annual_draw_SJ
 
+
+```
+cubic meters per second
+1 cubic meter = 264.2 gallons 
+```{r}
+seconds_per_year<-365*24*60*60
+water_available_SJ_2024<-500*264.2*seconds_per_year
+water_available_SJ_2024
+```
 
