@@ -125,7 +125,7 @@ The observed downward trend in discharge volume, as evidenced by measurements fr
 
 Of particular interest is the intermittent nature of discharge levels in the San Juan River. While both rivers exhibit an overall decrease in discharge, the San Juan demonstrates more frequent instances of elevated discharge levels. Noteworthy spikes in discharge, notably observed around the midpoints of 2023 and 2019, highlight the river's inherent variability and susceptibility to external influences.
 
-```{r Data Visualization San Juan, echo=FALSE, fig.align='center', fig.cap="Water Levels in San Juan River, message=FALSE}
+```{r Data Visualization San Juan, fig.align='center', fig.cap="Water Levels in San Juan River", message=FALSE, echo=FALSE}
 ggplot(data=sanjuan_quantity_df, 
        aes(x=Date, y=discharge_cf)) +
   geom_point() +
@@ -135,7 +135,7 @@ ggplot(data=sanjuan_quantity_df,
 
 ```
 
-```{r Data Visualization Colorado, echo=FALSE, fig.align='center', fig.cap="Water Levels in Colorado River, message=FALSE}
+```{r Data Visualization Colorado, echo=FALSE, fig.align='center', fig.cap="Water Levels in Colorado River", message=FALSE}
 ggplot(data = colorado_quantity_df, 
        aes(x=Date, y=discharge_cf)) +
   geom_point()+geom_smooth(method="lm") +
@@ -244,7 +244,7 @@ Indian Population drawing water directly from these rivers
 
 Navajo people are estimated to use only 7 gallons of water per day. [CITE Source] 
 
-```{r, echo=FALSE}
+```{r echo=FALSE, message=FALSE}
 #Colorado 
 annual_draw_colorado<-4516*7*365
 annual_draw_colorado
@@ -257,7 +257,7 @@ annual_draw_SJ
 cubic meters per second
 1 cubic meter = 264.2 gallons
 
-```{r, echo=FALSE}
+```{r echo=FALSE, message=FALSE}
 seconds_per_year<-365*24*60*60
 water_available_SJ_2024<-500*264.2*seconds_per_year
 water_available_SJ_2024
