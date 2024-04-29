@@ -1,6 +1,6 @@
 ---
 title: 'Final Project: Navajo Nation Water Quality Analysis'
-author: "Samantha White-Murillo, Wynnoa, Iby" 
+author: "Samantha White-Murillo, Wynnoa, Siyu Dong" 
 date: "Spring 2024"
 output: 
 geometry: margin=2.54cm
@@ -35,6 +35,7 @@ library(pdftables)
 library(viridis)
 library(rvest)
 library(tidycensus)
+library(ggplot2)
 
 # Set your ggplot theme
 my_theme <- theme_light() +
@@ -44,12 +45,12 @@ my_theme <- theme_light() +
 
 # Load your datasets
 ## Water Quality
-read_csv("Raw_data/Boron_S1.csv")
-read_csv("Raw_data/Boron_S2.csv")
-read_csv("Raw_data/magnesium_S1.csv")
-read_csv("Raw_data/magnesium_S2.csv")
-read_csv("Raw_data/Uranium_S1.csv")
-read_csv("Raw_data/Boron_S1.csv")
+Boron_Site1 <- read.csv("./Raw_data/Boron_S1.csv", stringsAsFactors = TRUE)
+Boron_Site2 <- read.csv("./Raw_data/Boron_S2.csv", stringsAsFactors = TRUE)
+Magnesium_Site1 <- read.csv("./Raw_data/magnesium_S1.csv", stringsAsFactors = TRUE)
+Magnesium_Site2 <- read.csv("./Raw_data/magnesium_S2.csv", stringsAsFactors = TRUE)
+Uranium_Site1 <- read.csv("./Raw_data/Uranium_S1.csv", stringsAsFactors = TRUE)
+Uranium_Site2 <- read.csv("./Raw_data/Uranium_S2.csv", stringsAsFactors = TRUE)
 
 ## Water Quantity 
 siteNumber <- "09379500"
@@ -80,48 +81,86 @@ pCode2 <- readNWISpCode(parameterCd2)
 
 
 # Rationale and Research Questions
+The Navajo Nation has severe water infrastructure deficiencies that impact the health, economy, and welfare of the Navajo people. The lack of adequate domestic and municipal water is the greatest water resource problem facing the Navajo Nation. Approximately thirty – forty percent of the Navajo Nation population does not have access to clean reliable drinking water, also, 173 thousand people are affected because drinking water sources are limited and abandoned uranium mines have caused contamination of groundwater in the Nation. In addition, many  improvements are needed for other areas of water use including water for irrigation, livestock, commercial, businesses, health care, schools and other facilities. (Navajo Nation Department of Water Resources, 2024) (SOURCE, n.d.) 
 
+In terms of water quantity, climate change in the Southwest will continue to impact water resources problems. The USGS Disaster Risk Assessment Study concluded that a long-term drying trend and decreasing snow pack, superimposed on the regional drought cycles, will magnify water-related impacts in Navajo Nation and leave the Navajo people increasingly vulnerable (Navajo Nation Department of Water Resources, 2024).
 
+For the above, the present project measures the water quality of the water in the main river Colorado River before, and after it pass through the reservation in the past 5 years, establishing the following hypothesis:
+
+> Hypothesis A: The water quality in the Colorado River before and after passing through the Navajo Nation is significantly different.
+> Null hypothesis: no difference
+
+> Hypothesis B: The water quality in the Colorado River before and after passing through the Navajo Nation has changed significantly in the last 5 years.
+
+On the other hand, measurement is carried out for the water quantity of the rivers over the last 5 years to evaluate the water availability in Colorado River and San Juan River, establishing the following hypothesis:
+
+> Hypothesis C: Water availability changed in the last years for the Navajo Nation due to droughts & climate change.
 
 \newpage
 
 # Dataset Information
+The dataset information was taken from the USGS Monitoring the rivers of the Nation (https://waterdata.usgs.gov/nwis), 
 
+For water quality, the data was extracted from years 2019 to 2023 form the following stations:
+- Station 1 = Colorado River at Lees Ferry, AZ - 09380000
+- Station 2 = Colorado River Near Grand Canyon, AZ - 09402500
 
+For water quantity, the data was extracted from years 2019 to 2023 form the station 1 as well.
 
 \newpage
 
 # Exploratory Analysis 
 
 ## Water Quantity
-### Question 1: <insert specific question here and add additional subsections for additional questions below, if needed>
+### Question 1: <How have water discharge levels changed in the last 5 years at San Juan and Colorado rivers?>
 
-## Data Wrangling
-```{r}
+#### Data Wrangling
+```{r Data Wrangling}
 #Renaming columns to be understandable 
 sanjuan_quantity_df<-rename(sanjuan_quantity_df, discharge_cf = X_00060_00003)
 colorado_quantity_df<-rename(colorado_quantity_df, discharge_cf = X_00060_00003)
 
 ```
 
-## Data Visualization 
-```{r, data exploration}
-ggplot(data=sanjuan_quantity_df, aes(x=Date, y=discharge_cf))+geom_point()+geom_smooth(method="lm")
-ggplot(data=colorado_quantity_df, aes(x=Date, y=discharge_cf))+geom_point()+geom_smooth(method="lm")
+#### Data Visualization 
+```{r Data Visualization, fig.align='center', fig.cap="Water Levels in San Juan River, 2019-2024"}
+ggplot(data = sanjuan_quantity_df, 
+       aes(x = Date, 
+           y = discharge_cf)) +
+  geom_point() +
+  geom_smooth(method="lm") +
+  my_theme
 
-discharge_sanjuan<-sanjuan_quantity_df$discharge_cf
-plot(discharge_sanjuan)
 ```
-> The downward slope measured at both gages suggests that discharge volume for both San Juan and Colorado Rivers have declined in the last five years. San Juan appears to have more frequent periods of high discharge than usual (eg. mid-2023 and mid-2019) compared to Colorado. 
 
-## Time Series Analysis 
-Study question: How have water discharge levels changed in the last 5 years at San Juan and Colorado rivers?
+```{r Data Visualization, fig.align='center', fig.cap="Water Levels in Colorado River, 2019-2024"}
+ggplot(data = colorado_quantity_df, 
+       aes(x = Date, 
+           y = discharge_cf)) +
+  geom_point() +
+  geom_smooth(method="lm") +
+  my_theme
 
-We don't have any missing data so we don't need to do linear interpolation. 
+```
 
-```{r}
+```{r Data Visualization, fig.align='center', fig.cap="Discharge Indez of San Juan River"}
+
+discharge_sanjuan <- sanjuan_quantity_df$discharge_cf
+plot(discharge_sanjuan)
+
+```
+
+> The downwarded slope measured at both gages suggests that discharge volume for both San Juan and Colorado Rivers have declined in the last five years. San Juan appears to have more frequent periods of high discharge than usual (eg. mid-2023 and mid-2019) compared to Colorado.
+
+#### Time Series Analysis
+
+*Note: there is no missing data so it is not necessary to execute linear interpolation.* 
+
+```{r Time Series Analysis, fig.align='center', fig.cap="Time Series Analysis of San Juan River, 2019-2024"}
+
 # San Juan River 
 # Generate time series
+
 f_month <- month(first(sanjuan_quantity_df$Date))
 f_year <- year(first(sanjuan_quantity_df$Date))
 f_day<- day(first(sanjuan_quantity_df$Date))
@@ -130,7 +169,7 @@ l_month <- month(last(sanjuan_quantity_df$Date))
 l_year <- year(last(sanjuan_quantity_df$Date))
 l_day<- day(last(sanjuan_quantity_df$Date))
 
-sanjuan_quantity_daily_ts<- ts(sanjuan_quantity_df$
+sanjuan_quantity_daily_ts <- ts(sanjuan_quantity_df$
                               discharge_cf,
                             start=c(f_year,f_month),
                             frequency=365)
@@ -138,11 +177,13 @@ sanjuan_quantity_daily_ts<- ts(sanjuan_quantity_df$
 # Decompose
 
 sanjuan_quantity_daily_decomposed<- stl(sanjuan_quantity_daily_ts, s.window = "periodic")
-plot(sanjuan_quantity_daily_decomposed)
+plot(sanjuan_quantity_daily_decomposed) + 
+  my_theme
 
 ```
 
-```{r}
+```{r Time Series Analysis, fig.align='center', fig.cap="Time Series Analysis of Colorado River, 2019-2024"}
+
 # Colorado River  
 # Generate time series
 f_month1 <- month(first(colorado_quantity_df$Date))
@@ -163,26 +204,21 @@ colorado_quantity_daily_decomposed<- stl(colorado_quantity_daily_ts, s.window = 
 plot(colorado_quantity_daily_decomposed)
 ```
 
-## Description of plots 
+> Colorado River: Water levels have declined from 2019 to mid-2022, then increased to peak at early 2023. 
 
-Colorado River: Water levels have declined from 2019 to mid-2022, then increased to peak at early 2023. 
+> San Juan River: Water levels have declined from 2019 to 2020 and remained steady (at a low level) up till mid-2022. Water levels then increased to peak at early 2023, and declined since then. 
 
-San Juan River: Water levels have declined from 2019 to 2020 and remained steady (at a low level) up till mid-2022. Water levels then increased to peak at early 2023, and declined since then. 
-
-## Population Drawing Directly From the Rivers 
-
-check how much water the Navajo people withdraw or need?
-check population living near the river-> est how much they would need 
-potential explanation- agriculture
+### Population Drawing Directly From the Rivers 
 
 We examined each of the chapters under the Western and Northern Agency on whether the San Juan and Colorado River passes through their territory. This would allows us to determine how much of the Navajo population collected water from each respective river. 
 
-For the Colorado River, the following chapters met this criteria: Bodaway-Gap, Coppermine, LeChee, and Navajo Mountain. 
+For Colorado River, the following chapters met this criteria: Bodaway-Gap, Coppermine, LeChee, and Navajo Mountain. 
 
 For San Juan, the following chapters met this criteria: Kayenta, Oljato, Shonto, Beclabito, Upper Fruitland, Gadii Ahi/to'koi, Mexican Water, Red Mesa, Teec Nos Pos, Tse Daa Kaan. 
 
-#manual data collection
-```{r}
+#### Manual data collection
+```{r Manual data collection}
+
 #Population Directly Drawing Water from the Colorado River  
 pop_Bodaway_Gap<-1705
 pop_Coppermine<-690
@@ -207,9 +243,10 @@ pop_Tse_Daa_Kaan <-1273
 pop_chapters_SJ<-pop_Kayenta+pop_Oljato+pop_Shonto+pop_Beclabito+pop_Upper_Fruitland+pop_Gadii_Ahi+pop_Mexican_Water+pop_Red_Mesa+pop_Teec_Nos_Pos+pop_Tse_Daa_Kaan
 
 pop_chapters_SJ #18728
+
 ```
 
-I tried scraping data from the website but it generated empty values. Hence, copy pasting the data was done instead. The code used can be found in the appendix. 
+*Note: It was intended to scraping data from the website but it generated empty values. Hence, copy pasting the data was done instead. See apendix 1.*
 
 Indian Population drawing water directly from these rivers 
 - Colorado River: Estimated to be 4516
@@ -225,46 +262,133 @@ annual_draw_SJ<-18728*7*365
 annual_draw_SJ
 
 ```
+
 cubic meters per second
-1 cubic meter = 264.2 gallons 
+1 cubic meter = 264.2 gallons
+
 ```{r}
 seconds_per_year<-365*24*60*60
 water_available_SJ_2024<-500*264.2*seconds_per_year
 water_available_SJ_2024
 ```
-
-# To add to discussion 
-7 gallons per day is not enough to meet basic needs. According to the UN WHO, at least 50 liters per day per person is needed, which is about 13.2 gallons. 
-Source: https://www.un.org/waterforlifedecade/pdf/human_right_to_water_and_sanitation_media_brief.pdf
-
-# Explaining observed water availability 
-1. Drought: https://www.nature.com/articles/s41558-022-01290-z
-Rapid intensification of the emerging southwestern North American megadrought in 2020–2021
-2. High snowpack from the mountains: The Basin experienced excellent snowpack last winter and above average runoff in 2023.
-https://www.azwater.gov/news/articles/2023-12-21-0 
-
+*make analysis*
 
 \newpage
 
 
 ## Water Quality
-### Question 2: 
+### Question 2: <How has been the water quality of the Colorado River before, and after it pass through the reservation in the past 5 years?>
 
+#### Data Preparation
+```{r Dara Preparation, message=FALSE}
 
+#Chage Date Format
+class(Boron_Site1$Activity_StartDate)
+class(Boron_Site2$Activity_StartDate)
+class(Magnesium_Site1$Activity_StartDate)
+class(Magnesium_Site2$Activity_StartDate)
+class(Uranium_Site1$Activity_StartDate)
+class(Uranium_Site2$Activity_StartDate)
+
+Boron_Site1$Activity_StartDate <- as.Date(Boron_Site1$Activity_StartDate, format = "%Y-%M-%d")
+Boron_Site2$Activity_StartDate <- as.Date(Boron_Site2$Activity_StartDate, format = "%Y-%M-%d")
+Magnesium_Site1$Activity_StartDate <- as.Date(Magnesium_Site1$Activity_StartDate, format = "%Y-%M-%d")
+Magnesium_Site2$Activity_StartDate <- as.Date(Magnesium_Site2$Activity_StartDate, format = "%Y-%M-%d")
+Uranium_Site1$Activity_StartDate <- as.Date(Uranium_Site1$Activity_StartDate, format = "%Y-%M-%d")
+Uranium_Site2$Activity_StartDate <- as.Date(Uranium_Site2$Activity_StartDate, format = "%Y-%M-%d")
+
+class(Boron_Site1$Activity_StartDate)
+class(Boron_Site2$Activity_StartDate)
+class(Magnesium_Site1$Activity_StartDate)
+class(Magnesium_Site2$Activity_StartDate)
+class(Uranium_Site1$Activity_StartDate)
+class(Uranium_Site2$Activity_StartDate)
+
+#Merger Datasets respectivelly
+Boron_merged <- bind_rows(Boron_Site1, Boron_Site2)
+Magnesium_merged <- bind_rows(Magnesium_Site1, Magnesium_Site2)
+Uranium_merged <- bind_rows(Uranium_Site1, Uranium_Site2)
+
+#Unify the research time range
+Uranium_filtered <- Uranium_merged %>%
+  filter(Activity_StartDate >= as.Date("2018-01-01") & 
+         Activity_StartDate <= as.Date("2023-12-31"))
+
+#Generate the annual average concentration of three contaminations for both sites
+Boron_merged$Year <- lubridate::year(Boron_merged$Activity_StartDate)
+Boron_annual_average <- Boron_merged %>%
+  group_by(Year, Location_Name) %>%
+  summarise(Avg_Concentration = mean(Result_MeasureValue, na.rm = TRUE))
+
+Magnesium_merged$Year <- lubridate::year(Magnesium_merged$Activity_StartDate)
+Magnesium_annual_average <- Magnesium_merged %>%
+  group_by(Year, Location_Name) %>%
+  summarise(Avg_Concentration = mean(Result_MeasureValue, na.rm = TRUE))
+
+Uranium_filtered$Year <- lubridate::year(Uranium_filtered$Activity_StartDate)
+Uranium_annual_average <- Uranium_filtered %>%
+  group_by(Year, Location_Name) %>%
+  summarise(Avg_Concentration = mean(Result_MeasureValue, na.rm = TRUE))
+
+```
+
+#### Data Visualization
+```{r Data visualization Boron, fig.align='center', fig.cap="Boron Concentration before and after passing through the Navajo Nation"}
+
+#Compare Boron
+ggplot(Boron_annual_average, 
+       aes(x = Year, y = Avg_Concentration, color = Location_Name)) +
+  geom_point() +
+  labs(x = "Observation Year",
+       y = "Mean Concentration (ug/L)") +
+  my_theme
+
+```
+
+```{r Data visualization Magnesium, fig.align='center', fig.cap="Magnesium Concentration before and after passing through the Navajo Nation"}
+
+#Compare Magnesium
+ggplot(Magnesium_annual_average, 
+       aes(x = Year, y = Avg_Concentration, color = Location_Name)) +
+  geom_point() +
+  labs(x = "Observation Year",
+       y = "Mean Concentration (ug/L)") +
+  my_theme
+
+```
+
+```{r Data visualization Uranium, fig.align='center', fig.cap="Uranium Concentration before and after passing through the Navajo Nation"}
+
+#Compare Uranium
+ggplot(Uranium_annual_average, 
+       aes(x = Year, y = Avg_Concentration, color = Location_Name)) +
+  geom_point() +
+  labs(x = "Observation Year",
+       y = "Mean Concentration (ug/L)") +
+  my_theme
+
+```
+*Make analysis*
 
 \newpage
 
 # Summary and Conclusions
-
+7 gallons per day is not enough to meet basic needs. According to the UN WHO, at least 50 liters per day per person is needed, which is about 13.2 gallons. 
 
 \newpage
 
 # References
-<add references here if relevant, otherwise delete this section> 
+UN-Water Decade Programme on Advocacy and Communication and Water Supply and Sanitation Collaborative Council. (2010). The human right to water and sanitation today. In Media Brief. https://www.un.org/waterforlifedecade/pdf/human_right_to_water_and_sanitation_media_brief.pdf
+
+Williams, A. P., Cook, B. I., & Smerdon, J. E. (2022). Rapid intensification of the emerging southwestern North American megadrought in 2020–2021. Nature Climate Change, 12(3), 232–234. https://doi.org/10.1038/s41558-022-01290-z
+
+The Colorado River: Heading into 2024 with hope for a more stable system | Arizona Department of Water Resources. (2023, December 21). https://www.azwater.gov/news/articles/2023-12-21-0
+
+\newpage
 
 # Appendix
-## Data scraping attempt
-```{r}
+## Appendix 1
+```{r Data scraping attempt}
 #set scraping website 
 Water_URL<- read_html('https://navajoprofile.wind.enavajo.org/')
 Water_URL
@@ -285,7 +409,5 @@ table<-Water_URL%>%
   html_nodes("tabContent001")%>%
   html_text()
 table
-
-#Note: I tried scraping data from the website but it didn't work and it generated empty values.  Here's the code I used. Hence, I decided to copy paste instead. 
 
 ```
