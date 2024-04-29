@@ -1,6 +1,6 @@
 ---
 title: 'Final Project: Navajo Nation Water Quality Analysis'
-author: "Samantha White-Murillo, Wynnoa, Siyu Dong" 
+author: "Samantha White-Murillo, Wynona Curaming, Siyu Dong" 
 date: "Spring 2024"
 output: 
   pdf_document:
@@ -91,67 +91,67 @@ On the other hand, measurements have been conducted for the water quantity of th
 
 > Hypothesis C: Water availability changed in the last years for the Navajo Nation due to droughts & climate change.
 
-\newpage
 
 # Dataset Information
 The dataset information was taken from the USGS Monitoring the rivers of the Nation (https://waterdata.usgs.gov/nwis), 
 
-For water quality, the data was extracted from years 2019 to 2023 form the following stations:
+For water quality analysis, data was extracted from the years 2019 to 2024, capturing Uranium, Magnesium, and Boron levels at both stations during this period. The reason for selecting these components was the availability of data at both stations. It was necessary for both stations to have the same components during the same period to enable a comparative analysis. Also, those component represent a high risk for human health and the environment at high levels.
+
+Below is the information on the stations worked:
 - Station 1 = Colorado River at Lees Ferry, AZ - 09380000
 - Station 2 = Colorado River Near Grand Canyon, AZ - 09402500
 
-For water quantity, the data was extracted from years 2019 to 2023 form the station 1 as well.
+
+For water quantity, the data was extracted from years 2019 to 2023 form the station 1 as well, extracting data of water flow in cf/s on that period.
 
 \newpage
 
 # Exploratory Analysis 
 
 ## Water Quantity
-#### Question 1: <How have water discharge levels changed in the last 5 years at San Juan and Colorado rivers?>
+#### Question 1: How have water discharge levels changed in the last 5 years at San Juan and Colorado rivers?
 
-### Data Wrangling
-```{r Data Wrangling}
+
+```{r Data Wrangling, echo=FALSE}
 #Renaming columns to be understandable 
 sanjuan_quantity_df<-rename(sanjuan_quantity_df, discharge_cf = X_00060_00003)
 colorado_quantity_df<-rename(colorado_quantity_df, discharge_cf = X_00060_00003)
 
 ```
 
-### Data Visualization 
-```{r Data Visualization San Juan, fig.align='center', fig.cap="Water Levels in San Juan River, 2019-2024"}
-ggplot(data = sanjuan_quantity_df, 
-       aes(x = Date, 
-           y = discharge_cf)) +
+### Data Visualization
+
+The observed downward trend in discharge volume, as evidenced by measurements from both gages (figure 1 and 2), presents a notable concern regarding the hydrological health of the San Juan and Colorado Rivers over the preceding half-decade. This declining trend signifies a significant challenge to the sustainability of these crucial aquatic ecosystems.
+
+Of particular interest is the intermittent nature of discharge levels in the San Juan River. While both rivers exhibit an overall decrease in discharge, the San Juan demonstrates more frequent instances of elevated discharge levels. Noteworthy spikes in discharge, notably observed around the midpoints of 2023 and 2019, highlight the river's inherent variability and susceptibility to external influences.
+
+```{r Data Visualization San Juan, echo=FALSE, fig.align='center', fig.cap="Water Levels in San Juan River, message=FALSE}
+ggplot(data=sanjuan_quantity_df, 
+       aes(x=Date, y=discharge_cf)) +
   geom_point() +
   geom_smooth(method="lm") +
+  labs(y= "Discharge (cubic feet/second)") +
   my_theme
 
 ```
 
-```{r Data Visualization Colorado, fig.align='center', fig.cap="Water Levels in Colorado River, 2019-2024"}
+```{r Data Visualization Colorado, echo=FALSE, fig.align='center', fig.cap="Water Levels in Colorado River, message=FALSE}
 ggplot(data = colorado_quantity_df, 
-       aes(x = Date, 
-           y = discharge_cf)) +
-  geom_point() +
-  geom_smooth(method="lm") +
+       aes(x=Date, y=discharge_cf)) +
+  geom_point()+geom_smooth(method="lm") +
+  labs(y= "Discharge (cubic feet/second)") +
   my_theme
 
 ```
-
-```{r Data Visualization San Juan Discharge, fig.align='center', fig.cap="Discharge Index of San Juan River"}
-
-discharge_sanjuan <- sanjuan_quantity_df$discharge_cf
-plot(discharge_sanjuan)
-
-```
-
-> The downwarded slope measured at both gages suggests that discharge volume for both San Juan and Colorado Rivers have declined in the last five years. San Juan appears to have more frequent periods of high discharge than usual (eg. mid-2023 and mid-2019) compared to Colorado.
 
 ### Time Series Analysis
 
 *Note: there is no missing data so it is not necessary to execute linear interpolation.* 
 
-```{r Time Series Analysis San Juan River, fig.align='center', fig.cap="Time Series Analysis of San Juan River, 2019-2024"}
+For Colorado River, water levels have declined from 2019 to mid-2022 and then increased to peak at early 2023. (See figure 4) 
+For San Juan River, Water levels have declined from 2019 to 2020 and remained steady (at a low level) up till mid-2022. Suddenly, water levels increased to peak at early 2023, and declined since then. (see figure 5)
+
+```{r Time Series Analysis San Juan River, echo=FALSE, fig.align='center', fig.cap="Time Series Analysis of San Juan River, 2019-2024"}
 
 # San Juan River 
 # Generate time series
@@ -171,13 +171,12 @@ sanjuan_quantity_daily_ts <- ts(sanjuan_quantity_df$
 
 # Decompose
 
-sanjuan_quantity_daily_decomposed<- stl(sanjuan_quantity_daily_ts, s.window = "periodic")
-plot(sanjuan_quantity_daily_decomposed) + 
-  my_theme
+sanjuan_quantity_daily_decomposed <- stl(sanjuan_quantity_daily_ts, s.window = "periodic")
+plot(sanjuan_quantity_daily_decomposed)
 
 ```
 
-```{r Time Series Analysis Colorado River, fig.align='center', fig.cap="Time Series Analysis of Colorado River, 2019-2024"}
+```{r Time Series Analysis Colorado River, echo=FALSE, fig.align='center', fig.cap="Time Series Analysis of Colorado River, 2019-2024"}
 
 # Colorado River  
 # Generate time series
@@ -199,9 +198,6 @@ colorado_quantity_daily_decomposed<- stl(colorado_quantity_daily_ts, s.window = 
 plot(colorado_quantity_daily_decomposed)
 ```
 
-> Colorado River: Water levels have declined from 2019 to mid-2022, then increased to peak at early 2023. 
-
-> San Juan River: Water levels have declined from 2019 to 2020 and remained steady (at a low level) up till mid-2022. Water levels then increased to peak at early 2023, and declined since then. 
 
 ### Population Drawing Directly From the Rivers 
 
@@ -211,8 +207,7 @@ For Colorado River, the following chapters met this criteria: Bodaway-Gap, Coppe
 
 For San Juan, the following chapters met this criteria: Kayenta, Oljato, Shonto, Beclabito, Upper Fruitland, Gadii Ahi/to'koi, Mexican Water, Red Mesa, Teec Nos Pos, Tse Daa Kaan. 
 
-### Manual data collection
-```{r Manual data collection}
+```{r Manual data collection, echo=FALSE}
 
 #Population Directly Drawing Water from the Colorado River  
 pop_Bodaway_Gap<-1705
@@ -248,7 +243,8 @@ Indian Population drawing water directly from these rivers
 - San Juan River: Estimated to be 18728
 
 Navajo people are estimated to use only 7 gallons of water per day. [CITE Source] 
-```{r}
+
+```{r, echo=FALSE}
 #Colorado 
 annual_draw_colorado<-4516*7*365
 annual_draw_colorado
@@ -261,12 +257,12 @@ annual_draw_SJ
 cubic meters per second
 1 cubic meter = 264.2 gallons
 
-```{r}
+```{r, echo=FALSE}
 seconds_per_year<-365*24*60*60
 water_available_SJ_2024<-500*264.2*seconds_per_year
 water_available_SJ_2024
 ```
-*make analysis*
+*make description*
 
 \newpage
 
