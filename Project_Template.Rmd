@@ -104,7 +104,7 @@ Below is the information on the stations worked:
 
 For water quantity, the data was extracted from years 2019 to 2024 from station 1 as well, extracting data of water flow in cf/s.
 
-There is no missing data so it is not necessary to execute linear interpolation for time series analysis. 
+Since there is no missing data it is not necessary to execute linear interpolation for time series analysis. 
 
 \newpage
 
@@ -238,7 +238,7 @@ Navajo people are estimated to use only 7 gallons of water per day. [Source: htt
 
 This estimate applies only for domestic use but since they use water for other activities such as agriculture, the water availability of both rivers is a limiting factor. 
 
-*Note to Samantha: when explaining our methods I think we need to make clear this assumption. we're counting only populations right beside the river, even though with water transport infrastructure, people in chapters far from the river will also be withdrawing, so this estimate of water withdrawing is an underestiamte.  
+Note: we're counting only populations right beside the river, even though with water transport infrastructure, people in chapters far from the river will also be withdrawing, so this estimate of water withdrawing is an underestimate.  
 
 
 ```{r}
@@ -280,10 +280,9 @@ water_available_Colorado_2024
 
 
 ## Water Quality
-#### Question 2: <How has been the water quality of Colorado River before, and after it pass through the reservation in the past 5 years?>
+#### Question 2: How has been the water quality of Colorado River before, and after it pass through the reservation in the past 5 years?
 
-### Data Preparation
-```{r Dara Preparation, message=FALSE}
+```{r Dara Preparation, message=FALSE, echo=FALSE}
 
 #Chage Date Format
 class(Boron_Site1$Activity_StartDate)
@@ -335,8 +334,11 @@ Uranium_annual_average <- Uranium_filtered %>%
 
 ```
 
-### Data Visualization
-```{r Data visualization Boron, fig.align='center', fig.cap="Boron Concentration before and after passing through the Navajo Nation"}
+### Data Visualization Analysis
+
+asjhfdakfhsethrt
+
+```{r Data visualization Boron, echo=FALSE, fig.align='center', fig.cap="Boron Concentration before and after passing through the Navajo Nation"}
 
 #Compare Boron
 ggplot(Boron_annual_average, 
@@ -348,7 +350,7 @@ ggplot(Boron_annual_average,
 
 ```
 
-```{r Data visualization Magnesium, fig.align='center', fig.cap="Magnesium Concentration before and after passing through the Navajo Nation"}
+```{r Data visualization Magnesium, echo=FALSE, fig.align='center', fig.cap="Magnesium Concentration before and after passing through the Navajo Nation"}
 
 #Compare Magnesium
 ggplot(Magnesium_annual_average, 
@@ -360,7 +362,7 @@ ggplot(Magnesium_annual_average,
 
 ```
 
-```{r Data visualization Uranium, fig.align='center', fig.cap="Uranium Concentration before and after passing through the Navajo Nation"}
+```{r Data visualization Uranium, echo=FALSE, fig.align='center', fig.cap="Uranium Concentration before and after passing through the Navajo Nation"}
 
 #Compare Uranium
 ggplot(Uranium_annual_average, 
@@ -371,12 +373,11 @@ ggplot(Uranium_annual_average,
   my_theme
 
 ```
-*Make analysis*
 
 \newpage
 
 # Summary and Conclusions
-7 gallons per day is not enough to meet basic needs. According to the UN WHO, at least 50 liters per day per person is needed, which is about 13.2 gallons.
+
 
 \newpage
 
