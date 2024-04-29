@@ -73,11 +73,11 @@ colorado_quantity_df<-rename(colorado_quantity_df, discharge_cf = X_00060_00003)
 
 ## Data Visualization 
 ```{r, data exploration}
-ggplot(data=sanjuan_quantity_df, aes(x=Date, y=discharge_cf))+geom_point()+geom_smooth(method="lm")
-ggplot(data=colorado_quantity_df, aes(x=Date, y=discharge_cf))+geom_point()+geom_smooth(method="lm")
+ggplot(data=sanjuan_quantity_df, aes(x=Date, y=discharge_cf))+geom_point()+geom_smooth(method="lm")+labs(y= "Discharge (cubic feet/second)")
+```
 
-discharge_sanjuan<-sanjuan_quantity_df$discharge_cf
-plot(discharge_sanjuan)
+```{r, data exploration}
+ggplot(data=colorado_quantity_df, aes(x=Date, y=discharge_cf))+geom_point()+geom_smooth(method="lm")+labs(y= "Discharge (cubic feet/second)")
 ```
 > The downward slope measured at both gages suggests that discharge volume for both San Juan and Colorado Rivers have declined in the last five years. San Juan appears to have more frequent periods of high discharge than usual (eg. mid-2023 and mid-2019) compared to Colorado. 
 
@@ -138,7 +138,7 @@ San Juan River: Water levels have declined from 2019 to 2020 and remained steady
 
 ## Population Drawing Directly From the Rivers 
 
-check how much water the Navajo people withdraw or need?
+check how much water the Navajo people withdraw?
 check population living near the river-> est how much they would need 
 potential explanation- agriculture
 
@@ -208,7 +208,8 @@ Indian Population drawing water directly from these rivers
 - Colorado River: Estimated to be 4516
 - San Juan River: Estimated to be 18728
 
-Navajo people are estimated to use only 7 gallons of water per day. [CITE Source] 
+Navajo people are estimated to use only 7 gallons of water per day. [Source: https://www.supremecourt.gov/opinions/22pdf/21-1484_aplc.pdf)
+
 ```{r}
 #Colorado 
 annual_draw_colorado<-4516*7*365
