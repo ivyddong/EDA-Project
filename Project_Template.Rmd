@@ -3,7 +3,6 @@ title: 'Final Project: Navajo Nation Water Quality Analysis'
 author: "Samantha White-Murillo, Wynnoa, Siyu Dong" 
 date: "Spring 2024"
 output: 
-geometry: margin=2.54cm
   pdf_document:
    fig_caption: true
 ---
@@ -39,7 +38,7 @@ my_theme <- theme_light() +
         axis.title = element_text(color = "darkblue", )) +
   theme(legend.position = "bottom")
 
-# Load your datasets
+# Load your data sets
 ## Water Quality
 Boron_Site1 <- read.csv("./Raw_data/Boron_S1.csv", stringsAsFactors = TRUE)
 Boron_Site2 <- read.csv("./Raw_data/Boron_S2.csv", stringsAsFactors = TRUE)
@@ -81,14 +80,14 @@ The Navajo Nation has severe water infrastructure deficiencies that impact the h
 
 In terms of water quantity, climate change in the Southwest will continue to impact water resources problems. The USGS Disaster Risk Assessment Study concluded that a long-term drying trend and decreasing snow pack, superimposed on the regional drought cycles, will magnify water-related impacts in Navajo Nation and leave the Navajo people increasingly vulnerable (Navajo Nation Department of Water Resources, 2024).
 
-For the above, the present project measures the water quality of the water in the main river Colorado River before, and after it pass through the reservation in the past 5 years, establishing the following hypothesis:
+The current project focuses on analyzing the water quality of the main Colorado River before and after it flows through the reservation over the past 5 years. Taking into account the tribe's persistent efforts to compel the federal government to meet its obligations, aiding in the quantification of the tribe's water rights on the Colorado River and ensuring access to high-quality water, we have chosen to focus our quality analysis on the Colorado River. This decision stems from the river's current water rights litigation and the availability of data. A five-year analysis period was selected to provide a more current evaluation. This analysis aims to establish the following hypotheses:
 
 > Hypothesis A: The water quality in the Colorado River before and after passing through the Navajo Nation is significantly different.
 > Null hypothesis: no difference
 
 > Hypothesis B: The water quality in the Colorado River before and after passing through the Navajo Nation has changed significantly in the last 5 years.
 
-On the other hand, measurement is carried out for the water quantity of the rivers over the last 5 years to evaluate the water availability in Colorado River and San Juan River, establishing the following hypothesis:
+On the other hand, measurements have been conducted for the water quantity of the rivers over the last 5 years (2019-2024) to assess water availability in both the Colorado River and the San Juan River. In order to broaden the scope of our analysis of water availability, the San Juan River was also selected, establishing the following hypothesis:
 
 > Hypothesis C: Water availability changed in the last years for the Navajo Nation due to droughts & climate change.
 
@@ -108,9 +107,9 @@ For water quantity, the data was extracted from years 2019 to 2023 form the stat
 # Exploratory Analysis 
 
 ## Water Quantity
-### Question 1: <How have water discharge levels changed in the last 5 years at San Juan and Colorado rivers?>
+#### Question 1: <How have water discharge levels changed in the last 5 years at San Juan and Colorado rivers?>
 
-#### Data Wrangling
+### Data Wrangling
 ```{r Data Wrangling}
 #Renaming columns to be understandable 
 sanjuan_quantity_df<-rename(sanjuan_quantity_df, discharge_cf = X_00060_00003)
@@ -118,8 +117,8 @@ colorado_quantity_df<-rename(colorado_quantity_df, discharge_cf = X_00060_00003)
 
 ```
 
-#### Data Visualization 
-```{r Data Visualization, fig.align='center', fig.cap="Water Levels in San Juan River, 2019-2024"}
+### Data Visualization 
+```{r Data Visualization San Juan, fig.align='center', fig.cap="Water Levels in San Juan River, 2019-2024"}
 ggplot(data = sanjuan_quantity_df, 
        aes(x = Date, 
            y = discharge_cf)) +
@@ -129,7 +128,7 @@ ggplot(data = sanjuan_quantity_df,
 
 ```
 
-```{r Data Visualization, fig.align='center', fig.cap="Water Levels in Colorado River, 2019-2024"}
+```{r Data Visualization Colorado, fig.align='center', fig.cap="Water Levels in Colorado River, 2019-2024"}
 ggplot(data = colorado_quantity_df, 
        aes(x = Date, 
            y = discharge_cf)) +
@@ -139,7 +138,7 @@ ggplot(data = colorado_quantity_df,
 
 ```
 
-```{r Data Visualization, fig.align='center', fig.cap="Discharge Indez of San Juan River"}
+```{r Data Visualization San Juan Discharge, fig.align='center', fig.cap="Discharge Index of San Juan River"}
 
 discharge_sanjuan <- sanjuan_quantity_df$discharge_cf
 plot(discharge_sanjuan)
@@ -148,11 +147,11 @@ plot(discharge_sanjuan)
 
 > The downwarded slope measured at both gages suggests that discharge volume for both San Juan and Colorado Rivers have declined in the last five years. San Juan appears to have more frequent periods of high discharge than usual (eg. mid-2023 and mid-2019) compared to Colorado.
 
-#### Time Series Analysis
+### Time Series Analysis
 
 *Note: there is no missing data so it is not necessary to execute linear interpolation.* 
 
-```{r Time Series Analysis, fig.align='center', fig.cap="Time Series Analysis of San Juan River, 2019-2024"}
+```{r Time Series Analysis San Juan River, fig.align='center', fig.cap="Time Series Analysis of San Juan River, 2019-2024"}
 
 # San Juan River 
 # Generate time series
@@ -178,7 +177,7 @@ plot(sanjuan_quantity_daily_decomposed) +
 
 ```
 
-```{r Time Series Analysis, fig.align='center', fig.cap="Time Series Analysis of Colorado River, 2019-2024"}
+```{r Time Series Analysis Colorado River, fig.align='center', fig.cap="Time Series Analysis of Colorado River, 2019-2024"}
 
 # Colorado River  
 # Generate time series
@@ -212,7 +211,7 @@ For Colorado River, the following chapters met this criteria: Bodaway-Gap, Coppe
 
 For San Juan, the following chapters met this criteria: Kayenta, Oljato, Shonto, Beclabito, Upper Fruitland, Gadii Ahi/to'koi, Mexican Water, Red Mesa, Teec Nos Pos, Tse Daa Kaan. 
 
-#### Manual data collection
+### Manual data collection
 ```{r Manual data collection}
 
 #Population Directly Drawing Water from the Colorado River  
@@ -273,9 +272,9 @@ water_available_SJ_2024
 
 
 ## Water Quality
-### Question 2: <How has been the water quality of the Colorado River before, and after it pass through the reservation in the past 5 years?>
+#### Question 2: <How has been the water quality of Colorado River before, and after it pass through the reservation in the past 5 years?>
 
-#### Data Preparation
+### Data Preparation
 ```{r Dara Preparation, message=FALSE}
 
 #Chage Date Format
@@ -328,7 +327,7 @@ Uranium_annual_average <- Uranium_filtered %>%
 
 ```
 
-#### Data Visualization
+### Data Visualization
 ```{r Data visualization Boron, fig.align='center', fig.cap="Boron Concentration before and after passing through the Navajo Nation"}
 
 #Compare Boron
@@ -369,7 +368,7 @@ ggplot(Uranium_annual_average,
 \newpage
 
 # Summary and Conclusions
-7 gallons per day is not enough to meet basic needs. According to the UN WHO, at least 50 liters per day per person is needed, which is about 13.2 gallons. 
+7 gallons per day is not enough to meet basic needs. According to the UN WHO, at least 50 liters per day per person is needed, which is about 13.2 gallons.
 
 \newpage
 
