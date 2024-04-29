@@ -6,7 +6,6 @@ output: pdf_document
 ---
 ```{r setup, include=FALSE}
 # Set your working directory
-setwd("/home/guest/EDA Project")
 getwd()
 
 # Load your packages
@@ -18,12 +17,12 @@ library(tidyverse)
 library(lubridate)
 
 # Load your datasets
-Boron_Site1 <- read.csv("/home/guest/EDA Project/Raw_data/Boron_S1.csv", stringsAsFactors = TRUE)
-Boron_Site2 <- read.csv("/home/guest/EDA Project/Raw_data/Boron_S2.csv", stringsAsFactors = TRUE)
-Magnesium_Site1 <- read.csv("/home/guest/EDA Project/Raw_data/magnesium_S1.csv", stringsAsFactors = TRUE)
-Magnesium_Site2 <- read.csv("/home/guest/EDA Project/Raw_data/magnesium_S2.csv", stringsAsFactors = TRUE)
-Uranium_Site1 <- read.csv("/home/guest/EDA Project/Raw_data/Uranium_S1.csv", stringsAsFactors = TRUE)
-Uranium_Site2 <- read.csv("/home/guest/EDA Project/Raw_data/Uranium_S2.csv", stringsAsFactors = TRUE)
+Boron_Site1 <- read.csv("./Raw_data/Boron_S1.csv", stringsAsFactors = TRUE)
+Boron_Site2 <- read.csv("./Raw_data/Boron_S2.csv", stringsAsFactors = TRUE)
+Magnesium_Site1 <- read.csv("./Raw_data/magnesium_S1.csv", stringsAsFactors = TRUE)
+Magnesium_Site2 <- read.csv("./Raw_data/magnesium_S2.csv", stringsAsFactors = TRUE)
+Uranium_Site1 <- read.csv("./Raw_data/Uranium_S1.csv", stringsAsFactors = TRUE)
+Uranium_Site2 <- read.csv("./Raw_data/Uranium_S2.csv", stringsAsFactors = TRUE)
 ```
 
 ```{r, Dara Preparation}
@@ -33,7 +32,7 @@ class(Boron_Site2$Activity_StartDate)
 class(Magnesium_Site1$Activity_StartDate)
 class(Magnesium_Site2$Activity_StartDate)
 class(Uranium_Site1$Activity_StartDate)
-class(Uranium_Site2$Activity_StartDate)
+class(Uranium_Sitew$Activity_StartDate)
 
 Boron_Site1$Activity_StartDate <- as.Date(Boron_Site1$Activity_StartDate, format = "%Y-%M-%d")
 Boron_Site2$Activity_StartDate <- as.Date(Boron_Site2$Activity_StartDate, format = "%Y-%M-%d")
@@ -77,10 +76,6 @@ Uranium_annual_average <- Uranium_filtered %>%
 ```
 
 ```{r}
-#t-test
-Boron_t_test <- t.test(Boron_Site1$Result_MeasureValue, Boron_Site2$Result_MeasureValue)
-print(Boron_t_test)
-
 #Compare Boron
 ggplot(Boron_annual_average, 
        aes(x = Year, y = Avg_Concentration, color = Location_Name)) +
