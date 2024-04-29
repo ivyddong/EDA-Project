@@ -95,7 +95,7 @@ On the other hand, measurements have been conducted for the water quantity of th
 # Dataset Information
 The dataset information was taken from the USGS Monitoring the rivers of the Nation (https://waterdata.usgs.gov/nwis), 
 
-For water quality analysis, data was extracted from the years 2018 to 2023, capturing Uranium, Magnesium, and Boron levels at both stations during this period. The reason for selecting these components was the availability of data at both stations. It was necessary for both stations to have the same components during the same period to enable a comparative analysis. Also, those component represent a high risk for human health and the environment at high levels.
+For water quality analysis, data was extracted from the years 2019 to 2024, capturing Uranium, Magnesium, and Boron levels at both stations during this period. The reason for selecting these components was the availability of data at both stations. It was necessary for both stations to have the same components during the same period to enable a comparative analysis. Also, those component represent a high risk for human health and the environment at high levels.
 
 Below is the information on the stations worked:
 - Station 1 = Colorado River at Lees Ferry, AZ - 09380000
@@ -336,9 +336,7 @@ Uranium_annual_average <- Uranium_filtered %>%
 
 ### Data Visualization Analysis
 
-There is an increase on the mean Boron concentrations along the years on the Colorado river (see figure 5), never the less, that increment and the concentrations itself haven't exceed a concerning level for human health according to the recommended maximum levels of drinking water of Canada and The World Health Organization standards (World Healh Organization, 2009; Health Canada, 2020). 
-
-In all the time periods there is less concentration of Boron when entering the tribe territory than when it exits, indicating that within the activities of the nation there is boron discharge in the Colorado river.
+There is an increase on the mean Boron concentrations along the years on the Colorado river (see figure 5), never the less, that increment and the concentrations itself haven't exceed a concerning level for human health according to Canada and The World Health Organization standards (World Healh Organization, 2009). In all the time periods there is less concentration of Boron when entering the tribe territory than when it exits, reaching a maximum concentration of >120 ug/L. Never the less, those concentrations are in a standard low value.
 
 ```{r Data visualization Boron, echo=FALSE, fig.align='center', fig.cap="Boron Concentration before and after passing through the Navajo Nation"}
 
@@ -398,8 +396,6 @@ webpage. Retrieved from https://nnwrc.navajo-nsn.gov/
 SOURCE. (n.d.). Los hidropaneles SOURCE llevan agua a la Nación Navajo. Retrieved from https://www.source.co/resources/case-studies/los-hidropaneles-source-llevan-agua-a-lanacion-navajo/?lang=es
 
 World Health Organization. (2009). Boron. Chemical Fact Sheets. https://www.who.int/docs/default-source/wash-documents/wash-chemicals/boron-chemical-fact-sheet.pdf?sfvrsn=a936384f_4
-
-Health Canada. (2020). Boron in drinking water. In Guidelines for Canadian Drinking Water Quality: Guideline Technical Document [Report]. https://www.canada.ca/content/dam/hc-sc/documents/programs/consultation-boron-drinking-water/document/boron-gtd-consultation-09-12-2019-eng.pdf
 
 \newpage
 
