@@ -32,7 +32,7 @@ class(Boron_Site2$Activity_StartDate)
 class(Magnesium_Site1$Activity_StartDate)
 class(Magnesium_Site2$Activity_StartDate)
 class(Uranium_Site1$Activity_StartDate)
-class(Uranium_Sitew$Activity_StartDate)
+class(Uranium_Site2$Activity_StartDate)
 
 Boron_Site1$Activity_StartDate <- as.Date(Boron_Site1$Activity_StartDate, format = "%Y-%M-%d")
 Boron_Site2$Activity_StartDate <- as.Date(Boron_Site2$Activity_StartDate, format = "%Y-%M-%d")

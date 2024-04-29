@@ -6,13 +6,9 @@ output:
 geometry: margin=2.54cm
   pdf_document:
    fig_caption: true
-   editor_options: 
-  chunk_output_type: console
 ---
 \newpage
 \tableofcontents
-\newpage
-\listoftables 
 \newpage
 \listoffigures 
 \newpage
@@ -246,7 +242,7 @@ pop_chapters_SJ #18728
 
 ```
 
-*Note: It was intended to scraping data from the website but it generated empty values. Hence, copy pasting the data was done instead. See apendix 1.*
+*Note: It was intended to scraping data from the website but it generated empty values. Hence, copy pasting the data was done instead. See appendix 1.*
 
 Indian Population drawing water directly from these rivers 
 - Colorado River: Estimated to be 4516
@@ -383,6 +379,11 @@ UN-Water Decade Programme on Advocacy and Communication and Water Supply and San
 Williams, A. P., Cook, B. I., & Smerdon, J. E. (2022). Rapid intensification of the emerging southwestern North American megadrought in 2020–2021. Nature Climate Change, 12(3), 232–234. https://doi.org/10.1038/s41558-022-01290-z
 
 The Colorado River: Heading into 2024 with hope for a more stable system | Arizona Department of Water Resources. (2023, December 21). https://www.azwater.gov/news/articles/2023-12-21-0
+
+Navajo Nation Water Rights Comission. (2024, 3 22). Navajo Nation Water Rights Comission 
+webpage. Retrieved from https://nnwrc.navajo-nsn.gov/
+
+SOURCE. (n.d.). Los hidropaneles SOURCE llevan agua a la Nación Navajo. Retrieved from https://www.source.co/resources/case-studies/los-hidropaneles-source-llevan-agua-a-lanacion-navajo/?lang=es
 
 \newpage
 
