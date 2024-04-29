@@ -103,7 +103,6 @@ sanjuan_quantity_daily_ts<- ts(sanjuan_quantity_df$
                             frequency=365)
 
 # Decompose
-
 sanjuan_quantity_daily_decomposed<- stl(sanjuan_quantity_daily_ts, s.window = "periodic")
 plot(sanjuan_quantity_daily_decomposed)
 
@@ -142,11 +141,9 @@ check how much water the Navajo people withdraw?
 check population living near the river-> est how much they would need 
 potential explanation- agriculture
 
-We examined each of the chapters under the Western and Northern Agency on whether the San Juan and Colorado River passes through their territory. This would allows us to determine how much of the Navajo population collected water from each respective river. 
+Within the Navajo Nation, each of the chapters under the Western and Northern Agency were examined to determine whether the San Juan and Colorado River passes through their territory. This helps determine how much of the Navajo population collected water from each respective river. 
 
-For the Colorado River, the following chapters met this criteria: Bodaway-Gap, Coppermine, LeChee, and Navajo Mountain. 
-
-For San Juan, the following chapters met this criteria: Kayenta, Oljato, Shonto, Beclabito, Upper Fruitland, Gadii Ahi/to'koi, Mexican Water, Red Mesa, Teec Nos Pos, Tse Daa Kaan. 
+For the Colorado River, the following chapters met this criteria: Bodaway-Gap, Coppermine, LeChee, and Navajo Mountain. For San Juan, the following chapters met this criteria: Kayenta, Oljato, Shonto, Beclabito, Upper Fruitland, Gadii Ahi/to'koi, Mexican Water, Red Mesa, Teec Nos Pos, Tse Daa Kaan. 
 
 #manual data collection
 ```{r}
@@ -203,7 +200,6 @@ table
 
 ```
 
-
 Indian Population drawing water directly from these rivers 
 - Colorado River: Estimated to be 4516
 - San Juan River: Estimated to be 18728
@@ -231,8 +227,9 @@ water_available_SJ_2024
 7 gallons per day is not enough to meet basic needs. According to the UN WHO, at least 50 liters per day per person is needed, which is about 13.2 gallons. 
 Source: https://www.un.org/waterforlifedecade/pdf/human_right_to_water_and_sanitation_media_brief.pdf
 
-# Explaining observed water availability 
-1. Drought: https://www.nature.com/articles/s41558-022-01290-z
-Rapid intensification of the emerging southwestern North American megadrought in 2020–2021
-2. High snowpack from the mountains: The Basin experienced excellent snowpack last winter and above average runoff in 2023.
-https://www.azwater.gov/news/articles/2023-12-21-0 
+# To add to analysis: Explaining observed water availability 
+Water availability on both rivers could be explained by two factors. In periods with low availability, drought could be a key reason. The southwestern US has been undergoing a intensified megadrought from 2020 to 2021 [Cite:https://www.nature.com/articles/s41558-022-01290-z]. This is within a larger backdrop of drought occuring in the region for the past few decades. According to the EPA, "Large portions of the Southwest have experienced drought conditions since weekly Drought Monitor records began in 2000" (Cite: https://www.epa.gov/climate-indicators/southwest). From the years 2000 to 2020, the region has experienced "higher than average temperatures" than "the long-term average (1895–2020)" (Ibid.). Aside from higher temperatures, the Colorado river supplies water to multiple states, some engaging in water-intensive agriculture and supporting the municipal needs of nearly 40 million people (Cite: https://www.usbr.gov/watersmart/bsp/docs/finalreport/ColoradoRiver/CRBS_Executive_Summary_FINAL.pdf). 
+
+The periods with higher than usual water discharge can be explained by high snowpack from the mountains. The Colorado Basin "experienced excellent snowpack last winter (end of 2022 & early 2023) and above average runoff in 2023" (Cite: https://www.azwater.gov/news/articles/2023-12-21-0 ). A measure of the amount of water stored in snowpack is SWE, which stands for Snow Water Equivalent. Other analysis have found that "Compared to the last three decades, most snow stations in the Upper and Lower Colorado River Basin documented SWEs at or above average in 2023. Some stations recorded as much as 262% above the 30-year SWE average, with as much as 300% or more during some months at some locations" (Cite: https://storymaps.arcgis.com/stories/930222924edc4506b17be6165368cd42). 
+
+
