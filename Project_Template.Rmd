@@ -236,6 +236,8 @@ pop_chapters_SJ<-pop_Kayenta+pop_Oljato+pop_Shonto+pop_Beclabito+pop_Upper_Fruit
 
 Navajo people are estimated to use only 7 gallons of water per day. [Source: https://www.supremecourt.gov/opinions/22pdf/21-1484_aplc.pdf) Based on this estimate, and the estimate of population drawing water directly from the rivers, we can estimate the gallons of annual water withdrawal by the Navajo Nation. About 11538380 gallons in total are directly withdrawn from the Colorado River by the Navajo Nation, while about 47850040 gallons in total are directly withdrawn by the Navajo Nation from the San Juan River. This is a small quantity compared to [*i think we need a statistic of how much other states withdraw from either river to put these numbers in context]
 
+This estimate applies only for domestic use but since they use water for other activities such as agriculture, the water availability of both rivers is a limiting factor. 
+
 *Note to Samantha: when explaining our methods I think we need to make clear this assumption. we're counting only populations right beside the river, even though with water transport infrastructure, people in chapters far from the river will also be withdrawing, so this estimate of water withdrawing is an underestiamte.  
 
 
