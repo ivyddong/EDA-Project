@@ -128,7 +128,7 @@ On the other hand, measurements have been conducted for the water quantity of th
 
 \newpage
 
-# Dataset Information
+# Dataset Information & Methods
 The dataset was taken from the USGS Monitoring the rivers of the Nation (https://waterdata.usgs.gov/nwis).
 
 For water quality analysis, data was extracted from the years 2018 to 2023, capturing Uranium, Magnesium, and Boron levels detected at both stations. Those components pose a high risk for human health and the environment at high levels. Uranium is radioactive , and high and prolonged exposure increases risks of kidney diseases (Vengosh, 2024). High concentrations of boron in humans can cause nausea, vomiting, redness of the skin, difficulty swallowing due to ulcers in the throat, and non-bloody diarrhea (U.S. EPA, et al., 2008). Moreover, these components were selected since the data was available for both stations, enabling a comparative analysis. 
