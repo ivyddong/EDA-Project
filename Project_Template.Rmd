@@ -145,7 +145,7 @@ For water quantity, the data was wrangled to have more understandable column nam
 
 \newpage
 
-# Exploratory Analysis 
+# Analysis 
 
 ## Water Quantity
 #### Question 1: How have water discharge levels changed in the last 5 years at San Juan and Colorado rivers?
@@ -237,7 +237,7 @@ colorado_quantity_daily_decomposed<- stl(colorado_quantity_daily_ts, s.window = 
 plot(colorado_quantity_daily_decomposed)
 ```
 
-
+\newpage
 ### Population Drawing Directly From the Rivers 
 
 We examined each of the chapters under the Western and Northern Agency on whether the San Juan and Colorado River passes through their territory (Navajo Nation Division of Community Development, n.d.). This would allows us to determine how much of the Navajo population drew water directly from each river. 
@@ -416,6 +416,7 @@ ggplot(Magnesium_annual_average,
   geom_point() +
   labs(x = "Observation Year",
        y = "Mean Concentration (ug/L)") +
+  scale_color_discrete(name = "Location")+
   my_theme
 
 ```
@@ -442,6 +443,7 @@ ggplot(Uranium_annual_average,
   geom_point() +
   labs(x = "Observation Year",
        y = "Mean Concentration (ug/L)") +
+  scale_color_discrete(name = "Location")+
   my_theme
 
 ```
@@ -455,7 +457,11 @@ boron, magnecium ratio
 
 # References
 
+Doug Brugge, Rob Goble. (2002). The History of Uranium Mining and the Navajo People. Public health then and now. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3222290/pdf/0921410.pdf
+
 Health Canada. (2020). Boron in drinking water. In Guidelines for Canadian Drinking Water Quality: Guideline Technical Document [Report]. https://www.canada.ca/content/dam/hc-sc/documents/programs/consultation-boron-drinking-water/document/boron-gtd-consultation-09-12-2019-eng.pdf
+
+National Primary Drinking Water Regulations | US EPA. (2024, January 2). US EPA. https://www.epa.gov/ground-water-and-drinking-water/national-primary-drinking-water-regulations
 
 Navajo Nation Division of Community Development (n.d.). Navajo Nation Profile. Navajo Nation WIND. Retrieved April 28, 2024, from https://navajoprofile.wind.enavajo.org/
 
@@ -468,19 +474,15 @@ Supreme Court of the United States (2022, October 1). Arizona et al. V. Navajo N
 
 The Colorado River: Heading into 2024 with hope for a more stable system | Arizona Department of Water Resources. (2023, December 21). https://www.azwater.gov/news/articles/2023-12-21-0
 
+U.S. EPA, Health and Ecological Criteria Division (HECD), O. of S. and T. (OST), OW, Office of Water (OW), & Office of Groundwater/Drinking Water (OGWDW), O. (2008). Drinking Water Health Advisory for Boron and Compounds. https://www.epa.gov/sites/default/files/2014-09/documents/summary_document_from_the_ha_for_boron.pdf
+
+U.S. EPA. (1984). Ambient surface water quality standards documentation, Magnesium. https://www.epa.gov/sites/default/files/2015-06/documents/ny_hh_396_w_12201984.pdf
+
 UN-Water Decade Programme on Advocacy and Communication and Water Supply and Sanitation Collaborative Council. (2010). The human right to water and sanitation today. In Media Brief. https://www.un.org/waterforlifedecade/pdf/human_right_to_water_and_sanitation_media_brief.pdf
 
 Williams, A. P., Cook, B. I., & Smerdon, J. E. (2022). Rapid intensification of the emerging southwestern North American megadrought in 2020–2021. Nature Climate Change, 12(3), 232–234. https://doi.org/10.1038/s41558-022-01290-z
 
 World Health Organization. (2009). Boron. Chemical Fact Sheets. https://www.who.int/docs/default-source/wash-documents/wash-chemicals/boron-chemical-fact-sheet.pdf?sfvrsn=a936384f_4
-
-National Primary Drinking Water Regulations | US EPA. (2024, January 2). US EPA. https://www.epa.gov/ground-water-and-drinking-water/national-primary-drinking-water-regulations
-
-Doug Brugge, Rob Goble. (2002). The History of Uranium Mining and the Navajo People. Public health then and now. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3222290/pdf/0921410.pdf
-
-U.S. EPA, Health and Ecological Criteria Division (HECD), O. of S. and T. (OST), OW, Office of Water (OW), & Office of Groundwater/Drinking Water (OGWDW), O. (2008). Drinking Water Health Advisory for Boron and Compounds. https://www.epa.gov/sites/default/files/2014-09/documents/summary_document_from_the_ha_for_boron.pdf
-
-U.S. EPA. (1984). Ambient surface water quality standards documentation, Magnesium. https://www.epa.gov/sites/default/files/2015-06/documents/ny_hh_396_w_12201984.pdf
 
 \newpage
 
