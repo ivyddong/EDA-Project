@@ -259,9 +259,10 @@ annual_draw_SJ
 
 ```
 
-cubic feet per second
-1 cubic feet = 7.48052 gallons 
+
 ```{r echo=FALSE, message=FALSE}
+#conversion: cubic feet per second. 1 cubic feet = 7.48052 gallons 
+
 seconds_per_year<-365*24*60*60
 #water available in periods of minimum water discharge from the last 5 years
 water_available_SJ_2024<-500*7.48052*seconds_per_year
@@ -269,9 +270,7 @@ water_available_SJ_2024
 water_available_Colorado_2024<-9500*7.48052*seconds_per_year
 water_available_Colorado_2024  
 
-#Note to samantha: Do we need to include this in our analysis? Cos even at the lowest levels, there is enough water passing through to meet the minimal 7gallon/day consumption 
 ```
-*make description*
 
 \newpage
 
@@ -333,9 +332,9 @@ Uranium_annual_average <- Uranium_filtered %>%
 
 ### Data Visualization Analysis
 
-There is an increase on the mean Boron concentrations along the years on the Colorado river (Figure 5), never the less, that increment and the concentrations itself haven't exceed a concerning level for human health according to the recommended maximum levels of drinking water of Canada and The World Health Organization standards (World Health Organization, 2009; Health Canada, 2020). 
+Mean annual Boron concentrations increased on the Colorado river (Figure 5) from 2019-2024, nevertheless, the concentrations have not yet exceed a concerning level for human health according to the recommended maximum levels for drinking water by Canada and The World Health Organization (World Health Organization, 2009; Health Canada, 2020). 
 
-In all the time periods there is less concentration of Boron when entering the tribe territory than when it exits, indicating that within the activities of the nation there is boron discharge in the Colorado river.
+Throughout this 5-year period, Boron concentration is lower when entering the tribe territory than when it exits, indicating that the Navajo Nation engages in activities that result in Boron discharge in the Colorado river. [***what sorts of activities might they be? Cite]
 
 ```{r Data visualization Boron, echo=FALSE, fig.align='center', fig.cap="Boron Concentration before and after passing through the Navajo Nation"}
 
@@ -350,6 +349,7 @@ ggplot(Boron_annual_average,
 ```
 
 Magnesium concentrations in the river show. 
+[***Magnesium and Uranium description and explanations needed]
 
 ```{r Data visualization Magnesium, echo=FALSE, fig.align='center', fig.cap="Magnesium Concentration before and after passing through the Navajo Nation"}
 
