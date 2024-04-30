@@ -350,9 +350,12 @@ ggplot(Boron_annual_average,
 ```
 
 Magnesium concentrations in the river show. 
-[***Magnesium and Uranium description and explanations needed]
+[***Magnesium description and explanations needed. Also mention they're not statistically significant based on the t-test below with p-value of 0.9361]
 
 ```{r Data visualization Magnesium, echo=FALSE, fig.align='center', fig.cap="Magnesium Concentration before and after passing through the Navajo Nation"}
+#t-test
+Magnesium_t_test <- t.test(Magnesium_Site1$Result_MeasureValue, Magnesium_Site2$Result_MeasureValue)
+print(Magnesium_t_test)
 
 #Compare Magnesium
 ggplot(Magnesium_annual_average, 
@@ -363,8 +366,11 @@ ggplot(Magnesium_annual_average,
   my_theme
 
 ```
-
+[***Uranium description and explanations needed. Interestingly, the results are statistically significant based on the t-test below with p-value of 8.993e-05]
 ```{r Data visualization Uranium, echo=FALSE, fig.align='center', fig.cap="Uranium Concentration before and after passing through the Navajo Nation"}
+#t-test
+Uranium_t_test <- t.test(Uranium_Site1$Result_MeasureValue, Uranium_Site2$Result_MeasureValue)
+print(Uranium_t_test)
 
 #Compare Uranium
 ggplot(Uranium_annual_average, 
