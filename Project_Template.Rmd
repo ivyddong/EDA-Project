@@ -80,6 +80,8 @@ The Navajo Nation has severe water infrastructure deficiencies that impact the h
 
 In terms of water quantity, climate change in the Southwest will continue to impact water resources problems. The USGS Disaster Risk Assessment Study concluded that a long-term drying trend and decreasing snowpack, superimposed on the regional drought cycles, will magnify water-related impacts in the Navajo Nation and leave the Navajo people increasingly vulnerable (Navajo Nation Department of Water Resources, 2024). 
 
+The Navajo Nation mainly gets its water from the Colorado and San Juan Rivers, but faces legal difficulties in getting its interests met within inter-state negotiations on water rights. The Colorado River Compact set in 1922 gives seven states the right to draw water, and are grouped into two, the Upper Basin States (namely Colorado, New Mexico, Utah and Wyoming) and Lower Basin States (namely Arizona, Nevada and California) (https://www.sltrib.com/news/environment/2024/03/06/utah-says-it-shouldnt-have-take/). The Navajo Nation is not formally included in these agreements. As the post-2026 operations of the river are being negotiated, the Navajo Nation is engaging in persistent legal efforts to compel the US government to meet its obligation to set aside water for its people. [***Sami please fact-check & edit as you see fit. Then we need to cite.]
+
 The current project focuses on analyzing the water quality of the main Colorado River before and after it flows through the reservation over the past 5 years. A five-year analysis period was selected to provide a more current evaluation. Taking into account the tribe’s persistent efforts to compel the federal government to meet its obligations, aiding in the quantification of the tribe’s water rights on the Colorado River and ensuring access to high-quality water, we have chosen to focus our quality analysis on the Colorado River. This decision stems from the river’s current water rights litigation and data availability. This analysis aims to test the following hypotheses: 
 
 > Hypothesis A: The water quality in the Colorado River before and after passing through the Navajo Nation is significantly different.
@@ -94,7 +96,7 @@ On the other hand, measurements have been conducted for the water quantity of th
 # Dataset Information
 The dataset was taken from the USGS Monitoring the rivers of the Nation (https://waterdata.usgs.gov/nwis).
 
-For water quality analysis, data was extracted from the years 2018 to 2023, capturing Uranium, Magnesium, and Boron levels detected at both stations. The reason for selecting these components was the availability of data at both stations. It was necessary for both stations to have the same components during the same period to enable a comparative analysis. Also, those component represent a high risk for human health and the environment at high levels [***I think we should elaborate with one or two sentences and cite].
+For water quality analysis, data was extracted from the years 2018 to 2023, capturing Uranium, Magnesium, and Boron levels detected at both stations. The reason for selecting these components was the availability of data at both stations. It was necessary for both stations to have the same components during the same period to enable a comparative analysis. Also, those component represent a high risk for human health and the environment at high levels.
 
 Below is the information on the stations worked:
 - Station 1 = Colorado River at Lees Ferry, AZ - 09380000
@@ -102,7 +104,8 @@ Below is the information on the stations worked:
 
 For water quantity, the data was extracted from years 2019 to 2024 from station 1 as well, extracting data of water flow in cf/s.
 
-Since there is no missing data it is not necessary to execute linear interpolation for time series analysis. 
+Wrangling: 
+For water quantity, the data was wrangled to have more understandable column names for the discharge. The data was parsed to include only relevant variables, namely, discharge and date. No additional wrangling was needed since the dates and discharge were already in the correct format (Year-mm-dd) and class (Date and number respectively), and the dataset contained no missing data. 
 
 \newpage
 
@@ -121,9 +124,7 @@ colorado_quantity_df<-rename(colorado_quantity_df, discharge_cf = X_00060_00003)
 
 ### Data Visualization
 
-The observed downward trend in discharge volume, as evidenced by measurements from both gages (Figures 1 and 2), presents a notable concern regarding the hydrological health of the San Juan and Colorado Rivers over the preceding half-decade. This declining trend signifies a significant challenge to the sustainability of these crucial aquatic ecosystems.
-
-Of particular interest are changes in discharge levels in the San Juan River. While both rivers exhibit an overall decrease in discharge, the San Juan demonstrates more frequent instances of elevated discharge levels. Noteworthy spikes in discharge, notably observed around the midpoints of 2023 and 2019, highlight the river's seasonal variability and susceptibility to external influences.
+The downward slope measured at both gages shows that the discharge volume for both San Juan and Colorado Rivers have declined in the last five years (Figures # and #). This corroborates with previous years where drought conditions have affected water quantity, posing a continued challenge to water availability for the people in the Navajo Nation and impacting aquatic ecosystems. While both rivers experience seasonal variability, the San Juan River has more frequent periods of high discharge (eg. mid-2023 and mid-2019) compared to the Colorado River. 
 
 ```{r Data Visualization San Juan, fig.align='center', fig.cap="Water Levels in San Juan River", message=FALSE, echo=FALSE}
 ggplot(data=sanjuan_quantity_df, 
@@ -231,7 +232,7 @@ pop_chapters_SJ<-pop_Kayenta+pop_Oljato+pop_Shonto+pop_Beclabito+pop_Upper_Fruit
 
 *Note: We intended to use scrape data from the website but it generated empty values. Hence, copy pasting the data was done instead. See appendix 1.*
 
-Navajo people are estimated to use only 7 gallons of water per day (Supreme Court of the United States, 2022). Based on this estimate, and the estimate of population drawing water directly from the rivers, we can estimate the gallons of annual water withdrawal by the Navajo Nation. About 11538380 gallons in total are directly withdrawn from the Colorado River by the Navajo Nation, while about 47850040 gallons in total are directly withdrawn by the Navajo Nation from the San Juan River. This is a small quantity compared to [*i think we need a statistic of how much other states withdraw from either river to put these numbers in context]
+Navajo people are estimated to use only 7 gallons of water per day (Supreme Court of the United States, 2022). Based on this estimate, and the estimate of population drawing water directly from the rivers, we can estimate the gallons of annual water withdrawal by the Navajo Nation. About 11538380 gallons in total are directly withdrawn from the Colorado River by the Navajo Nation, while about 47850040 gallons in total are directly withdrawn by the Navajo Nation from the San Juan River. This is a small quantity compared to...
 
 This estimate applies only for domestic use but since they use water for other activities such as agriculture, the water availability of both rivers is a limiting factor. 
 
@@ -332,7 +333,7 @@ Uranium_annual_average <- Uranium_filtered %>%
 
 ### Data Visualization Analysis
 
-Mean annual Boron concentrations increased on the Colorado river (see Figure 5) from 2019-2024, nevertheless, the concentrations have not yet exceed a concerning level for human health according to the recommended maximum levels for drinking water by Canada and The World Health Organization (World Health Organization, 2009; Health Canada, 2020). 
+Mean annual Boron concentrations increased on the Colorado river (Figure 5) from 2019-2024, nevertheless, the concentrations have not yet exceed a concerning level for human health according to the recommended maximum levels for drinking water by Canada and The World Health Organization (World Health Organization, 2009; Health Canada, 2020). 
 
 Throughout this 5-year period, Boron concentration is lower when entering the tribe territory than when it exits, reaching a maximum concentration of >120 ug/L, which is still considered low, having in general a mean concentration along the river of 74.81 ug/L. The statistically significant difference (p-value = 0.002834 < 0.05) indicates that the Navajo Nation engages in activities that result in Boron discharge in the Colorado river.
 
@@ -356,7 +357,7 @@ ggplot(Boron_annual_average,
 
 ```
 
-Mean annual Magnesium concentrations increased on the Colorado river (see Figure 6) from 2020-2023, having a low concentration on 2018 and high increase in 2019 up to 22.9 mg/L. 
+Mean annual Magnesium concentrations increased on the Colorado river (Figure 6) from 2020-2023, having a low concentration on 2018 and high increase in 2019 up to 22.9 mg/L. 
 
 Throughout this 5-year period, Magnesium concentration is lower when entering the tribe territory than when it exits, with a significant difference between both sides of 93.61%, having in general a mean concentration along the river of 21.55 mg/L,
 
