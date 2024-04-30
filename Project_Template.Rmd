@@ -127,6 +127,7 @@ On the other hand, measurements have been conducted for the water quantity of th
 
 > Hypothesis C: Water availability changed in the last years for the Navajo Nation.
 
+\newpage
 
 # Dataset Information
 The dataset was taken from the USGS Monitoring the rivers of the Nation (https://waterdata.usgs.gov/nwis).
@@ -137,7 +138,7 @@ Below is the information on the stations worked:
 - Station 1 = Colorado River at Lees Ferry, AZ - 09380000
 - Station 2 = Colorado River Near Grand Canyon, AZ - 09402500
 
-For water quantity, the data was extracted from years 2019 to 2024 from station 1 as well, extracting data of water flow in cf/s. For the San Juan river, the data was extracted from the gage on site 09379500. 
+For water quantity, the data was extracted from years 2019 to 2024 from station 1 as well, extracting data of water flow in cf/s. For the San Juan river, the data was extracted from the gage on site San Juan River near Bluff, UT - FF09379500. 
 
 Wrangling: 
 For water quantity, the data was wrangled to have more understandable column names for the discharge. The data was parsed to include only relevant variables, namely, discharge and date. No additional wrangling was needed since the dates and discharge were already in the correct format (Year-mm-dd) and class (Date and number respectively), and the dataset contained no missing data. 
@@ -182,6 +183,8 @@ ggplot(data = colorado_quantity_df,
   my_theme
 
 ```
+
+\newpage
 
 ### Time Series Analysis
 
@@ -243,7 +246,7 @@ For Colorado River, the following chapters met this criteria: Bodaway-Gap, Coppe
 
 The total Indian population in the Navajo Nation estimated to live in the chapters bordering the Colorado River is about 4516 (Navajo Nation Division of Community Development, n.d.). San Juan River has about 18728 people living close-by (Ibid.). 
 
-```{r Manual data collection, echo=FALSE, message=FALSE, warning=FALSE}
+```{r Manual data collection, echo=FALSE, message=FALSE, include=FALSE}
 
 #Population Directly Drawing Water from the Colorado River  
 pop_Bodaway_Gap<-1705
@@ -277,7 +280,7 @@ This estimate applies only for domestic use but since they use water for other a
 Note: we're counting only populations right beside the river, even though with water transport infrastructure, people in chapters far from the river will also be withdrawing, so this estimate of water withdrawing is an underestimate.  
 
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 seconds_per_year<-365*24*60*60
 #water available in periods of minimum water discharge from the last 5 years
 water_available_SJ_2024<-500*7.48052*seconds_per_year
@@ -287,7 +290,7 @@ water_available_Colorado_2024
 
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 #Colorado 
 annual_draw_colorado<-4516*7*365
 annual_draw_colorado
@@ -298,7 +301,7 @@ annual_draw_SJ
 ```
 
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 #conversion: cubic feet per second. 1 cubic feet = 7.48052 gallons 
 
 seconds_per_year<-365*24*60*60
@@ -316,7 +319,7 @@ water_available_Colorado_2024
 ## Water Quality
 #### Question 2: How has been the water quality of Colorado River before, and after it pass through the reservation in the past 5 years?
 
-```{r Dara Preparation, echo=FALSE, message=FALSE, warning=FALSE}
+```{r Dara Preparation, echo=FALSE, message=FALSE, include=FALSE}
 
 #Change to date format for the Activity_StartDate columns for further analysis
 class(Boron_Site1$Activity_StartDate)
@@ -371,11 +374,11 @@ Uranium_annual_average <- Uranium_filtered %>%
 
 ### Boron
 
-Mean annual Boron concentrations increased on the Colorado river (Figure 5) from 2019-2024, nevertheless, the concentrations have not yet exceed a concerning level for human health according to the recommended maximum levels for drinking water by Canada and The World Health Organization (World Health Organization, 2009; Health Canada, 2020).
+Mean annual boron concentrations increased on the Colorado River (Figure 5) from 2019 to 2024; nevertheless, the concentrations have not yet exceeded a concerning level for human health according to the recommended maximum levels for drinking water by Canada and The World Health Organization (World Health Organization, 2009; Health Canada, 2020).
 
-Throughout this 5-year period, Boron concentration is lower when entering the tribe territory than when it exits, reaching a maximum concentration of >120 ug/L, which is still considered low, having in general a mean concentration along the river of 74.81 ug/L. The statistically significant difference (p-value = 0.002834 < 0.05) indicates that the Navajo Nation engages in activities that result in Boron discharge in the Colorado river. It's important to mention that even there is no limits in the US regulations, high concentrations of Boron in humans can causes nausea, vomiting, redness of the skin, difficulty swallowing due to ulcers in the throat, and a non-bloody diarrhea (U.S. EPA, et all., 2008).
+Throughout this 5-year period, boron concentration is lower when entering the tribal territory than when it exits, reaching a maximum concentration of >120 ug/L, which is still considered low, with a general mean concentration along the river of 74.81 ug/L. The statistically significant difference (p-value = 0.002834 < 0.05) indicates that the Navajo Nation engages in activities that result in boron discharge in the Colorado River. It's important to mention that even though there are no limits in the US regulations, high concentrations of boron in humans can cause nausea, vomiting, redness of the skin, difficulty swallowing due to ulcers in the throat, and non-bloody diarrhea (U.S. EPA, et al., 2008).
 
-```{r Data visualization Boron t-test, echo=FALSE, message=FALSE, warning=FALSE}
+```{r Data visualization Boron t-test, echo=FALSE, message=FALSE, include=FALSE}
 #t-test
 Boron_t_test <- t.test(Boron_Site1$Result_MeasureValue, Boron_Site2$Result_MeasureValue)
 print(Boron_t_test)
@@ -395,20 +398,16 @@ ggplot(Boron_annual_average,
 
 ```
 
-### Magnasium
+### Magnesium
 
-Mean annual Magnesium concentrations increased on the Colorado river (Figure 6) from 2020-2023, having a low concentration on 2018 and high increase in 2019 up to 22.9 mg/L. This element is one of the most common elements in natural resources, it is an essential element in human nutrition. The levels found in the water source is typical in water bodies and does not represent a risk for human and natural health (U.S. EPA, 1984).
+Mean annual magnesium concentrations increased on the Colorado River (Figure 6) from 2020 to 2023, with a low concentration in 2018 and a significant increase in 2019, reaching up to 22.9 mg/L. Throughout this 5-year period, magnesium concentration is lower upon entering the tribal territory than when it exits, with a significant difference of 93.61% between both sides, resulting in a mean concentration along the river of 21.55 mg/L. This element is one of the most common elements in natural resources and is essential for human nutrition. The levels found in the water source are typical in water bodies and do not represent a risk to human and natural health (U.S. EPA, 1984).
 
-Throughout this 5-year period, Magnesium concentration is lower when entering the tribe territory than when it exits, with a significant difference between both sides of 93.61%, having in general a mean concentration along the river of 21.55 mg/L,
-
-
-```{r Data visualization Magnesium t-test, echo=FALSE, message=FALSE, warning=FALSE}
+```{r Data visualization Magnesium t-test, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 #t-test
 Magnesium_t_test <- t.test(Magnesium_Site1$Result_MeasureValue, Magnesium_Site2$Result_MeasureValue)
 print(Magnesium_t_test)
 
 ```
-
 
 ```{r Data visualization Magnesium, echo=FALSE, fig.align='center', fig.cap="Magnesium Concentration before and after passing through the Navajo Nation"}
 #Compare Magnesium
@@ -423,11 +422,11 @@ ggplot(Magnesium_annual_average,
 
 ### Uranium
 
-Mean annual Uranium concentrations have increased on the Colorado River (see Figure 5) from 2019 to 2024. Nevertheless, the concentrations have not yet exceeded concerning levels for human health according to the recommended maximum levels for drinking water by The World Health Organization and the EPA. However, the goal concentrations are zero (World Health Organization, 2009; US EPA, 2024). Considering that the water used from the Colorado River is for direct human consumption and other activities, accumulation of this element can potentially generate radiological toxicity, and high concentrations of that accumulation can generate impacts on human health such as kidney diseases (Vengosh, 2024). The low concentrations of this component at this location indicates a positive environmental stage considering the historical mining in the Navajo territories (Doug Brugge, Rob Goble. 2002).
+Mean annual uranium concentrations have increased on the Colorado River (see Figure 5) from 2019 to 2024. Nevertheless, the concentrations have not yet exceeded concerning levels for human health according to the recommended maximum levels for drinking water by The World Health Organization and the EPA. However, the goal concentrations are zero (World Health Organization, 2009; US EPA, 2024). Considering that the water used from the Colorado River is for direct human consumption and other activities, accumulation of this element can potentially generate radiological toxicity, and high concentrations of that accumulation can generate impacts on human health such as kidney diseases (Vengosh, 2024). The low concentrations of this component at this location indicate a positive environmental stage considering the historical mining in the Navajo territories (Doug Brugge, Rob Goble, 2002).
 
-Throughout this 5-year period, Uranium concentration is lower when entering the tribe territory than when it exits (except 2021 and 2023), reaching a maximum concentration of 5.80 ug/L, having in general a mean concentration along the river of 3.47 ug/L. The statistically significant difference (p-value = 8.993 e-5) indicates a difference in uranium measurements between the entrance to the reservation and the exit of the water concentrations of the Colorado river. Suggesting that there are activities or natural occurring uranium discharge.
+Throughout this 5-year period, uranium concentration is lower when entering the tribe territory than when it exits (except in 2021 and 2023), reaching a maximum concentration of 5.80 ug/L, with a general mean concentration along the river of 3.47 ug/L. The statistically significant difference (p-value = 8.993e-5) indicates a difference in uranium measurements between the entrance to the reservation and the exit of the water concentrations of the Colorado River, suggesting that there are activities or naturally occurring uranium discharges.
 
-```{r Data visualization Uranium t-test, echo=FALSE, message=FALSE, warning=FALSE}
+```{r Data visualization Uranium t-test, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 #t-test
 Uranium_t_test <- t.test(Uranium_Site1$Result_MeasureValue, Uranium_Site2$Result_MeasureValue)
 print(Uranium_t_test)
