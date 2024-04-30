@@ -243,7 +243,7 @@ For Colorado River, the following chapters met this criteria: Bodaway-Gap, Coppe
 
 The total Indian population in the Navajo Nation estimated to live in the chapters bordering the Colorado River is about 4516 (Navajo Nation Division of Community Development, n.d.). San Juan River has about 18728 people living close-by (Ibid.). 
 
-```{r Manual data collection, echo=FALSE}
+```{r Manual data collection, echo=FALSE, message=FALSE, warning=FALSE}
 
 #Population Directly Drawing Water from the Colorado River  
 pop_Bodaway_Gap<-1705
@@ -277,7 +277,7 @@ This estimate applies only for domestic use but since they use water for other a
 Note: we're counting only populations right beside the river, even though with water transport infrastructure, people in chapters far from the river will also be withdrawing, so this estimate of water withdrawing is an underestimate.  
 
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 seconds_per_year<-365*24*60*60
 #water available in periods of minimum water discharge from the last 5 years
 water_available_SJ_2024<-500*7.48052*seconds_per_year
@@ -285,10 +285,9 @@ water_available_SJ_2024
 water_available_Colorado_2024<-9500*7.48052*seconds_per_year
 water_available_Colorado_2024  
 
-#Note to samantha: Do we need this? Cos even at the lowest 
 ```
 
-```{r echo=FALSE, message=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 #Colorado 
 annual_draw_colorado<-4516*7*365
 annual_draw_colorado
@@ -299,7 +298,7 @@ annual_draw_SJ
 ```
 
 
-```{r echo=FALSE, message=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 #conversion: cubic feet per second. 1 cubic feet = 7.48052 gallons 
 
 seconds_per_year<-365*24*60*60
@@ -370,13 +369,13 @@ Uranium_annual_average <- Uranium_filtered %>%
 
 ```
 
-### Data Visualization Analysis
+### Boron
 
-Mean annual Boron concentrations increased on the Colorado river (Figure 5) from 2019-2024, nevertheless, the concentrations have not yet exceed a concerning level for human health according to the recommended maximum levels for drinking water by Canada and The World Health Organization (World Health Organization, 2009; Health Canada, 2020). 
+Mean annual Boron concentrations increased on the Colorado river (Figure 5) from 2019-2024, nevertheless, the concentrations have not yet exceed a concerning level for human health according to the recommended maximum levels for drinking water by Canada and The World Health Organization (World Health Organization, 2009; Health Canada, 2020).
 
-Throughout this 5-year period, Boron concentration is lower when entering the tribe territory than when it exits, reaching a maximum concentration of >120 ug/L, which is still considered low, having in general a mean concentration along the river of 74.81 ug/L. The statistically significant difference (p-value = 0.002834 < 0.05) indicates that the Navajo Nation engages in activities that result in Boron discharge in the Colorado river.
+Throughout this 5-year period, Boron concentration is lower when entering the tribe territory than when it exits, reaching a maximum concentration of >120 ug/L, which is still considered low, having in general a mean concentration along the river of 74.81 ug/L. The statistically significant difference (p-value = 0.002834 < 0.05) indicates that the Navajo Nation engages in activities that result in Boron discharge in the Colorado river. It's important to mention that even there is no limits in the US regulations, high concentrations of Boron in humans can causes nausea, vomiting, redness of the skin, difficulty swallowing due to ulcers in the throat, and a non-bloody diarrhea (U.S. EPA, et all., 2008).
 
-```{r Data visualization Boron t-test, echo=FALSE}
+```{r Data visualization Boron t-test, echo=FALSE, message=FALSE, warning=FALSE}
 #t-test
 Boron_t_test <- t.test(Boron_Site1$Result_MeasureValue, Boron_Site2$Result_MeasureValue)
 print(Boron_t_test)
@@ -396,12 +395,14 @@ ggplot(Boron_annual_average,
 
 ```
 
-Mean annual Magnesium concentrations increased on the Colorado river (Figure 6) from 2020-2023, having a low concentration on 2018 and high increase in 2019 up to 22.9 mg/L. 
+### Magnasium
+
+Mean annual Magnesium concentrations increased on the Colorado river (Figure 6) from 2020-2023, having a low concentration on 2018 and high increase in 2019 up to 22.9 mg/L. This element is one of the most common elements in natural resources, it is an essential element in human nutrition. The levels found in the water source is typical in water bodies and does not represent a risk for human and natural health (U.S. EPA, 1984).
 
 Throughout this 5-year period, Magnesium concentration is lower when entering the tribe territory than when it exits, with a significant difference between both sides of 93.61%, having in general a mean concentration along the river of 21.55 mg/L,
 
 
-```{r Data visualization Magnesium t-test, echo=FALSE}
+```{r Data visualization Magnesium t-test, echo=FALSE, message=FALSE, warning=FALSE}
 #t-test
 Magnesium_t_test <- t.test(Magnesium_Site1$Result_MeasureValue, Magnesium_Site2$Result_MeasureValue)
 print(Magnesium_t_test)
@@ -420,11 +421,13 @@ ggplot(Magnesium_annual_average,
 
 ```
 
+### Uranium
+
 Mean annual Uranium concentrations have increased on the Colorado River (see Figure 5) from 2019 to 2024. Nevertheless, the concentrations have not yet exceeded concerning levels for human health according to the recommended maximum levels for drinking water by The World Health Organization and the EPA. However, the goal concentrations are zero (World Health Organization, 2009; US EPA, 2024). Considering that the water used from the Colorado River is for direct human consumption and other activities, accumulation of this element can potentially generate radiological toxicity, and high concentrations of that accumulation can generate impacts on human health such as kidney diseases (Vengosh, 2024). The low concentrations of this component at this location indicates a positive environmental stage considering the historical mining in the Navajo territories (Doug Brugge, Rob Goble. 2002).
 
 Throughout this 5-year period, Uranium concentration is lower when entering the tribe territory than when it exits (except 2021 and 2023), reaching a maximum concentration of 5.80 ug/L, having in general a mean concentration along the river of 3.47 ug/L. The statistically significant difference (p-value = 8.993 e-5) indicates a difference in uranium measurements between the entrance to the reservation and the exit of the water concentrations of the Colorado river. Suggesting that there are activities or natural occurring uranium discharge.
 
-```{r Data visualization Uranium t-test, echo=FALSE}
+```{r Data visualization Uranium t-test, echo=FALSE, message=FALSE, warning=FALSE}
 #t-test
 Uranium_t_test <- t.test(Uranium_Site1$Result_MeasureValue, Uranium_Site2$Result_MeasureValue)
 print(Uranium_t_test)
@@ -447,7 +450,7 @@ ggplot(Uranium_annual_average,
 \newpage
 
 # Summary and Conclusions
-
+boron, magnecium ratio
 
 \newpage
 
@@ -475,6 +478,10 @@ World Health Organization. (2009). Boron. Chemical Fact Sheets. https://www.who.
 National Primary Drinking Water Regulations | US EPA. (2024, January 2). US EPA. https://www.epa.gov/ground-water-and-drinking-water/national-primary-drinking-water-regulations
 
 Doug Brugge, Rob Goble. (2002). The History of Uranium Mining and the Navajo People. Public health then and now. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3222290/pdf/0921410.pdf
+
+U.S. EPA, Health and Ecological Criteria Division (HECD), O. of S. and T. (OST), OW, Office of Water (OW), & Office of Groundwater/Drinking Water (OGWDW), O. (2008). Drinking Water Health Advisory for Boron and Compounds. https://www.epa.gov/sites/default/files/2014-09/documents/summary_document_from_the_ha_for_boron.pdf
+
+U.S. EPA. (1984). Ambient surface water quality standards documentation, Magnesium. https://www.epa.gov/sites/default/files/2015-06/documents/ny_hh_396_w_12201984.pdf
 
 \newpage
 
