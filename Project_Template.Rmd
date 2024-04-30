@@ -1,5 +1,5 @@
 ---
-title: 'Final Project: Navajo Nation Water Quantity and Quality Analysis from 2019-2024'
+title: 'Final Project: Navajo Nation Water Quantity (2019-2024) and Quality Analysis (2018-2023)'
 author: "Samantha White-Murillo, Wynona Curaming, Siyu Dong" 
 date: "Spring 2024"
 output: 
@@ -129,18 +129,15 @@ On the other hand, measurements have been conducted for the water quantity of th
 \newpage
 
 # Dataset Information and Methods
-The dataset was taken from the USGS Monitoring the rivers of the Nation (https://waterdata.usgs.gov/nwis).
+The dataset was taken from the USGS Monitoring the rivers of the Nation (U.S. Geological Survey, n.d.).
 
-For water quality analysis, data was extracted from the years 2018 to 2023, capturing Uranium, Magnesium, and Boron levels detected at both stations. Those components pose a high risk for human health and the environment at high levels. Uranium is radioactive , and high and prolonged exposure increases risks of kidney diseases (Vengosh, 2024). High concentrations of boron in humans can cause nausea, vomiting, redness of the skin, difficulty swallowing due to ulcers in the throat, and non-bloody diarrhea (U.S. EPA, et al., 2008). Moreover, these components were selected since the data was available for both stations, enabling a comparative analysis. 
+For water quantity, the data was extracted from years 2019 to 2024 for Colorado River and San Juan. Our chosen proxy for water quantity is water discharge in cubic feet per second. Data for the Colorado River was taken from the same gage as site 1 in water quality (see next paragraph). For the San Juan river, the data was extracted from the gage on San Juan River near Bluff, UT - FF09379500. 
 
-Below is the information on the stations worked:
-- Station 1 = Colorado River at Lees Ferry, AZ - 09380000
-- Station 2 = Colorado River Near Grand Canyon, AZ - 09402500
+For water quality, data was extracted from the years 2018 to 2023, capturing Uranium, Magnesium, and Boron levels detected at both stations. Those components were chosen as they pose a high risk for human health and the environment at high levels. Uranium is radioactive , and high and prolonged exposure increases risks of kidney diseases (Vengosh, 2024). High concentrations of boron in humans can cause nausea, vomiting, redness of the skin, difficulty swallowing due to ulcers in the throat, and non-bloody diarrhea (U.S. EPA, et al., 2008). Moreover, these components were selected since the data was available for both stations, enabling a comparative analysis. The period of analysis differs between water quantity and quality analysis due to data availability. 
 
-For water quantity, the data was extracted from years 2019 to 2024 from station 1 as well, extracting data of water flow in cf/s. For the San Juan river, the data was extracted from the gage on site San Juan River near Bluff, UT - FF09379500. 
+Two sites were selected to assess how water quality changes as the river passes through the Navajo Nation. Site 1 referred to Colorado River at Lees Ferry, AZ - 09380000, while Site 2 referred to Colorado River Near Grand Canyon, AZ - 09402500. Site 1 represented the Colorado River water condition before entering the Navajo Nation, while site 2 was upon exiting the nation.  
 
-Wrangling: 
-For water quantity, the data was wrangled to have more understandable column names for the discharge. The data was parsed to include only relevant variables, namely, discharge and date. No additional wrangling was needed since the dates and discharge were already in the correct format (Year-mm-dd) and class (Date and number respectively), and the dataset contained no missing data. 
+Data wrangling was conducted for each dataset as follows. For water quantity, the data was wrangled to have more understandable column names for the discharge. The data was parsed to include only relevant variables, namely, discharge and date. No additional wrangling was needed since the dates and discharge were already in the correct format (Year-mm-dd) and class (Date and number respectively), and the dataset contained no missing data. For water quality, the datasets were converted and filtered such that the dates had the correct format and the time period across the two sites were consistent (starting from January 1, 2018 and ending on December 31, 2023). For each contaminant, the datasets for sites 1 and 2 were merged to examine and compare their annual average concentrations over time. 
 
 \newpage
 
@@ -481,6 +478,8 @@ The Colorado River: Heading into 2024 with hope for a more stable system | Arizo
 U.S. EPA, Health and Ecological Criteria Division (HECD), O. of S. and T. (OST), OW, Office of Water (OW), & Office of Groundwater/Drinking Water (OGWDW), O. (2008). Drinking Water Health Advisory for Boron and Compounds. https://www.epa.gov/sites/default/files/2014-09/documents/summary_document_from_the_ha_for_boron.pdf
 
 U.S. EPA. (1984). Ambient surface water quality standards documentation, Magnesium. https://www.epa.gov/sites/default/files/2015-06/documents/ny_hh_396_w_12201984.pdf
+
+U.S. Geological Survey (n.d.). USGS Water Data for the Nation. USGS. Retrieved April 9, 2024, from https://waterdata.usgs.gov/nwis
 
 UN-Water Decade Programme on Advocacy and Communication and Water Supply and Sanitation Collaborative Council. (2010). The human right to water and sanitation today. In Media Brief. https://www.un.org/waterforlifedecade/pdf/human_right_to_water_and_sanitation_media_brief.pdf
 
