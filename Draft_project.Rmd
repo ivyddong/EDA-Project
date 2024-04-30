@@ -300,7 +300,7 @@ class(Magnesium_Site2$Activity_StartDate)
 class(Uranium_Site1$Activity_StartDate)
 class(Uranium_Site2$Activity_StartDate)
 
-#Merger Datasets respectivelly
+#Merge datasets respectively
 Boron_merged <- bind_rows(Boron_Site1, Boron_Site2)
 Magnesium_merged <- bind_rows(Magnesium_Site1, Magnesium_Site2)
 Uranium_merged <- bind_rows(Uranium_Site1, Uranium_Site2)
@@ -310,7 +310,7 @@ Uranium_filtered <- Uranium_merged %>%
   filter(Activity_StartDate >= as.Date("2018-01-01") & 
          Activity_StartDate <= as.Date("2023-12-31"))
 
-#Generate the annual average concentration of three contaminations for both sites
+#Generate the annual average concentration of three contaminants for both sites
 Boron_merged$Year <- lubridate::year(Boron_merged$Activity_StartDate)
 Boron_annual_average <- Boron_merged %>%
   group_by(Year, Location_Name) %>%
@@ -331,9 +331,13 @@ Uranium_annual_average <- Uranium_filtered %>%
 ### Data Visualization Analysis
 Mean annual Boron concentrations increased on the Colorado river (Figure 5) from 2019-2024, nevertheless, the concentrations have not yet exceed a concerning level for human health according to the recommended maximum levels for drinking water by Canada and The World Health Organization (World Health Organization, 2009; Health Canada, 2020). 
 
-Throughout this 5-year period, Boron concentration is lower when entering the tribe territory than when it exits, reaching a maximum concentration of >120 ug/L, which is considered low. This indicates that the Navajo Nation engages in activities that result in Boron discharge in the Colorado river. [***what sorts of activities might they be? Cite]
+Throughout this 5-year period, Boron concentration is lower when entering the tribe territory than when it exits, reaching a maximum concentration of >120 ug/L, which is still considered low. The statistically significant difference (p-value = 0.002834 < 0.05) indicates that the Navajo Nation engages in activities that result in Boron discharge in the Colorado river. [***what sorts of activities might they be? Cite]
 
 ```{r Data visualization Boron, echo=FALSE, fig.align='center', fig.cap="Boron Concentration before and after passing through the Navajo Nation"}
+
+#t-test
+Boron_t_test <- t.test(Boron_Site1$Result_MeasureValue, Boron_Site2$Result_MeasureValue)
+print(Boron_t_test)
 
 #Compare Boron
 ggplot(Boron_annual_average, 
