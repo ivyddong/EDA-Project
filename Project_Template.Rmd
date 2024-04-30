@@ -120,6 +120,9 @@ For water quantity, the data was wrangled to have more understandable column nam
 sanjuan_quantity_df<-rename(sanjuan_quantity_df, discharge_cf = X_00060_00003)
 colorado_quantity_df<-rename(colorado_quantity_df, discharge_cf = X_00060_00003)
 
+#Parsing to include only relevant columns (discharge and date)
+sanjuan_quantity_df<- subset(sanjuan_quantity_df, select=c("Date", "discharge_cf"))
+colorado_quantity_df<- subset(colorado_quantity_df, select=c("Date", "discharge_cf"))
 ```
 
 ### Data Visualization
