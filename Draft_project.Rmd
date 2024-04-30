@@ -76,21 +76,19 @@ pCode2 <- readNWISpCode(parameterCd2)
 
 
 # Rationale and Research Questions
-The Navajo Nation has severe water infrastructure deficiencies that impact the health, economy, and welfare of the Navajo people. The lack of adequate domestic and municipal water is the greatest water resource problem facing the Navajo Nation. Approximately thirty – forty percent of the Navajo Nation population does not have access to clean reliable drinking water, also, 173 thousand people are affected because drinking water sources are limited and abandoned uranium mines have caused contamination of groundwater in the Nation. In addition, many  improvements are needed for other areas of water use including water for irrigation, livestock, commercial, businesses, health care, schools and other facilities. (Navajo Nation Department of Water Resources, 2024) (SOURCE, n.d.) 
+The Navajo Nation has severe water infrastructure deficiencies that impact the health, economy, and welfare of the Navajo people. The lack of adequate domestic and municipal water is the greatest water resource problem facing the Navajo Nation. Approximately 30-40% of the Navajo Nation population does not have access to clean, reliable drinking water  (Navajo Nation Department of Water Resources, 2024). Also, 173 thousand people are affected because drinking water sources are limited, and abandoned uranium mines have caused groundwater contamination in the Nation (Ibid.). In addition, many improvements are needed for other areas of water use, including water for irrigation, livestock, commercial, businesses, health care, schools, and other facilities (SOURCE, n.d.).
 
-In terms of water quantity, climate change in the Southwest will continue to impact water resources problems. The USGS Disaster Risk Assessment Study concluded that a long-term drying trend and decreasing snow pack, superimposed on the regional drought cycles, will magnify water-related impacts in Navajo Nation and leave the Navajo people increasingly vulnerable (Navajo Nation Department of Water Resources, 2024).
+In terms of water quantity, climate change in the Southwest will continue to impact water resources problems. The USGS Disaster Risk Assessment Study concluded that a long-term drying trend and decreasing snowpack, superimposed on the regional drought cycles, will magnify water-related impacts in the Navajo Nation and leave the Navajo people increasingly vulnerable (Navajo Nation Department of Water Resources, 2024). 
 
-The current project focuses on analyzing the water quality of the main Colorado River before and after it flows through the reservation over the past 5 years. Taking into account the tribe's persistent efforts to compel the federal government to meet its obligations, aiding in the quantification of the tribe's water rights on the Colorado River and ensuring access to high-quality water, we have chosen to focus our quality analysis on the Colorado River. This decision stems from the river's current water rights litigation and the availability of data. A five-year analysis period was selected to provide a more current evaluation. This analysis aims to establish the following hypotheses:
+The current project focuses on analyzing the water quality of the main Colorado River before and after it flows through the reservation over the past 5 years. A five-year analysis period was selected to provide a more current evaluation. Taking into account the tribe’s persistent efforts to compel the federal government to meet its obligations, aiding in the quantification of the tribe’s water rights on the Colorado River and ensuring access to high-quality water, we have chosen to focus our quality analysis on the Colorado River. This decision stems from the river’s current water rights litigation and data availability. This analysis aims to test the following hypotheses: 
 
 > Hypothesis A: The water quality in the Colorado River before and after passing through the Navajo Nation is significantly different.
-> Null hypothesis: no difference
 
 > Hypothesis B: The water quality in the Colorado River before and after passing through the Navajo Nation has changed significantly in the last 5 years.
 
 On the other hand, measurements have been conducted for the water quantity of the rivers over the last 5 years (2019-2024) to assess water availability in both the Colorado River and the San Juan River. In order to broaden the scope of our analysis of water availability, the San Juan River was also selected, establishing the following hypothesis:
 
-> Hypothesis C: Water availability changed in the last years for the Navajo Nation due to droughts & climate change.
-
+> Hypothesis C: Water availability changed in the last years for the Navajo Nation.
 
 # Dataset Information
 The dataset information was taken from the USGS Monitoring the rivers of the Nation (https://waterdata.usgs.gov/nwis), 
@@ -148,8 +146,7 @@ ggplot(data = colorado_quantity_df,
 
 ### Time Series Analysis
 
-For Colorado River, water levels have declined from 2019 to mid-2022 and then increased to peak at early 2023. (See figure 4) 
-For San Juan River, Water levels have declined from 2019 to 2020 and remained steady (at a low level) up till mid-2022. Suddenly, water levels increased to peak at early 2023, and declined since then. (see figure 5)
+For Colorado River, water levels have declined from 2019 to mid-2022 and then increased to peak at early 2023 (Figure 4). For San Juan River, water levels have declined from 2019 to 2020 and remained steady (at a low level) up till mid-2022. Suddenly, water levels increased to peak at early 2023, and declined since then (Figure 5).
 
 ```{r Time Series Analysis San Juan River, echo=FALSE, fig.align='center', fig.cap="Time Series Analysis of San Juan River, 2019-2024"}
 
@@ -201,11 +198,11 @@ plot(colorado_quantity_daily_decomposed)
 
 ### Population Drawing Directly From the Rivers 
 
-We examined each of the chapters under the Western and Northern Agency on whether the San Juan and Colorado River passes through their territory. This would allows us to determine how much of the Navajo population drew water directly from each river. 
+We examined each of the chapters under the Western and Northern Agency on whether the San Juan and Colorado River passes through their territory (Navajo Nation Division of Community Development, n.d.). This would allows us to determine how much of the Navajo population drew water directly from each river. 
 
 For Colorado River, the following chapters met this criteria: Bodaway-Gap, Coppermine, LeChee, and Navajo Mountain. For San Juan, the following chapters met this criteria: Kayenta, Oljato, Shonto, Beclabito, Upper Fruitland, Gadii Ahi/to'koi, Mexican Water, Red Mesa, Teec Nos Pos, Tse Daa Kaan. 
 
-The total Indian population in the Navajo Nation estimated to live in the chapters bordering the Colorado River is about 4516. San Juan River has about 18728 people living close-by. 
+The total Indian population in the Navajo Nation estimated to live in the chapters bordering the Colorado River is about 4516 (Navajo Nation Division of Community Development, n.d.). San Juan River has about 18728 people living close-by (Ibid.). 
 
 ```{r Manual data collection, echo=FALSE}
 
@@ -234,12 +231,11 @@ pop_chapters_SJ<-pop_Kayenta+pop_Oljato+pop_Shonto+pop_Beclabito+pop_Upper_Fruit
 
 *Note: We intended to use scrape data from the website but it generated empty values. Hence, copy pasting the data was done instead. See appendix 1.*
 
-Navajo people are estimated to use only 7 gallons of water per day. [Source: https://www.supremecourt.gov/opinions/22pdf/21-1484_aplc.pdf) Based on this estimate, and the estimate of population drawing water directly from the rivers, we can estimate the gallons of annual water withdrawal by the Navajo Nation. About 11538380 gallons in total are directly withdrawn from the Colorado River by the Navajo Nation, while about 47850040 gallons in total are directly withdrawn by the Navajo Nation from the San Juan River. This is a small quantity compared to [*i think we need a statistic of how much other states withdraw from either river to put these numbers in context]
+Navajo people are estimated to use only 7 gallons of water per day (Supreme Court of the United States, 2022). Based on this estimate, and the estimate of population drawing water directly from the rivers, we can estimate the gallons of annual water withdrawal by the Navajo Nation. About 11538380 gallons in total are directly withdrawn from the Colorado River by the Navajo Nation, while about 47850040 gallons in total are directly withdrawn by the Navajo Nation from the San Juan River. This is a small quantity compared to [*i think we need a statistic of how much other states withdraw from either river to put these numbers in context]
 
 This estimate applies only for domestic use but since they use water for other activities such as agriculture, the water availability of both rivers is a limiting factor. 
 
 Note: we're counting only populations right beside the river, even though with water transport infrastructure, people in chapters far from the river will also be withdrawing, so this estimate of water withdrawing is an underestimate.  
-
 
 ```{r}
 seconds_per_year<-365*24*60*60
@@ -262,9 +258,8 @@ annual_draw_SJ
 
 ```
 
-cubic feet per second
-1 cubic feet = 7.48052 gallons 
 ```{r echo=FALSE, message=FALSE}
+#conversion: cubic feet per second. 1 cubic feet = 7.48052 gallons 
 seconds_per_year<-365*24*60*60
 #water available in periods of minimum water discharge from the last 5 years
 water_available_SJ_2024<-500*7.48052*seconds_per_year
@@ -274,7 +269,6 @@ water_available_Colorado_2024
 
 #Note to samantha: Do we need to include this in our analysis? Cos even at the lowest levels, there is enough water passing through to meet the minimal 7gallon/day consumption 
 ```
-*make description*
 
 \newpage
 
@@ -335,8 +329,9 @@ Uranium_annual_average <- Uranium_filtered %>%
 ```
 
 ### Data Visualization Analysis
+Mean annual Boron concentrations increased on the Colorado river (Figure 5) from 2019-2024, nevertheless, the concentrations have not yet exceed a concerning level for human health according to the recommended maximum levels for drinking water by Canada and The World Health Organization (World Health Organization, 2009; Health Canada, 2020). 
 
-There is an increase on the mean Boron concentrations along the years on the Colorado river (see figure 5), never the less, that increment and the concentrations itself haven't exceed a concerning level for human health according to Canada and The World Health Organization standards (World Healh Organization, 2009). In all the time periods there is less concentration of Boron when entering the tribe territory than when it exits, reaching a maximum concentration of >120 ug/L. Never the less, those concentrations are in a standard low value.
+Throughout this 5-year period, Boron concentration is lower when entering the tribe territory than when it exits, reaching a maximum concentration of >120 ug/L, which is considered low. This indicates that the Navajo Nation engages in activities that result in Boron discharge in the Colorado river. [***what sorts of activities might they be? Cite]
 
 ```{r Data visualization Boron, echo=FALSE, fig.align='center', fig.cap="Boron Concentration before and after passing through the Navajo Nation"}
 
@@ -351,6 +346,7 @@ ggplot(Boron_annual_average,
 ```
 
 Magnesium concentrations in the river show. 
+[***Magnesium and Uranium description and explanations needed]
 
 ```{r Data visualization Magnesium, echo=FALSE, fig.align='center', fig.cap="Magnesium Concentration before and after passing through the Navajo Nation"}
 
@@ -384,16 +380,22 @@ ggplot(Uranium_annual_average,
 \newpage
 
 # References
-UN-Water Decade Programme on Advocacy and Communication and Water Supply and Sanitation Collaborative Council. (2010). The human right to water and sanitation today. In Media Brief. https://www.un.org/waterforlifedecade/pdf/human_right_to_water_and_sanitation_media_brief.pdf
+Health Canada. (2020). Boron in drinking water. In Guidelines for Canadian Drinking Water Quality: Guideline Technical Document [Report]. https://www.canada.ca/content/dam/hc-sc/documents/programs/consultation-boron-drinking-water/document/boron-gtd-consultation-09-12-2019-eng.pdf
 
-Williams, A. P., Cook, B. I., & Smerdon, J. E. (2022). Rapid intensification of the emerging southwestern North American megadrought in 2020–2021. Nature Climate Change, 12(3), 232–234. https://doi.org/10.1038/s41558-022-01290-z
-
-The Colorado River: Heading into 2024 with hope for a more stable system | Arizona Department of Water Resources. (2023, December 21). https://www.azwater.gov/news/articles/2023-12-21-0
+Navajo Nation Division of Community Development (n.d.). Navajo Nation Profile. Navajo Nation WIND. Retrieved April 28, 2024, from https://navajoprofile.wind.enavajo.org/
 
 Navajo Nation Water Rights Comission. (2024, 3 22). Navajo Nation Water Rights Comission 
 webpage. Retrieved from https://nnwrc.navajo-nsn.gov/
 
 SOURCE. (n.d.). Los hidropaneles SOURCE llevan agua a la Nación Navajo. Retrieved from https://www.source.co/resources/case-studies/los-hidropaneles-source-llevan-agua-a-lanacion-navajo/?lang=es
+
+Supreme Court of the United States (2022, October 1). Arizona et al. V. Navajo Nation et al. Retrieved April 28, 2024, from https://www.supremecourt.gov/opinions/22pdf/21-1484_aplc.pdf
+
+The Colorado River: Heading into 2024 with hope for a more stable system | Arizona Department of Water Resources. (2023, December 21). https://www.azwater.gov/news/articles/2023-12-21-0
+
+UN-Water Decade Programme on Advocacy and Communication and Water Supply and Sanitation Collaborative Council. (2010). The human right to water and sanitation today. In Media Brief. https://www.un.org/waterforlifedecade/pdf/human_right_to_water_and_sanitation_media_brief.pdf
+
+Williams, A. P., Cook, B. I., & Smerdon, J. E. (2022). Rapid intensification of the emerging southwestern North American megadrought in 2020–2021. Nature Climate Change, 12(3), 232–234. https://doi.org/10.1038/s41558-022-01290-z
 
 World Health Organization. (2009). Boron. Chemical Fact Sheets. https://www.who.int/docs/default-source/wash-documents/wash-chemicals/boron-chemical-fact-sheet.pdf?sfvrsn=a936384f_4
 
