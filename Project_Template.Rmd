@@ -92,15 +92,15 @@ The Navajo Nation's water sources are mainly the interstate rivers (Colorado and
 This project comprises of two sections: 1) water quantity, 2) water quality. The five-year periods selected provide a more current evaluation of the water conditions faced by the Navajo Nation. The water quantity of the Colorado River and the San Juan River over the last 5 years (2019-2024) were assessed for trends. Given prolonged drought and climate change, we establish the following research question and hypothesis.
 
 > RQ 1: What are the trends in water availability for the Navajo Nation in the last 5 years?  
-> Hypothesis A: Water availability decreased in the last 5 years for the Navajo Nation.
+> Hypothesis 1: Water availability decreased in the last 5 years for the Navajo Nation.
 
 The water quality section focuses on analyzing the concentrations of 3 contaminants (Uranium, Magnesium, and Boron) in the main Colorado River before and after it flows through the reservation over 5 years (2018-2023). Taking into account the tribe’s persistent efforts to compel the federal government to meet its obligations, aiding in the quantification of the tribe’s water rights on the Colorado River and ensuring access to high-quality water, we have chosen to focus our quality analysis on the Colorado River. This decision stems from the river’s current water rights litigation and data availability. This analysis aims to test the following hypotheses: 
 
 > RQ 2: Does water quality change in the Colorado River as it passes through the Navajo Nation, and if so, in what ways?
-> Hypothesis B: The water quality in the Colorado River before and after passing through the Navajo Nation is significantly different.
+> Hypothesis 2: The water quality in the Colorado River before and after passing through the Navajo Nation is significantly different.
 
 > RQ 3: How has the water quality changed in the Colorado River in the last 5 years?
-> Hypothesis C: The water quality in the Colorado River before and after passing through the Navajo Nation has changed significantly in the last 5 years.
+> Hypothesis 3: The water quality in the Colorado River before and after passing through the Navajo Nation has changed significantly in the last 5 years.
 
 \newpage
 
@@ -183,6 +183,31 @@ ggplot(data = colorado_quantity_df,
   geom_point()+geom_smooth(method="lm") +
   labs(y= "Discharge (cubic feet/second)") +
   my_theme
+
+```
+
+```{r Calculating change in average water quantity in 2019 and 2024, echo=FALSE, message=FALSE}
+# Mean water quantity in 2019
+sanjuan_quantity_2019<-sanjuan_quantity_df%>% 
+  mutate(Year= year(Date))%>%
+  filter(Year==2019)
+
+median_sanjuan_quantity_2019<-median(sanjuan_quantity_2019$discharge_cf)
+
+# Mean water quantity in 2024
+sanjuan_quantity_2024<-sanjuan_quantity_df%>% 
+  mutate(Year= year(Date))%>%
+  filter(Year==2024)
+
+median_sanjuan_quantity_2024<-median(sanjuan_quantity_2024$discharge_cf)
+
+# Change in water quantity over the five-year period 
+(median_sanjuan_quantity_2019-median_sanjuan_quantity_2024)/median_sanjuan_quantity_2019*100
+
+#Used the linear model just to find the slope of decline in water quantity 
+lm(data=sanjuan_quantity_df, discharge_cf~ Date)
+
+lm(data=colorado_quantity_df, discharge_cf~ Date)
 
 ```
 

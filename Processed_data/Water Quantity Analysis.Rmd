@@ -19,8 +19,6 @@ library(zoo)
 library(trend)
 library(here)
 library(ggthemes)
-library(pdftools)
-library(pdftables)
 library(viridis);library(rvest)
 library(tidycensus)
 ```
