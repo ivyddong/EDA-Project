@@ -109,17 +109,12 @@ print(summary_water_quantity)
 
 ```
 
-
 # Rationale and Research Questions
 The Navajo Nation has severe water infrastructure deficiencies that impact the health, economy, and welfare of the Navajo people. The lack of adequate domestic and municipal water is the greatest water resource problem facing the Navajo Nation. Approximately 30-40% of the Navajo Nation population does not have access to clean, reliable drinking water  (Navajo Nation Department of Water Resources, 2024). Also, 173 thousand people are affected because drinking water sources are limited, and abandoned uranium mines have caused groundwater contamination in the Nation (Ibid.). In addition, many improvements are needed for other areas of water use, including water for irrigation, livestock, commercial, businesses, health care, schools, and other facilities (SOURCE, n.d.).
 
 In terms of water quantity, climate change in the Southwest will continue to impact water resources problems. The USGS Disaster Risk Assessment Study concluded that a long-term drying trend and decreasing snowpack, superimposed on the regional drought cycles, will magnify water-related impacts in the Navajo Nation and leave the Navajo people increasingly vulnerable (Navajo Nation Department of Water Resources, 2024). 
 
-<<<<<<< HEAD
-The Navajo Nation water sources are mainly the interstate rivers and groundwater, unfortunately they face legal difficulties in getting its interests met within inter-state negotiations on water rights. The Colorado River Compact set in 1922 gives seven states the right to draw water, and are grouped into two, the Upper Basin States (namely Colorado, New Mexico, Utah and Wyoming) and Lower Basin States (namely Arizona, Nevada and California) (Anastasia Hufham, 2024), but the Navajo Nation is not formally included in these agreements. As the post-2026 operations of the river are being negotiated, the Navajo Nation is engaging in persistent legal efforts to be part of the negotiations and have the right to meet its obligation to set aside water for its people.
-=======
-The Navajo Nation mainly gets its water from the Colorado and San Juan Rivers, but faces legal difficulties in getting its interests met within inter-state negotiations on water rights. The Colorado River Compact set in 1922 gives seven states the right to draw water, and are grouped into two, the Upper Basin States (namely Colorado, New Mexico, Utah and Wyoming) and Lower Basin States (namely Arizona, Nevada and California) (https://www.sltrib.com/news/environment/2024/03/06/utah-says-it-shouldnt-have-take/). The Navajo Nation is not formally included in these agreements. As the post-2026 operations of the river are being negotiated, the Navajo Nation is engaging in persistent legal efforts to compel the US government to meet its obligation to set aside water for its people. 
->>>>>>> 1c6add0ece37c68bdb43b63b57304767f766d6e2
+The Navajo Nation's water sources are mainly the interstate rivers and groundwater, unfortunately they face legal difficulties in getting its interests met within inter-state negotiations on water rights. The Colorado River Compact set in 1922 gives seven states the right to draw water, and are grouped into two, the Upper Basin States (namely Colorado, New Mexico, Utah and Wyoming) and Lower Basin States (namely Arizona, Nevada and California) (Anastasia Hufham, 2024), but the Navajo Nation is not formally included in these agreements. As the post-2026 operations of the river are being negotiated, the Navajo Nation is engaging in persistent legal efforts to be part of the negotiations and have the right to meet its obligation to set aside water for its people.
 
 The current project focuses on analyzing the water quality of the main Colorado River before and after it flows through the reservation over the past 5 years. A five-year analysis period was selected to provide a more current evaluation. Taking into account the tribe’s persistent efforts to compel the federal government to meet its obligations, aiding in the quantification of the tribe’s water rights on the Colorado River and ensuring access to high-quality water, we have chosen to focus our quality analysis on the Colorado River. This decision stems from the river’s current water rights litigation and data availability. This analysis aims to test the following hypotheses: 
 
@@ -136,7 +131,7 @@ On the other hand, measurements have been conducted for the water quantity of th
 # Dataset Information
 The dataset was taken from the USGS Monitoring the rivers of the Nation (https://waterdata.usgs.gov/nwis).
 
-For water quality analysis, data was extracted from the years 2018 to 2023, capturing Uranium, Magnesium, and Boron levels detected at both stations. Those components pose a high risk for human health and the environment at high levels. High concentrations of boron in humans can cause nausea, vomiting, redness of the skin, difficulty swallowing due to ulcers in the throat, and non-bloody diarrhea (U.S. EPA, et al., 2008). Moreover, these components were selected since the data was available for both stations, enabling a comparative analysis. 
+For water quality analysis, data was extracted from the years 2018 to 2023, capturing Uranium, Magnesium, and Boron levels detected at both stations. Those components pose a high risk for human health and the environment at high levels. Uranium is radioactive , and high and prolonged exposure increases risks of kidney diseases (Vengosh, 2024). High concentrations of boron in humans can cause nausea, vomiting, redness of the skin, difficulty swallowing due to ulcers in the throat, and non-bloody diarrhea (U.S. EPA, et al., 2008). Moreover, these components were selected since the data was available for both stations, enabling a comparative analysis. 
 
 Below is the information on the stations worked:
 - Station 1 = Colorado River at Lees Ferry, AZ - 09380000
@@ -426,7 +421,7 @@ ggplot(Magnesium_annual_average,
 
 ### Uranium
 
-Mean annual uranium concentrations have increased on the Colorado River (see Figure 5) from 2019 to 2024. Nevertheless, the concentrations have not yet exceeded concerning levels for human health according to the recommended maximum levels for drinking water by The World Health Organization and the EPA. However, the goal concentrations are zero (World Health Organization, 2009; US EPA, 2024). Considering that the water used from the Colorado River is for direct human consumption and other activities, accumulation of this element can potentially generate radiological toxicity, and high concentrations of that accumulation can generate impacts on human health such as kidney diseases (Vengosh, 2024). The low concentrations of this component at this location indicate a positive environmental stage considering the historical mining in the Navajo territories (Doug Brugge, Rob Goble, 2002).
+Mean annual uranium concentrations have increased on the Colorado River (see Figure 5) from 2019 to 2024. Nevertheless, the concentrations have not yet exceeded concerning levels for human health according to the recommended maximum levels for drinking water by The World Health Organization and the EPA. However, the goal concentrations are zero (World Health Organization, 2009; US EPA, 2024). Considering that the water used from the Colorado River is for direct human consumption and other activities, accumulation of this element can potentially generate radiological toxicity. The low concentrations of this component at this location indicate a positive environmental stage considering the historical mining in the Navajo territories (Doug Brugge, Rob Goble, 2002).
 
 Throughout this 5-year period, uranium concentration is lower when entering the tribe territory than when it exits (except in 2021 and 2023), reaching a maximum concentration of 5.80 ug/L, with a general mean concentration along the river of 3.47 ug/L. The statistically significant difference (p-value = 8.993e-5) indicates a difference in uranium measurements between the entrance to the reservation and the exit of the water concentrations of the Colorado River, suggesting that there are activities or naturally occurring uranium discharges.
 
@@ -460,11 +455,8 @@ boron, magnecium ratio
 
 # References
 
-<<<<<<< HEAD
 Anastasia Hufham. (2024). Utah says it shouldn’t have to take Colorado River cuts. Other states say it needs to. The Salt Lake Tribune. https://www.sltrib.com/news/environment/2024/03/06/utah-says-it-shouldnt-have-take/
 
-=======
->>>>>>> 1c6add0ece37c68bdb43b63b57304767f766d6e2
 Doug Brugge, Rob Goble. (2002). The History of Uranium Mining and the Navajo People. Public health then and now. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3222290/pdf/0921410.pdf
 
 Health Canada. (2020). Boron in drinking water. In Guidelines for Canadian Drinking Water Quality: Guideline Technical Document [Report]. https://www.canada.ca/content/dam/hc-sc/documents/programs/consultation-boron-drinking-water/document/boron-gtd-consultation-09-12-2019-eng.pdf
@@ -490,23 +482,10 @@ U.S. EPA. (1984). Ambient surface water quality standards documentation, Magnesi
 
 UN-Water Decade Programme on Advocacy and Communication and Water Supply and Sanitation Collaborative Council. (2010). The human right to water and sanitation today. In Media Brief. https://www.un.org/waterforlifedecade/pdf/human_right_to_water_and_sanitation_media_brief.pdf
 
-<<<<<<< HEAD
-National Primary Drinking Water Regulations | US EPA. (2024, January 2). US EPA. https://www.epa.gov/ground-water-and-drinking-water/national-primary-drinking-water-regulations
-
-U.S. EPA, Health and Ecological Criteria Division (HECD), O. of S. and T. (OST), OW, Office of Water (OW), & Office of Groundwater/Drinking Water (OGWDW), O. (2008). Drinking Water Health Advisory for Boron and Compounds. https://www.epa.gov/sites/default/files/2014-09/documents/summary_document_from_the_ha_for_boron.pdf
-
-U.S. EPA. (1984). Ambient surface water quality standards documentation, Magnesium. https://www.epa.gov/sites/default/files/2015-06/documents/ny_hh_396_w_12201984.pdf
-
-Williams, A. P., Cook, B. I., & Smerdon, J. E. (2022). Rapid intensification of the emerging southwestern North American megadrought in 2020–2021. Nature Climate Change, 12(3), 232–234. https://doi.org/10.1038/s41558-022-01290-z
-
-World Health Organization. (2009). Boron. Chemical Fact Sheets. https://www.who.int/docs/default-source/wash-documents/wash-chemicals/boron-chemical-fact-sheet.pdf?sfvrsn=a936384f_4
- 
-=======
 Williams, A. P., Cook, B. I., & Smerdon, J. E. (2022). Rapid intensification of the emerging southwestern North American megadrought in 2020–2021. Nature Climate Change, 12(3), 232–234. https://doi.org/10.1038/s41558-022-01290-z
 
 World Health Organization. (2009). Boron. Chemical Fact Sheets. https://www.who.int/docs/default-source/wash-documents/wash-chemicals/boron-chemical-fact-sheet.pdf?sfvrsn=a936384f_4
 
->>>>>>> 1c6add0ece37c68bdb43b63b57304767f766d6e2
 \newpage
 
 # Appendix
