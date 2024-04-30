@@ -448,7 +448,7 @@ ggplot(Uranium_annual_average,
 # Summary and Conclusions
 Based on the analysis of element concentrations, the water quality of the Colorado River meets good standards for human use. Its concentration when entering the tribal territory is relatively low compared to maximum human health standards. However, it is necessary to conduct a broader evaluation of other elements and contaminant concentrations in the water to identify if there are additional components that could deteriorate the water quality for Navajo activities such as agriculture, consumption, and others. Data availability was limited for the present document analysis in terms of the time period and the station's measurements. On the other hand, the water quality leaving the reserve for most of the time periods of the three elements is significantly higher than when entering, indicating that there are activities in the territory that contribute to the concentration of those elements in the water.
 
-
+The concentrations of those elements over the past 5 years have increased when entering and leaving the territory, indicating an increase in water usage upstream. Although these concentrations do not reach the limits, their increase over time could indicate a decrease in the water quality of the river and a potential deterioration of its availability for use by the Navajo Nation.
 
 \newpage
 
@@ -482,6 +482,8 @@ U.S. EPA. (1984). Ambient surface water quality standards documentation, Magnesi
 U.S. Geological Survey (n.d.). USGS Water Data for the Nation. USGS. Retrieved April 9, 2024, from https://waterdata.usgs.gov/nwis
 
 UN-Water Decade Programme on Advocacy and Communication and Water Supply and Sanitation Collaborative Council. (2010). The human right to water and sanitation today. In Media Brief. https://www.un.org/waterforlifedecade/pdf/human_right_to_water_and_sanitation_media_brief.pdf
+
+Vangosh. (2024). Uraium, Radium and Radon, presentation summary.
 
 Williams, A. P., Cook, B. I., & Smerdon, J. E. (2022). Rapid intensification of the emerging southwestern North American megadrought in 2020–2021. Nature Climate Change, 12(3), 232–234. https://doi.org/10.1038/s41558-022-01290-z
 
