@@ -449,7 +449,9 @@ ggplot(Uranium_annual_average,
 \newpage
 
 # Summary and Conclusions
-boron, magnecium ratio
+Based on the analysis of element concentrations, the water quality of the Colorado River meets good standards for human use. Its concentration when entering the tribal territory is relatively low compared to maximum human health standards. However, it is necessary to conduct a broader evaluation of other elements and contaminant concentrations in the water to identify if there are additional components that could deteriorate the water quality for Navajo activities such as agriculture, consumption, and others. Data availability was limited for the present document analysis in terms of the time period and the station's measurements. On the other hand, the water quality leaving the reserve for most of the time periods of the three elements is significantly higher than when entering, indicating that there are activities in the territory that contribute to the concentration of those elements in the water.
+
+
 
 \newpage
 
