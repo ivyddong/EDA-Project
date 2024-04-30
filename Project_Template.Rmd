@@ -383,7 +383,6 @@ print(Boron_t_test)
 
 ```
 
-
 ```{r Data visualization Boron, echo=FALSE, fig.align='center', fig.cap="Boron Concentration before and after passing through the Navajo Nation"}
 
 #Compare Boron
@@ -421,8 +420,9 @@ ggplot(Magnesium_annual_average,
 
 ```
 
-Mean annual Uranium concentrations increased on the Colorado river (see Figure 5) from 2019-2024, nevertheless, the concentrations have not yet exceed a concerning level for human health according to the recommended maximum levels for drinking water by The World Health Organization and the EPA, however the goal concentrations are zero (World Health Organization, 2009; US EPA, 2024). Considering that the water used from Colorado river is for direct human consume and other activities, accumulation of this element can potentially generate a radiological toxicity and high concentrations of that cummulation can generate impacts on human health such as kidney deseases (Vengosh, 2024). The low concentrations of this component at this location is remarkable considering the historical mining in the Navajo territories. ()  
+Mean annual Uranium concentrations have increased on the Colorado River (see Figure 5) from 2019 to 2024. Nevertheless, the concentrations have not yet exceeded concerning levels for human health according to the recommended maximum levels for drinking water by The World Health Organization and the EPA. However, the goal concentrations are zero (World Health Organization, 2009; US EPA, 2024). Considering that the water used from the Colorado River is for direct human consumption and other activities, accumulation of this element can potentially generate radiological toxicity, and high concentrations of that accumulation can generate impacts on human health such as kidney diseases (Vengosh, 2024). The low concentrations of this component at this location indicates a positive environmental stage considering the historical mining in the Navajo territories (Doug Brugge, Rob Goble. 2002).
 
+Throughout this 5-year period, Uranium concentration is lower when entering the tribe territory than when it exits (except 2021 and 2023), reaching a maximum concentration of 5.80 ug/L, having in general a mean concentration along the river of 3.47 ug/L. The statistically significant difference (p-value = 8.993 e-5) indicates a difference in uranium measurements between the entrance to the reservation and the exit of the water concentrations of the Colorado river. Suggesting that there are activities or natural occurring uranium discharge.
 
 ```{r Data visualization Uranium t-test, echo=FALSE}
 #t-test
@@ -474,6 +474,7 @@ World Health Organization. (2009). Boron. Chemical Fact Sheets. https://www.who.
 
 National Primary Drinking Water Regulations | US EPA. (2024, January 2). US EPA. https://www.epa.gov/ground-water-and-drinking-water/national-primary-drinking-water-regulations
 
+Doug Brugge, Rob Goble. (2002). The History of Uranium Mining and the Navajo People. Public health then and now. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3222290/pdf/0921410.pdf
 
 \newpage
 
