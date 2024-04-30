@@ -136,7 +136,7 @@ On the other hand, measurements have been conducted for the water quantity of th
 # Dataset Information
 The dataset was taken from the USGS Monitoring the rivers of the Nation (https://waterdata.usgs.gov/nwis).
 
-For water quality analysis, data was extracted from the years 2018 to 2023, capturing Uranium, Magnesium, and Boron levels detected at both stations. The reason for selecting these components was the availability of data at both stations. It was necessary for both stations to have the same components during the same period to enable a comparative analysis. Also, those component represent a high risk for human health and the environment at high levels.
+For water quality analysis, data was extracted from the years 2018 to 2023, capturing Uranium, Magnesium, and Boron levels detected at both stations. Those components pose a high risk for human health and the environment at high levels. High concentrations of boron in humans can cause nausea, vomiting, redness of the skin, difficulty swallowing due to ulcers in the throat, and non-bloody diarrhea (U.S. EPA, et al., 2008). Moreover, these components were selected since the data was available for both stations, enabling a comparative analysis. 
 
 Below is the information on the stations worked:
 - Station 1 = Colorado River at Lees Ferry, AZ - 09380000
@@ -377,9 +377,9 @@ Uranium_annual_average <- Uranium_filtered %>%
 
 ### Boron
 
-Mean annual boron concentrations increased on the Colorado River (Figure 5) from 2019 to 2024; nevertheless, the concentrations have not yet exceeded a concerning level for human health according to the recommended maximum levels for drinking water by Canada and The World Health Organization (World Health Organization, 2009; Health Canada, 2020).
+Mean annual boron concentrations increased on the Colorado River (Figure 5) from 2019 to 2024; nevertheless, the concentrations have not yet exceeded a concerning level for human health according to the recommended maximum levels for drinking water by Canada and The World Health Organization (World Health Organization, 2009; Health Canada, 2020). The US has not set any regulations limiting boron concentrations in water. 
 
-Throughout this 5-year period, boron concentration is lower when entering the tribal territory than when it exits, reaching a maximum concentration of >120 ug/L, which is still considered low, with a general mean concentration along the river of 74.81 ug/L. The statistically significant difference (p-value = 0.002834 < 0.05) indicates that the Navajo Nation engages in activities that result in boron discharge in the Colorado River. It's important to mention that even though there are no limits in the US regulations, high concentrations of boron in humans can cause nausea, vomiting, redness of the skin, difficulty swallowing due to ulcers in the throat, and non-bloody diarrhea (U.S. EPA, et al., 2008).
+Throughout this 5-year period, boron concentration is lower when entering the tribal territory than when it exits. It reached a maximum concentration of >120 ug/L, which is still considered low, with a general mean concentration along the river of 74.81 ug/L. The statistically significant difference (p-value = 0.002834 < 0.05, df = 8.9481, t = -4.0699) found through a t-test indicates that the Navajo Nation engages in activities that result in boron discharge in the Colorado River. 
 
 ```{r Data visualization Boron t-test, echo=FALSE, message=FALSE, include=FALSE}
 #t-test
