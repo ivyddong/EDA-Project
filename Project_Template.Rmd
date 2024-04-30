@@ -57,23 +57,6 @@ summarize_dataset <- function(df, dataset_name) {
   )
 }
 
-##Summarize 6 water quality datasets
-summary_Boron_Site1 <- summarize_dataset(Boron_Site1, "Boron_Site1")
-summary_Boron_Site2 <- summarize_dataset(Boron_Site2, "Boron_Site2")
-summary_Magnesium_Site1 <- summarize_dataset(Magnesium_Site1, "Magnesium_Site1")
-summary_Magnesium_Site2 <- summarize_dataset(Magnesium_Site2, "Magnesium_Site2")
-summary_Uranium_Site1 <- summarize_dataset(Uranium_Site1, "Uranium_Site1")
-summary_Uranium_Site2 <- summarize_dataset(Uranium_Site2, "Uranium_Site2")
-
-##Combine summaries into one table
-summary_water_quality <- rbind(summary_Boron_Site1, summary_Boron_Site2,
-                               summary_Magnesium_Site1, summary_Magnesium_Site2,
-                               summary_Uranium_Site1, summary_Uranium_Site2)
-
-##Print water quality summary table
-print(summary_water_quality)
-
-
 ## Water Quantity 
 siteNumber <- "09379500"
 ChoptankInfo <- readNWISsite(siteNumber)
@@ -96,16 +79,6 @@ colorado_quantity_df <- readNWISdv(
   "2019-04-24", "2024-04-22")
 
 pCode2 <- readNWISpCode(parameterCd2)
-
-# Summarize 2 water quantity datasets with the previously built function
-summary_sanjuan <- summarize_dataset(sanjuan_quantity_df, "sanjuan_quantity_df")
-summary_colorado <- summarize_dataset(colorado_quantity_df, "colorado_quantity_df")
-
-# Combine summaries into one table
-summary_water_quantity <- rbind(summary_sanjuan, summary_colorado)
-
-# Print summary table
-print(summary_water_quantity)
 
 ```
 
@@ -141,6 +114,36 @@ For water quality, data was extracted from the years 2018 to 2023, capturing Ura
 Two sites were selected to assess how water quality changes as the river passes through the Navajo Nation. Site 1 referred to Colorado River at Lees Ferry, AZ - 09380000, while Site 2 referred to Colorado River Near Grand Canyon, AZ - 09402500. Site 1 represented the Colorado River water condition before entering the Navajo Nation, while site 2 was upon exiting the nation.  
 
 Data wrangling was conducted for each dataset as follows. For water quantity, the data was wrangled to have more understandable column names for the discharge. The data was parsed to include only relevant variables, namely, discharge and date. No additional wrangling was needed since the dates and discharge were already in the correct format (Year-mm-dd) and class (Date and number respectively), and the dataset contained no missing data. For water quality, the datasets were converted and filtered such that the dates had the correct format and the time period across the two sites were consistent (starting from January 1, 2018 and ending on December 31, 2023). For each contaminant, the datasets for sites 1 and 2 were merged to examine and compare their annual average concentrations over time. 
+
+```{r Dataset structure table quality, echo=FALSE, include=FALSE}
+# Summarize 2 water quantity datasets with the previously built function
+summary_sanjuan <- summarize_dataset(sanjuan_quantity_df, "sanjuan_quantity_df")
+summary_colorado <- summarize_dataset(colorado_quantity_df, "colorado_quantity_df")
+
+# Combine summaries into one table
+summary_water_quantity <- rbind(summary_sanjuan, summary_colorado)
+
+# Print summary table
+print(summary_water_quantity)
+```
+
+```{r Dataset structure table quantity, echo=FALSE, include=FALSE}
+##Summarize 6 water quality datasets
+summary_Boron_Site1 <- summarize_dataset(Boron_Site1, "Boron_Site1")
+summary_Boron_Site2 <- summarize_dataset(Boron_Site2, "Boron_Site2")
+summary_Magnesium_Site1 <- summarize_dataset(Magnesium_Site1, "Magnesium_Site1")
+summary_Magnesium_Site2 <- summarize_dataset(Magnesium_Site2, "Magnesium_Site2")
+summary_Uranium_Site1 <- summarize_dataset(Uranium_Site1, "Uranium_Site1")
+summary_Uranium_Site2 <- summarize_dataset(Uranium_Site2, "Uranium_Site2")
+
+##Combine summaries into one table
+summary_water_quality <- rbind(summary_Boron_Site1, summary_Boron_Site2,
+                               summary_Magnesium_Site1, summary_Magnesium_Site2,
+                               summary_Uranium_Site1, summary_Uranium_Site2)
+
+##Print water quality summary table
+print(summary_water_quality)
+```
 
 \newpage
 
