@@ -55,8 +55,7 @@ parameterCd <- "00060"
 # Raw daily data:
 sanjuan_quantity_df <- readNWISdv(
   siteNumber, parameterCd,
-  "2019-04-24", "2024-04-22"
-)
+  "2019-04-24", "2024-04-22")
 
 pCode <- readNWISpCode(parameterCd)
 
@@ -67,8 +66,7 @@ parameterCd2 <- "00060"
 # Raw daily data:
 colorado_quantity_df <- readNWISdv(
   siteNumber2, parameterCd2,
-  "2019-04-24", "2024-04-22"
-)
+  "2019-04-24", "2024-04-22")
 
 pCode2 <- readNWISpCode(parameterCd2)
 
@@ -102,7 +100,7 @@ Below is the information on the stations worked:
 - Station 1 = Colorado River at Lees Ferry, AZ - 09380000
 - Station 2 = Colorado River Near Grand Canyon, AZ - 09402500
 
-For water quantity, the data was extracted from years 2019 to 2024 from station 1 as well, extracting data of water flow in cf/s.
+For water quantity, the data was extracted from years 2019 to 2024 from station 1 as well, extracting data of water flow in cf/s. For the San Juan river, the data was extracted from the gage on site 09379500. 
 
 Wrangling: 
 For water quantity, the data was wrangled to have more understandable column names for the discharge. The data was parsed to include only relevant variables, namely, discharge and date. No additional wrangling was needed since the dates and discharge were already in the correct format (Year-mm-dd) and class (Date and number respectively), and the dataset contained no missing data. 
