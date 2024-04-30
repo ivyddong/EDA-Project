@@ -38,7 +38,7 @@ my_theme <- theme_light() +
         axis.title = element_text(color = "darkblue", )) +
   theme(legend.position = "bottom")
 
-# Load datasets
+# Load your data sets
 ## Water Quality
 Boron_Site1 <- read.csv("./Raw_data/Boron_S1.csv", stringsAsFactors = TRUE)
 Boron_Site2 <- read.csv("./Raw_data/Boron_S2.csv", stringsAsFactors = TRUE)
@@ -46,6 +46,7 @@ Magnesium_Site1 <- read.csv("./Raw_data/magnesium_S1.csv", stringsAsFactors = TR
 Magnesium_Site2 <- read.csv("./Raw_data/magnesium_S2.csv", stringsAsFactors = TRUE)
 Uranium_Site1 <- read.csv("./Raw_data/Uranium_S1.csv", stringsAsFactors = TRUE)
 Uranium_Site2 <- read.csv("./Raw_data/Uranium_S2.csv", stringsAsFactors = TRUE)
+
 
 ##Function to summarize dataset structure
 summarize_dataset <- function(df, dataset_name) {
@@ -71,6 +72,7 @@ summary_water_quality <- rbind(summary_Boron_Site1, summary_Boron_Site2,
 
 ##Print water quality summary table
 print(summary_water_quality)
+
 
 ## Water Quantity 
 siteNumber <- "09379500"
@@ -104,6 +106,7 @@ summary_water_quantity <- rbind(summary_sanjuan, summary_colorado)
 
 # Print summary table
 print(summary_water_quantity)
+
 ```
 
 
@@ -295,6 +298,7 @@ annual_draw_SJ
 
 ```
 
+
 ```{r echo=FALSE, message=FALSE}
 #conversion: cubic feet per second. 1 cubic feet = 7.48052 gallons 
 
@@ -337,11 +341,7 @@ class(Magnesium_Site2$Activity_StartDate)
 class(Uranium_Site1$Activity_StartDate)
 class(Uranium_Site2$Activity_StartDate)
 
-<<<<<<< HEAD
-#Merger Datasets respectivelly for each target contamination
-=======
-#Merged Datasets respectively
->>>>>>> 674f3250fe98d71d6e488a43b7ccc0d976faee6a
+#Merged Datasets respectively for each target contamination
 Boron_merged <- bind_rows(Boron_Site1, Boron_Site2)
 Magnesium_merged <- bind_rows(Magnesium_Site1, Magnesium_Site2)
 Uranium_merged <- bind_rows(Uranium_Site1, Uranium_Site2)
@@ -366,6 +366,7 @@ Uranium_filtered$Year <- lubridate::year(Uranium_filtered$Activity_StartDate)
 Uranium_annual_average <- Uranium_filtered %>%
   group_by(Year, Location_Name) %>%
   summarise(Avg_Concentration = mean(Result_MeasureValue, na.rm = TRUE))
+
 
 ```
 
