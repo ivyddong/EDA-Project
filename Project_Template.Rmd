@@ -302,7 +302,7 @@ class(Magnesium_Site2$Activity_StartDate)
 class(Uranium_Site1$Activity_StartDate)
 class(Uranium_Site2$Activity_StartDate)
 
-#Merger Datasets respectivelly
+#Merged Datasets respectively
 Boron_merged <- bind_rows(Boron_Site1, Boron_Site2)
 Magnesium_merged <- bind_rows(Magnesium_Site1, Magnesium_Site2)
 Uranium_merged <- bind_rows(Uranium_Site1, Uranium_Site2)
@@ -312,7 +312,7 @@ Uranium_filtered <- Uranium_merged %>%
   filter(Activity_StartDate >= as.Date("2018-01-01") & 
          Activity_StartDate <= as.Date("2023-12-31"))
 
-#Generate the annual average concentration of three contaminations for both sites
+#Generate the annual average concentration of three contamination for both sites
 Boron_merged$Year <- lubridate::year(Boron_merged$Activity_StartDate)
 Boron_annual_average <- Boron_merged %>%
   group_by(Year, Location_Name) %>%
@@ -332,9 +332,17 @@ Uranium_annual_average <- Uranium_filtered %>%
 
 ### Data Visualization Analysis
 
-Mean annual Boron concentrations increased on the Colorado river (Figure 5) from 2019-2024, nevertheless, the concentrations have not yet exceed a concerning level for human health according to the recommended maximum levels for drinking water by Canada and The World Health Organization (World Health Organization, 2009; Health Canada, 2020). 
+Mean annual Boron concentrations increased on the Colorado river (see Figure 5) from 2019-2024, nevertheless, the concentrations have not yet exceed a concerning level for human health according to the recommended maximum levels for drinking water by Canada and The World Health Organization (World Health Organization, 2009; Health Canada, 2020). 
 
-Throughout this 5-year period, Boron concentration is lower when entering the tribe territory than when it exits, indicating that the Navajo Nation engages in activities that result in Boron discharge in the Colorado river. [***what sorts of activities might they be? Cite]
+Throughout this 5-year period, Boron concentration is lower when entering the tribe territory than when it exits, reaching a maximum concentration of >120 ug/L, which is still considered low, having in general a mean concentration along the river of 74.81 ug/L. The statistically significant difference (p-value = 0.002834 < 0.05) indicates that the Navajo Nation engages in activities that result in Boron discharge in the Colorado river.
+
+```{r Data visualization Boron t-test, echo=FALSE}
+#t-test
+Boron_t_test <- t.test(Boron_Site1$Result_MeasureValue, Boron_Site2$Result_MeasureValue)
+print(Boron_t_test)
+
+```
+
 
 ```{r Data visualization Boron, echo=FALSE, fig.align='center', fig.cap="Boron Concentration before and after passing through the Navajo Nation"}
 
@@ -348,11 +356,20 @@ ggplot(Boron_annual_average,
 
 ```
 
-Magnesium concentrations in the river show. 
-[***Magnesium and Uranium description and explanations needed]
+Mean annual Magnesium concentrations increased on the Colorado river (see Figure 6) from 2020-2023, having a low concentration on 2018 and high increase in 2019 up to 22.9 mg/L. 
+
+Throughout this 5-year period, Magnesium concentration is lower when entering the tribe territory than when it exits, with a significant difference between both sides of 93.61%, having in general a mean concentration along the river of 21.55 mg/L,
+
+
+```{r Data visualization Magnesium t-test, echo=FALSE}
+#t-test
+Magnesium_t_test <- t.test(Magnesium_Site1$Result_MeasureValue, Magnesium_Site2$Result_MeasureValue)
+print(Magnesium_t_test)
+
+```
+
 
 ```{r Data visualization Magnesium, echo=FALSE, fig.align='center', fig.cap="Magnesium Concentration before and after passing through the Navajo Nation"}
-
 #Compare Magnesium
 ggplot(Magnesium_annual_average, 
        aes(x = Year, y = Avg_Concentration, color = Location_Name)) +
@@ -362,6 +379,17 @@ ggplot(Magnesium_annual_average,
   my_theme
 
 ```
+
+Mean annual Uranium concentrations increased on the Colorado river (see Figure 5) from 2019-2024, nevertheless, the concentrations have not yet exceed a concerning level for human health according to the recommended maximum levels for drinking water by The World Health Organization and the EPA, however the goal concentrations are zero (World Health Organization, 2009; US EPA, 2024). Considering that the water used from Colorado river is for direct human consume and other activities, accumulation of this element can potentially generate a radiological toxicity and high concentrations of that cummulation can generate impacts on human health such as kidney deseases (Vengosh, 2024). The low concentrations of this component at this location is remarkable considering the historical mining in the Navajo territories. ()  
+
+
+```{r Data visualization Uranium t-test, echo=FALSE}
+#t-test
+Uranium_t_test <- t.test(Uranium_Site1$Result_MeasureValue, Uranium_Site2$Result_MeasureValue)
+print(Uranium_t_test)
+
+```
+
 
 ```{r Data visualization Uranium, echo=FALSE, fig.align='center', fig.cap="Uranium Concentration before and after passing through the Navajo Nation"}
 
@@ -403,6 +431,7 @@ Williams, A. P., Cook, B. I., & Smerdon, J. E. (2022). Rapid intensification of 
 
 World Health Organization. (2009). Boron. Chemical Fact Sheets. https://www.who.int/docs/default-source/wash-documents/wash-chemicals/boron-chemical-fact-sheet.pdf?sfvrsn=a936384f_4
 
+National Primary Drinking Water Regulations | US EPA. (2024, January 2). US EPA. https://www.epa.gov/ground-water-and-drinking-water/national-primary-drinking-water-regulations
 
 
 \newpage
