@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.7)  30 APR 2024 23:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.7)  30 APR 2024 23:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -665,7 +665,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 [3] [4]
 
-LaTeX Warning: Float too large for page by 159.65836pt on input line 427.
+LaTeX Warning: Float too large for page by 159.65836pt on input line 424.
 
 [5] [6]
 <Project_Template_files/figure-latex/Data Visualization San Juan-1.pdf, id=84, 
@@ -674,7 +674,7 @@ File: Project_Template_files/figure-latex/Data Visualization San Juan-1.pdf Gra
 phic file (type pdf)
 <use Project_Template_files/figure-latex/Data Visualization San Juan-1.pdf>
 Package pdftex.def Info: Project_Template_files/figure-latex/Data Visualization
- San Juan-1.pdf  used on input line 465.
+ San Juan-1.pdf  used on input line 462.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 <Project_Template_files/figure-latex/Data Visualization Colorado-1.pdf, id=85, 
 469.755pt x 325.215pt>
@@ -682,7 +682,7 @@ File: Project_Template_files/figure-latex/Data Visualization Colorado-1.pdf Gra
 phic file (type pdf)
 <use Project_Template_files/figure-latex/Data Visualization Colorado-1.pdf>
 Package pdftex.def Info: Project_Template_files/figure-latex/Data Visualization
- Colorado-1.pdf  used on input line 474.
+ Colorado-1.pdf  used on input line 471.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [7 <./Project_Template_files/figure-latex/Data Visualization San Juan-1.pdf>] [
 8 <./Project_Template_files/figure-latex/Data Visualization Colorado-1.pdf>]
@@ -693,7 +693,7 @@ File: Project_Template_files/figure-latex/Time Series Analysis Colorado River-1
 <use Project_Template_files/figure-latex/Time Series Analysis Colorado River-1.
 pdf>
 Package pdftex.def Info: Project_Template_files/figure-latex/Time Series Analys
-is Colorado River-1.pdf  used on input line 494.
+is Colorado River-1.pdf  used on input line 491.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 <Project_Template_files/figure-latex/Time Series Analysis San Juan River-1.pdf,
  id=117, 469.755pt x 325.215pt>
@@ -702,7 +702,7 @@ File: Project_Template_files/figure-latex/Time Series Analysis San Juan River-1
 <use Project_Template_files/figure-latex/Time Series Analysis San Juan River-1.
 pdf>
 Package pdftex.def Info: Project_Template_files/figure-latex/Time Series Analys
-is San Juan River-1.pdf  used on input line 503.
+is San Juan River-1.pdf  used on input line 500.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [9 <./Project_Template_files/figure-latex/Time Series Analysis Colorado River-1
 .pdf>] [10 <./Project_Template_files/figure-latex/Time Series Analysis San Juan
@@ -713,7 +713,7 @@ File: Project_Template_files/figure-latex/Data visualization Boron-1.pdf Graphi
 c file (type pdf)
 <use Project_Template_files/figure-latex/Data visualization Boron-1.pdf>
 Package pdftex.def Info: Project_Template_files/figure-latex/Data visualization
- Boron-1.pdf  used on input line 592.
+ Boron-1.pdf  used on input line 589.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [12 <./Project_Template_files/figure-latex/Data visualization Boron-1.pdf>]
 <Project_Template_files/figure-latex/Data visualization Magnesium-1.pdf, id=159
@@ -722,7 +722,7 @@ File: Project_Template_files/figure-latex/Data visualization Magnesium-1.pdf Gr
 aphic file (type pdf)
 <use Project_Template_files/figure-latex/Data visualization Magnesium-1.pdf>
 Package pdftex.def Info: Project_Template_files/figure-latex/Data visualization
- Magnesium-1.pdf  used on input line 615.
+ Magnesium-1.pdf  used on input line 612.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 <Project_Template_files/figure-latex/Data visualization Uranium-1.pdf, id=160, 
 469.755pt x 325.215pt>
@@ -730,7 +730,7 @@ File: Project_Template_files/figure-latex/Data visualization Uranium-1.pdf Grap
 hic file (type pdf)
 <use Project_Template_files/figure-latex/Data visualization Uranium-1.pdf>
 Package pdftex.def Info: Project_Template_files/figure-latex/Data visualization
- Uranium-1.pdf  used on input line 649.
+ Uranium-1.pdf  used on input line 646.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [13 <./Project_Template_files/figure-latex/Data visualization Magnesium-1.pdf>]
 [14 <./Project_Template_files/figure-latex/Data visualization Uranium-1.pdf>] [
@@ -754,11 +754,11 @@ L3 programming layer <2023-08-29>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 15752 strings out of 474934
- 250429 string characters out of 5759818
- 1950807 words of memory out of 5000000
+ 15750 strings out of 474934
+ 250407 string characters out of 5759818
+ 1949807 words of memory out of 5000000
  36820 multiletter control sequences out of 15000+600000
- 615243 words of font info for 145 fonts, out of 8000000 for 9000
+ 615160 words of font info for 144 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  77i,9n,81p,1013b,451s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/lo
@@ -769,7 +769,7 @@ s/type1/public/lm/lmr17.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/pub
 lic/lm/lmri10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmt
 k10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></
 usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on Project_Template.pdf (17 pages, 578571 bytes).
+Output written on Project_Template.pdf (17 pages, 578342 bytes).
 PDF statistics:
  329 PDF objects out of 1000 (max. 8388607)
  274 compressed objects within 3 object streams
