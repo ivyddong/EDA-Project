@@ -31,6 +31,9 @@ library(viridis)
 library(rvest)
 library(tidycensus)
 library(ggplot2)
+library(knitr)
+library(vtable)
+library(gt)
 
 # Set your ggplot theme
 my_theme <- theme_light() +
@@ -47,15 +50,9 @@ Magnesium_Site2 <- read.csv("./Raw_data/magnesium_S2.csv", stringsAsFactors = TR
 Uranium_Site1 <- read.csv("./Raw_data/Uranium_S1.csv", stringsAsFactors = TRUE)
 Uranium_Site2 <- read.csv("./Raw_data/Uranium_S2.csv", stringsAsFactors = TRUE)
 
-
 ##Function to summarize dataset structure
 summarize_dataset <- function(df, dataset_name) {
-  data.frame(
-    Dataset = dataset_name,
-    Variable = names(df),
-    Class = sapply(df, class)
-  )
-}
+  data.frame(Class = sapply(df, class))}
 
 ## Water Quantity 
 siteNumber <- "09379500"
@@ -83,7 +80,7 @@ pCode2 <- readNWISpCode(parameterCd2)
 ```
 
 # Rationale and Research Questions
-The Navajo Nation has severe water infrastructure deficiencies that impact the health, economy, and welfare of the Navajo people. Inadequate domestic and municipal water is the greatest water resource problem facing the Navajo Nation. Approximately 30-40% of the Navajo Nation population does not have access to clean, reliable drinking water  (Navajo Nation Department of Water Resources, 2024). Also, 173 thousand people are affected because drinking water sources are limited, and abandoned uranium mines have caused groundwater contamination (Ibid.). In addition, many improvements are needed for other areas of water use, including water for irrigation, livestock, commercial, businesses, health care, schools, and other facilities (SOURCE, n.d.).
+The Navajo Nation has severe water infrastructure deficiencies that impact the health, economy, and welfare of the Navajo people. Inadequate domestic and municipal water is the greatest water resource problem facing the Navajo Nation. Approximately 30-40% of the Navajo Nation population does not have access to clean, reliable drinking water  (Navajo Nation Department of Water Resources, 2024). Also, 173 thousand people are affected because drinking water sources are limited, and abandoned uranium mines have caused groundwater contamination (Ibid.). In addition, many improvements are needed for other areas of water use, including water for irrigation, livestock, commercial, businesses, health care, schools, and other facilities (Ibid.).
 
 In terms of water quantity, climate change in the Southwest has adversely impacted water availability and is projected to continue doing so. The USGS Disaster Risk Assessment Study concluded that a long-term drying trend and decreasing snowpack, superimposed on the regional drought cycles, will magnify water-related impacts in the Navajo Nation and leave the Navajo people increasingly vulnerable (Navajo Nation Department of Water Resources, 2024). 
 
@@ -92,14 +89,17 @@ The Navajo Nation's water sources are mainly the interstate rivers (Colorado and
 This project comprises of two sections: 1) water quantity, 2) water quality. The five-year periods selected provide a more current evaluation of the water conditions faced by the Navajo Nation. The water quantity of the Colorado River and the San Juan River over the last 5 years (2019-2024) were assessed for trends. Given prolonged drought and climate change, we establish the following research question and hypothesis.
 
 > RQ 1: What are the trends in water availability for the Navajo Nation in the last 5 years?  
+
 > Hypothesis 1: Water availability decreased in the last 5 years for the Navajo Nation.
 
 The water quality section focuses on analyzing the concentrations of 3 contaminants (Uranium, Magnesium, and Boron) in the main Colorado River before and after it flows through the reservation over 5 years (2018-2023). Taking into account the tribe’s persistent efforts to compel the federal government to meet its obligations, aiding in the quantification of the tribe’s water rights on the Colorado River and ensuring access to high-quality water, we have chosen to focus our quality analysis on the Colorado River. This decision stems from the river’s current water rights litigation and data availability. This analysis aims to test the following hypotheses: 
 
 > RQ 2: Does water quality change in the Colorado River as it passes through the Navajo Nation, and if so, in what ways?
+
 > Hypothesis 2: The water quality in the Colorado River before and after passing through the Navajo Nation is significantly different.
 
 > RQ 3: How has the water quality changed in the Colorado River in the last 5 years?
+
 > Hypothesis 3: The water quality in the Colorado River before and after passing through the Navajo Nation has changed significantly in the last 5 years.
 
 \newpage
@@ -115,7 +115,9 @@ Two sites were selected to assess how water quality changes as the river passes 
 
 Data wrangling was conducted for each dataset as follows. For water quantity, the data was wrangled to have more understandable column names for the discharge. The data was parsed to include only relevant variables, namely, discharge and date. No additional wrangling was needed since the dates and discharge were already in the correct format (Year-mm-dd) and class (Date and number respectively), and the dataset contained no missing data. For water quality, the datasets were converted and filtered such that the dates had the correct format and the time period across the two sites were consistent (starting from January 1, 2018 and ending on December 31, 2023). For each contaminant, the datasets for sites 1 and 2 were merged to examine and compare their annual average concentrations over time. 
 
-```{r Dataset structure table quality, echo=FALSE, include=FALSE}
+
+
+```{r Dataset structure table quality, echo=FALSE, include=TRUE}
 # Summarize 2 water quantity datasets with the previously built function
 summary_sanjuan <- summarize_dataset(sanjuan_quantity_df, "sanjuan_quantity_df")
 summary_colorado <- summarize_dataset(colorado_quantity_df, "colorado_quantity_df")
@@ -124,10 +126,10 @@ summary_colorado <- summarize_dataset(colorado_quantity_df, "colorado_quantity_d
 summary_water_quantity <- rbind(summary_sanjuan, summary_colorado)
 
 # Print summary table
-print(summary_water_quantity)
+kable(summary_sanjuan, caption = "Summary Table of Water Quantity Dataset") #Chose just one river so that the table doesn't show duplicates. Each river dataset has the same set of the variables. 
 ```
 
-```{r Dataset structure table quantity, echo=FALSE, include=FALSE}
+```{r Dataset structure table quantity, echo=FALSE, include=TRUE}
 ##Summarize 6 water quality datasets
 summary_Boron_Site1 <- summarize_dataset(Boron_Site1, "Boron_Site1")
 summary_Boron_Site2 <- summarize_dataset(Boron_Site2, "Boron_Site2")
@@ -142,7 +144,8 @@ summary_water_quality <- rbind(summary_Boron_Site1, summary_Boron_Site2,
                                summary_Uranium_Site1, summary_Uranium_Site2)
 
 ##Print water quality summary table
-print(summary_water_quality)
+kable(summary_Boron_Site1, caption = "Summary Table of Water Quality Dataset") #Chose just one river so that the table doesn't show duplicates. Each river dataset has the same set of the variables. 
+
 ```
 
 \newpage
@@ -167,7 +170,9 @@ colorado_quantity_df<- subset(colorado_quantity_df, select=c("Date", "discharge_
 
 The downward slope measured at both gages shows that the discharge volume for both San Juan and Colorado Rivers have declined in the last five years (Figures 1 and 2). This corroborates with previous years where drought conditions have affected water quantity, posing a continued challenge to water availability for the people in the Navajo Nation and impacting aquatic ecosystems. While both rivers experience seasonal variability, the San Juan River has more frequent periods of high discharge (eg. mid-2023 and mid-2019) compared to the Colorado River. 
 
-```{r Data Visualization San Juan, fig.align='center', fig.cap="Water Levels in San Juan River", message=FALSE, echo=FALSE}
+In Colorado river, the median discharge in 2024 was 11400 cf/s, which was 6.938776% lower than that of 2019 (12250 cf/s). In San Juan River, the median discharge in 2024 was 635 cf/s, which was 54.48029% lower than that of 2019 (1395 cf/s). Assessing the slope of decline over time, the Colorado River had an average decrease of 0.6946 cf/s per day over the five-year period while San Juan River had an average decrease 0.1454 cf/s per day. 
+
+```{r Data Visualization San Juan, fig.align='center', fig.cap="Water Discharge in San Juan River from 2019-2024", message=FALSE, echo=FALSE}
 ggplot(data=sanjuan_quantity_df, 
        aes(x=Date, y=discharge_cf)) +
   geom_point() +
@@ -177,7 +182,7 @@ ggplot(data=sanjuan_quantity_df,
 
 ```
 
-```{r Data Visualization Colorado, echo=FALSE, fig.align='center', fig.cap="Water Levels in Colorado River", message=FALSE}
+```{r Data Visualization Colorado, echo=FALSE, fig.align='center', fig.cap="Water Discharge in Colorado River from 2019-2024", message=FALSE}
 ggplot(data = colorado_quantity_df, 
        aes(x=Date, y=discharge_cf)) +
   geom_point()+geom_smooth(method="lm") +
@@ -186,23 +191,36 @@ ggplot(data = colorado_quantity_df,
 
 ```
 
-```{r Calculating change in average water quantity in 2019 and 2024, echo=FALSE, message=FALSE}
-# Mean water quantity in 2019
+```{r Calculating change in average water quantity in 2019 and 2024, echo=FALSE, message=FALSE, include=FALSE}
+# Median water quantity in 2019
 sanjuan_quantity_2019<-sanjuan_quantity_df%>% 
   mutate(Year= year(Date))%>%
   filter(Year==2019)
 
 median_sanjuan_quantity_2019<-median(sanjuan_quantity_2019$discharge_cf)
 
-# Mean water quantity in 2024
+colorado_quantity_2019<-colorado_quantity_df%>% 
+  mutate(Year= year(Date))%>%
+  filter(Year==2019)
+
+median_colorado_quantity_2019<-median(colorado_quantity_2019$discharge_cf)
+
+# Median water quantity in 2024
 sanjuan_quantity_2024<-sanjuan_quantity_df%>% 
   mutate(Year= year(Date))%>%
   filter(Year==2024)
 
 median_sanjuan_quantity_2024<-median(sanjuan_quantity_2024$discharge_cf)
 
+colorado_quantity_2024<-colorado_quantity_df%>% 
+  mutate(Year= year(Date))%>%
+  filter(Year==2024)
+
+median_colorado_quantity_2024<-median(colorado_quantity_2024$discharge_cf)
+
 # Change in water quantity over the five-year period 
-(median_sanjuan_quantity_2019-median_sanjuan_quantity_2024)/median_sanjuan_quantity_2019*100
+per_change_median_quantity_SJ<-(median_sanjuan_quantity_2019-median_sanjuan_quantity_2024)/median_sanjuan_quantity_2019*100
+per_change_median_quantity_Colorado<-(median_colorado_quantity_2019-median_colorado_quantity_2024)/median_colorado_quantity_2019*100
 
 #Used the linear model just to find the slope of decline in water quantity 
 lm(data=sanjuan_quantity_df, discharge_cf~ Date)
@@ -215,9 +233,31 @@ lm(data=colorado_quantity_df, discharge_cf~ Date)
 
 ### Time Series Analysis
 
-For Colorado River, water levels have declined from 2019 to mid-2022 and then increased to peak at early 2023 (Figure 4). For San Juan River, water levels have declined from 2019 to 2020 and remained steady (at a low level) up till mid-2022. Suddenly, water levels increased to peak at early 2023, and declined since then (Figure 5).
+For Colorado River, water levels have declined from 2019 to mid-2022 and then increased to peak at early 2023 (Figure 3). For San Juan River, water levels have declined from 2019 to 2020 and remained steady (at a low level) up till mid-2022. Suddenly, water levels increased to peak at early 2023, and declined since then (Figure 4).
 
-```{r Time Series Analysis San Juan River, echo=FALSE, fig.align='center', fig.cap="Time Series Analysis of San Juan River, 2019-2024"}
+```{r Time Series Analysis Colorado River, echo=FALSE, fig.align='center', fig.cap="Time Series Analysis of Discharge by the Colorado River, 2019-2024"}
+
+# Colorado River  
+# Generate time series
+f_month1 <- month(first(colorado_quantity_df$Date))
+f_year1 <- year(first(colorado_quantity_df$Date))
+f_day1<- day(first(colorado_quantity_df$Date))
+
+l_month1 <- month(last(colorado_quantity_df$Date))
+l_year1 <- year(last(colorado_quantity_df$Date))
+l_day1<- day(last(colorado_quantity_df$Date))
+
+colorado_quantity_daily_ts<- ts(colorado_quantity_df$
+                              discharge_cf,
+                            start=c(f_year1,f_month1),
+                            frequency=365)
+
+# Decompose
+colorado_quantity_daily_decomposed<- stl(colorado_quantity_daily_ts, s.window = "periodic")
+plot(colorado_quantity_daily_decomposed)
+```
+
+```{r Time Series Analysis San Juan River, echo=FALSE, fig.align='center', fig.cap="Time Series Analysis of Discharge by the San Juan River, 2019-2024"}
 
 # San Juan River 
 # Generate time series
@@ -242,27 +282,6 @@ plot(sanjuan_quantity_daily_decomposed)
 
 ```
 
-```{r Time Series Analysis Colorado River, echo=FALSE, fig.align='center', fig.cap="Time Series Analysis of Colorado River, 2019-2024"}
-
-# Colorado River  
-# Generate time series
-f_month1 <- month(first(colorado_quantity_df$Date))
-f_year1 <- year(first(colorado_quantity_df$Date))
-f_day1<- day(first(colorado_quantity_df$Date))
-
-l_month1 <- month(last(colorado_quantity_df$Date))
-l_year1 <- year(last(colorado_quantity_df$Date))
-l_day1<- day(last(colorado_quantity_df$Date))
-
-colorado_quantity_daily_ts<- ts(colorado_quantity_df$
-                              discharge_cf,
-                            start=c(f_year,f_month),
-                            frequency=365)
-
-# Decompose
-colorado_quantity_daily_decomposed<- stl(colorado_quantity_daily_ts, s.window = "periodic")
-plot(colorado_quantity_daily_decomposed)
-```
 
 \newpage
 ### Population Drawing Directly From the Rivers 
@@ -345,7 +364,7 @@ water_available_Colorado_2024
 ## Water Quality
 #### Question 2: How has been the water quality of Colorado River before, and after it pass through the reservation in the past 5 years?
 
-```{r Dara Preparation, echo=FALSE, message=FALSE, include=FALSE}
+```{r Data Preparation, echo=FALSE, message=FALSE, include=FALSE}
 
 #Change to date format for the Activity_StartDate columns for further analysis
 class(Boron_Site1$Activity_StartDate)
@@ -411,7 +430,7 @@ print(Boron_t_test)
 
 ```
 
-```{r Data visualization Boron, echo=FALSE, fig.align='center', fig.cap="Boron Concentration before and after passing through the Navajo Nation"}
+```{r Data visualization Boron, echo=FALSE, fig.align='center', fig.cap="Boron Concentrations Before and After Passing Through the Navajo Nation"}
 
 #Compare Boron
 ggplot(Boron_annual_average, 
@@ -435,7 +454,7 @@ print(Magnesium_t_test)
 
 ```
 
-```{r Data visualization Magnesium, echo=FALSE, fig.align='center', fig.cap="Magnesium Concentration before and after passing through the Navajo Nation"}
+```{r Data visualization Magnesium, echo=FALSE, fig.align='center', fig.cap="Magnesium Concentrations Before and After Passing Through the Navajo Nation"}
 #Compare Magnesium
 ggplot(Magnesium_annual_average, 
        aes(x = Year, y = Avg_Concentration, color = Location_Name)) +
@@ -449,7 +468,7 @@ ggplot(Magnesium_annual_average,
 
 ### Uranium
 
-Mean annual uranium concentrations have increased on the Colorado River (see Figure 5) from 2019 to 2024. Nevertheless, the concentrations have not yet exceeded concerning levels for human health according to the recommended maximum levels for drinking water by The World Health Organization and the EPA. However, the goal concentrations are zero (World Health Organization, 2009; US EPA, 2024). Considering that the water used from the Colorado River is for direct human consumption and other activities, accumulation of this element can potentially generate radiological toxicity. The low concentrations of this component at this location indicate a positive environmental stage considering the historical mining in the Navajo territories (Doug Brugge, Rob Goble, 2002).
+Mean annual uranium concentrations have increased on the Colorado River (Figure 7) from 2019 to 2024. Nevertheless, the concentrations have not yet exceeded concerning levels for human health according to the recommended maximum levels for drinking water by The World Health Organization and the EPA. However, the goal concentrations are zero (World Health Organization, 2009; US EPA, 2024). Considering that the water used from the Colorado River is for direct human consumption and other activities, accumulation of this element can potentially generate radiological toxicity. The low concentrations of this component at this location indicate a positive environmental stage considering the historical mining in the Navajo territories (Doug Brugge, Rob Goble, 2002).
 
 Throughout this 5-year period, uranium concentration is lower when entering the tribe territory than when it exits (except in 2021 and 2023), reaching a maximum concentration of 5.80 ug/L, with a general mean concentration along the river of 3.47 ug/L. The statistically significant difference (p-value = 8.993e-5) indicates a difference in uranium measurements between the entrance to the reservation and the exit of the water concentrations of the Colorado River, suggesting that there are activities or naturally occurring uranium discharges.
 
@@ -461,7 +480,7 @@ print(Uranium_t_test)
 ```
 
 
-```{r Data visualization Uranium, echo=FALSE, fig.align='center', fig.cap="Uranium Concentration before and after passing through the Navajo Nation"}
+```{r Data visualization Uranium, echo=FALSE, fig.align='center', fig.cap="Uranium Concentrations Before and After Passing Through the Navajo Nation"}
 
 #Compare Uranium
 ggplot(Uranium_annual_average, 
@@ -477,11 +496,11 @@ ggplot(Uranium_annual_average,
 \newpage
 
 # Summary and Conclusions
-In terms of water availability, the discharge volume for both the San Juan and Colorado Rivers has declined over the last five years, with an average of xxx in 2019 and xxx in 2024, representing a decrease of xxx over the five-year period. This result is corroborated by previous years' droughts that have affected the water quantity in the reservation.
+In terms of water availability, the discharge for both the San Juan and Colorado Rivers has declined over the last five years. In Colorado river, the median discharge in 2024 was 11400 cf/s, which was 6.938776% lower than that of 2019 (12250 cf/s). In San Juan River, the median discharge in 2024 was 635 cf/s, which was 54.48029% lower than that of 2019 (1395 cf/s). Assessing the decline over time, the Colorado River had an average decrease of 0.6946 cf/s per day over the five-year period while San Juan River had an average decrease 0.1454 cf/s per day. This result is corroborated by previous years' droughts that have affected the water quantity in the reservation.
 
-In comparison, it was estimated that a section of the Navajo Nation could be using 11,538,380 gallons/year from the Colorado River and 47,850,040 gallons/year from the San Juan River for domestic use only. The water availability is sufficient if it were only used for household consumption, but since most of the water extracted from the rivers is for agricultural purposes, it ends up being limited. As mentioned before, the average water used for agriculture by the Lower Basin from 2000 to 2019 is 6,610.06 million cubic meters, which is 1,746,193,109,029.7864 gallons.
+The Indian populations within the Navajo Nation use very limited water. We estimate that the Indian population living in chapters where the both rivers pass through are using only 11,538,380 gallons/year from the Colorado River and 47,850,040 gallons/year from the San Juan River, which is 7 gallons per day per capita. 7 gallons per day is not enough to meet basic needs. At least 50 liters per day per person is needed (UN-Water), which is about 13.2 gallons. The water availability by both rivers would be sufficient if they were only used for household consumption in the states they pass through. However, since most of the water is extracted for water-intensive agricultural practices, it ends up being limited. As mentioned before, the average water used for agriculture by the Lower Basin from 2000 to 2019 is 6,610.06 million cubic meters, which is 1,746,193,109,029.7864 gallons.
 
-Based on the analysis of element concentrations, the water quality of the Colorado River meets good standards for human use. Its concentration when entering the tribal territory is relatively low compared to maximum human health standards. However, it is necessary to conduct a broader evaluation of other elements and contaminant concentrations in the water to identify if there are additional components that could deteriorate the water quality for Navajo activities such as agriculture, consumption, and others. Data availability was limited for the present document analysis in terms of the time period and the station's measurements. On the other hand, the water quality leaving the reserve for most of the time periods of the three elements is significantly higher than when entering, indicating that there are activities in the territory that contribute to the concentration of those elements in the water.
+Based on the analysis of element concentrations, the water quality of the Colorado River meets good standards for human use. The concentrations of Magnesium, Boron and Uranium when entering the tribal territory is relatively low compared to maximum human health standards. However, it is necessary to conduct a broader evaluation of other elements and contaminant concentrations in the water to identify if there are additional components that could deteriorate the water quality for Navajo activities such as agriculture, consumption, and others. Data availability was limited for the present document analysis in terms of the time period and the station's measurements. On the other hand, the contaminant concentrations of the water leaving the reserve for Boron and Uranium is significantly higher than when entering, indicating that there are activities in the territory that contribute to the concentration of those elements in the water.
 
 The concentrations of those elements over the past 5 years have increased when entering and leaving the territory, indicating an increase in water usage upstream. Although these concentrations do not reach the limits, their increase over time could indicate a decrease in the water quality of the river and a potential deterioration of its availability for use by the Navajo Nation.
 
@@ -504,8 +523,6 @@ webpage. Retrieved from https://nnwrc.navajo-nsn.gov/
 
 Richter, B. D., Lamsal, G., Marston, L., Dhakal, S., Sangha, L. S., Rushforth, R. R., Wei, D., Ruddell, B. L., Davis, K. F., Hernandez-Cruz, A., Sandoval-Solis, S., & Schmidt, J. C. (2024). New water accounting reveals why the Colorado River no longer reaches the sea. Communications Earth & Environment, 5(1), 134. https://doi.org/10.1038/s43247-024-01291-0
 
-SOURCE. (n.d.). Los hidropaneles SOURCE llevan agua a la Nación Navajo. Retrieved from https://www.source.co/resources/case-studies/los-hidropaneles-source-llevan-agua-a-lanacion-navajo/?lang=es
-
 Supreme Court of the United States (2022, October 1). Arizona et al. V. Navajo Nation et al. Retrieved April 28, 2024, from https://www.supremecourt.gov/opinions/22pdf/21-1484_aplc.pdf
 
 The Colorado River: Heading into 2024 with hope for a more stable system | Arizona Department of Water Resources. (2023, December 21). https://www.azwater.gov/news/articles/2023-12-21-0
@@ -516,7 +533,7 @@ U.S. EPA. (1984). Ambient surface water quality standards documentation, Magnesi
 
 U.S. Geological Survey (n.d.). USGS Water Data for the Nation. USGS. Retrieved April 9, 2024, from https://waterdata.usgs.gov/nwis
 
-UN-Water Decade Programme on Advocacy and Communication and Water Supply and Sanitation Collaborative Council. (2010). The human right to water and sanitation today. In Media Brief. https://www.un.org/waterforlifedecade/pdf/human_right_to_water_and_sanitation_media_brief.pdf
+UN-Water. (2010). The human right to water and sanitation today. In Media Brief. https://www.un.org/waterforlifedecade/pdf/human_right_to_water_and_sanitation_media_brief.pdf
 
 Vangosh. (2024). Uraium, Radium and Radon, presentation summary.
 
